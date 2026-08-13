@@ -177,7 +177,7 @@ body.rave{animation:ravehue 1s linear infinite}
 .brand-mark::after{content:"";position:absolute;inset:2.5px;border-radius:10px;background:#0a0a12}
 @keyframes spin{to{transform:rotate(360deg)}}
 .brand-bolt{position:relative;z-index:1;width:23px;height:23px;color:var(--acid);filter:drop-shadow(0 0 7px var(--acid))}
-.brand-word{position:relative;display:inline-block;font-family:'Montserrat',sans-serif;font-weight:300;font-size:27px;letter-spacing:6px;text-transform:uppercase;transform:skewX(-16deg);
+.brand-word{position:relative;font-family:var(--font-display);font-weight:400;font-size:32px;letter-spacing:1.5px;text-transform:uppercase;
   background:linear-gradient(90deg,#fff 0%,var(--cyan) 22%,var(--magenta) 48%,var(--violet) 72%,#fff 100%);
   background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 6s linear infinite;
   filter:drop-shadow(0 0 12px rgba(122,59,255,.3))}
@@ -371,7 +371,7 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
   .work-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr;gap:40px}
   .steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:none}
   .foot-top{flex-direction:column;align-items:flex-start}.hsvc-head h2{font-size:22px}
-  .brand-word{font-size:19px;letter-spacing:3.5px}.brand-tag{display:none}.brand-mark{width:38px;height:38px}
+  .brand-word{font-size:22px}.brand-tag{display:none}.brand-mark{width:38px;height:38px}
   /* CTA fixe en bas — remplace la fusée sur mobile */
   .rocket-top{display:none}
   .cc-orb{bottom:calc(84px + env(safe-area-inset-bottom))}
