@@ -13,6 +13,7 @@ const ROUTES = [
   "creation-site-web",
   "reseaux-sociaux",
   "publicite-en-ligne",
+  "video-motion",
   "seo-conversion",
   "objectifs",
 ];

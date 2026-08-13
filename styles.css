@@ -505,3 +505,10 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
   .pg-hub{padding:120px 0 30px}
   .pg-incl-list{grid-template-columns:1fr}
 }
+
+/* ============================ CARTES SERVICES CLIQUABLES (home) ============================ */
+.hcard{text-decoration:none;color:inherit;display:block}
+.hcard-go{position:absolute;left:34px;bottom:26px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.3px;
+  opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.hcard:hover .hcard-go{opacity:.95;transform:translateY(0)}
+.hcard.c3 .hcard-go,.hcard.c4 .hcard-go,.hcard.c5 .hcard-go{color:#131018}
