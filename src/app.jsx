@@ -860,18 +860,26 @@ function CommandPalette({t,lang,setLang,openConcierge,triggerRave}){
 
 /* ============================ APP ============================ */
 /* ============================ PAGES DÉDIÉES ============================ */
+const SERVICE_ACCENT={
+  "strategie-de-marque":{a:"#7A3BFF",a2:"#00E0FF"},
+  "identite-visuelle":{a:"#FF2D9B",a2:"#7A3BFF"},
+  "creation-site-web":{a:"#00E0FF",a2:"#7A3BFF"},
+  "reseaux-sociaux":{a:"#FF3D7F",a2:"#FF9F1C"},
+  "publicite-en-ligne":{a:"#FF9F1C",a2:"#FF2D9B"},
+  "video-motion":{a:"#B14BFF",a2:"#00E0FF"},
+  "seo-conversion":{a:"#C9FF3B",a2:"#00E0FF"},
+};
 function PageHero({data}){
-  const pmx=useMotionValue(0),pmy=useMotionValue(0);
-  const px=useSpring(pmx,{stiffness:110,damping:20}),py=useSpring(pmy,{stiffness:110,damping:20});
-  const onParallax=e=>{pmx.set((e.clientX/window.innerWidth-0.5)*18);pmy.set((e.clientY/window.innerHeight-0.5)*12);};
   return(
-    <section className="pg-hero" onMouseMove={onParallax}>
+    <section className="pg-hero">
       <AnimatedHeroBG/><div className="hero-bg"/>
-      {[{y:"22%",c:"var(--cyan)",ang:"-20deg",dur:"5.2s",d:"0s"},
-        {y:"48%",c:"var(--magenta)",ang:"-18deg",dur:"6.1s",d:"1.6s"},
-        {y:"74%",c:"var(--violet)",ang:"-22deg",dur:"5.6s",d:"2.8s"}].map((s,i)=>(
+      <div className="pg-orb pg-orb1" aria-hidden="true"/>
+      <div className="pg-orb pg-orb2" aria-hidden="true"/>
+      {[{y:"22%",c:"var(--acc,#00E0FF)",ang:"-20deg",dur:"5.2s",d:"0s"},
+        {y:"48%",c:"var(--acc2,#FF2D9B)",ang:"-18deg",dur:"6.1s",d:"1.6s"},
+        {y:"74%",c:"var(--acc,#7A3BFF)",ang:"-22deg",dur:"5.6s",d:"2.8s"}].map((s,i)=>(
         <span key={i} className="shoot" style={{"--y":s.y,"--c":s.c,"--ang":s.ang,"--dur":s.dur,"--d":s.d}}/>))}
-      <motion.div className="wrap" style={{x:px,y:py}}>
+      <div className="wrap">
         <motion.span className="eyebrow" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6}}><span className="dot"/>{data.tag}</motion.span>
         <ScrambleText as="h1" className="pg-title" text={data.title}/>
         {data.valueProp&&<motion.p className="pg-vp" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.28}}>{data.valueProp}</motion.p>}
@@ -880,20 +888,44 @@ function PageHero({data}){
           <motion.div className="pg-hero-cta" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.5}}>
             <Magnetic className="btn fill" onClick={()=>scrollToId("contact")}>{data.heroCta}</Magnetic>
           </motion.div>)}
-      </motion.div>
+      </div>
       <div className="scroll-hint"><span className="mouse"/></div>
     </section>
   );
 }
-function ServiceBenefits({benefits}){
+function ServiceStatement({text}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-90px"});
+  return(
+    <section className="pg-statement" ref={ref}>
+      <span className="pg-statement-q" aria-hidden="true">“</span>
+      <div className="wrap">
+        <motion.p initial={{opacity:0,y:32}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.85,ease:[.16,1,.3,1]}}>{text}</motion.p>
+      </div>
+    </section>
+  );
+}
+function ServiceContext({label,text}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-80px"});
+  return(
+    <section className="pg-context" ref={ref}><div className="wrap">
+      <div className="pg-context-grid">
+        <div className="pg-context-label"><span className="pg-ctx-bar"/>{label}</div>
+        <motion.p className="pg-context-body" initial={{opacity:0,y:26}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.75}}>{text}</motion.p>
+      </div>
+    </div></section>
+  );
+}
+function ServiceBenefits({benefits,title}){
   return(
     <section className="pg-benefits"><div className="wrap">
-      <div className="pg-ben-grid">
+      {title&&<ScrambleText as="h2" className="pg-sec-h pg-sec-h--left" text={title}/>}
+      <div className="pg-ben-rows">
         {benefits.map((b,i)=>{
-          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
-          return(<motion.div className="pg-ben" key={i} ref={ref} initial={{opacity:0,y:30}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.1}}>
-            <span className="pg-ben-mark"/>
-            <h3>{b.h}</h3><p>{b.p}</p>
+          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-70px"});
+          return(<motion.div className="pg-ben-row" key={i} ref={ref} initial={{opacity:0,y:38}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.08}}>
+            <span className="pg-ben-idx">{String(i+1).padStart(2,"0")}</span>
+            <div className="pg-ben-txt"><h3>{b.h}</h3><p>{b.p}</p></div>
+            <span className="pg-ben-line" aria-hidden="true"/>
           </motion.div>);
         })}
       </div>
@@ -983,12 +1015,13 @@ function PageMethod({method}){
   return(
     <section className="pg-method"><div className="wrap">
       <ScrambleText as="h2" className="pg-sec-h" text={method.title}/>
-      <div className="pg-steps">
+      <div className="pg-timeline">
+        <span className="pg-tl-line" aria-hidden="true"/>
         {method.steps.map((s,i)=>{
           const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
-          return(<motion.div className="pg-step" key={i} ref={ref} initial={{opacity:0,y:30}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.08}}>
-            <span className="pg-step-n">{String(i+1).padStart(2,"0")}</span>
-            <h3>{s.h}</h3><p>{s.p}</p>
+          return(<motion.div className="pg-tl-step" key={i} ref={ref} initial={{opacity:0,x:-24}} animate={inView?{opacity:1,x:0}:{}} transition={{duration:.55,delay:i*.1}}>
+            <div className="pg-tl-node"><span>{String(i+1).padStart(2,"0")}</span></div>
+            <div className="pg-tl-body"><h3>{s.h}</h3><p>{s.p}</p></div>
           </motion.div>);
         })}
       </div>
@@ -1026,16 +1059,21 @@ function PageView({route,lang,t}){
       <Footer t={t}/>
     </div>);
   }
+  const acc=SERVICE_ACCENT[route]||{a:"var(--cyan)",a2:"var(--violet)"};
+  const CTX={fr:"Le contexte",en:"The context",de:"Der Kontext"}[lang]||"Le contexte";
+  const BEN={fr:"Ce que vous y gagnez",en:"What you gain",de:"Was Sie gewinnen"}[lang]||"Ce que vous y gagnez";
   return(
-    <div className="pg" key={route+lang}>
+    <div className="pg pg-svc" style={{"--acc":acc.a,"--acc2":acc.a2}} key={route+lang}>
       <PageHero data={data}/>
-      {data.benefits&&<ServiceBenefits benefits={data.benefits}/>}
+      {data.lead&&<ServiceStatement text={data.lead}/>}
+      {data.context&&<ServiceContext label={CTX} text={data.context}/>}
+      {data.benefits&&<ServiceBenefits benefits={data.benefits} title={BEN}/>}
+      {data.method&&<PageMethod method={data.method}/>}
       {data.blocks&&<section className="pg-body"><div className="wrap">
         {data.blocks.map((b,i)=><PageBlock key={i} b={b} i={i}/>)}
       </div></section>}
       {data.included&&<ServiceIncluded title={data.includedTitle||"Inclus"} items={data.included}/>}
       {data.proof&&<ServiceProof proof={data.proof}/>}
-      {data.method&&<PageMethod method={data.method}/>}
       {data.faq&&<PageFaq faq={data.faq}/>}
       <PageCTA data={data.cta}/>
       <Footer t={t}/>
