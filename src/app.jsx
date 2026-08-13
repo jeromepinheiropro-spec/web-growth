@@ -8,7 +8,7 @@ import VanillaTilt from "vanilla-tilt";
 import { tsParticles } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import confetti from "canvas-confetti";
-import { PAGES } from "./pages.js";
+import { PAGES, SERVICE_ROUTES, SERVICE_LABELS } from "./pages.js";
 
 /* ============================ ANIMATED HERO BG (WebGL plasma néon) ============================ */
 function AnimatedHeroBG(){
@@ -137,7 +137,7 @@ const BRAND = "Web Growth";
 /* ============================ I18N ============================ */
 const I18N = {
  fr:{
-  nav_services:"Services",nav_objectifs:"Objectifs",nav_seo:"SEO & Conversion",nav_work:"Réalisations",nav_approach:"Approche",nav_contact:"Contact",nav_cta:"Démarrer un projet",
+  nav_services:"Services",nav_objectifs:"Objectifs",nav_seo:"SEO & Conversion",nav_all_services:"Tous nos services",nav_work:"Réalisations",nav_approach:"Approche",nav_contact:"Contact",nav_cta:"Démarrer un projet",
   hero_eyebrow:"Agence de communication digitale · Luxembourg",
   hero_l1:"De la com",hero_l2:"qui a du",
   hero_sub:"Web Growth transforme votre présence digitale en énergie pure — stratégie, création, contenu et publicité, depuis le cœur du Luxembourg.",
@@ -157,7 +157,7 @@ const I18N = {
   rotator:["voltage","punch","du peps","de l'éclat"]
  },
  en:{
-  nav_services:"Services",nav_objectifs:"Goals",nav_seo:"SEO & Conversion",nav_work:"Work",nav_approach:"Approach",nav_contact:"Contact",nav_cta:"Start a project",
+  nav_services:"Services",nav_objectifs:"Goals",nav_seo:"SEO & Conversion",nav_all_services:"All services",nav_work:"Work",nav_approach:"Approach",nav_contact:"Contact",nav_cta:"Start a project",
   hero_eyebrow:"Digital communication agency · Luxembourg",
   hero_l1:"Marketing",hero_l2:"with real",
   hero_sub:"Web Growth turns your digital presence into pure energy — strategy, creative, content and advertising, from the heart of Luxembourg.",
@@ -177,7 +177,7 @@ const I18N = {
   rotator:["voltage","punch","energy","spark"]
  },
  de:{
-  nav_services:"Leistungen",nav_objectifs:"Ziele",nav_seo:"SEO & Conversion",nav_work:"Projekte",nav_approach:"Ansatz",nav_contact:"Kontakt",nav_cta:"Projekt starten",
+  nav_services:"Leistungen",nav_objectifs:"Ziele",nav_seo:"SEO & Conversion",nav_all_services:"Alle Leistungen",nav_work:"Projekte",nav_approach:"Ansatz",nav_contact:"Kontakt",nav_cta:"Projekt starten",
   hero_eyebrow:"Agentur für digitale Kommunikation · Luxemburg",
   hero_l1:"Marketing",hero_l2:"mit echtem",
   hero_sub:"Web Growth verwandelt deine digitale Präsenz in reine Energie — Strategie, Kreation, Content und Werbung, aus dem Herzen Luxemburgs.",
@@ -289,19 +289,24 @@ function Trail({mx,my,stiff,damp,size,c}){
 }
 
 /* ============================ ROUTING (chemins réels) ============================ */
-const ROUTES=["services","objectifs","seo-conversion"];
+const ROUTES=[...SERVICE_ROUTES,"services","objectifs"];
 function parseRoute(){const p=(window.location.pathname||"/").replace(/^\/+|\/+$/g,"").trim();return ROUTES.includes(p)?p:"home";}
 function goPage(r){
   const path = r==="home" ? "/" : "/"+r;
   if(window.location.pathname!==path){window.history.pushState({},"",path);}
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
-const SEO_TITLE={
+const LOC={fr:"Luxembourg",en:"Luxembourg",de:"Luxemburg"};
+const SEO_FIXED={
   home:{fr:"Web Growth — Agence de communication digitale à Luxembourg",en:"Web Growth — Digital communication agency in Luxembourg",de:"Web Growth — Agentur für digitale Kommunikation in Luxemburg"},
   services:{fr:"Services de communication digitale · Web Growth Luxembourg",en:"Digital communication services · Web Growth Luxembourg",de:"Digitale Kommunikationsleistungen · Web Growth Luxemburg"},
   objectifs:{fr:"Objectifs & résultats marketing · Web Growth Luxembourg",en:"Marketing goals & results · Web Growth Luxembourg",de:"Marketingziele & Ergebnisse · Web Growth Luxemburg"},
-  "seo-conversion":{fr:"SEO & optimisation des conversions · Web Growth Luxembourg",en:"SEO & conversion optimisation · Web Growth Luxembourg",de:"SEO & Conversion-Optimierung · Web Growth Luxemburg"},
 };
+function seoTitle(route,lang){
+  if(SEO_FIXED[route]) return SEO_FIXED[route][lang];
+  const label=(SERVICE_LABELS[lang]&&SERVICE_LABELS[lang][route])||route;
+  return `${label} · Web Growth ${LOC[lang]}`;
+}
 const HOME_DESC={fr:"Web Growth transforme votre présence digitale en énergie pure : stratégie, création, contenu et publicité, depuis le cœur du Luxembourg.",en:"Web Growth turns your digital presence into pure energy: strategy, creative, content and advertising, from the heart of Luxembourg.",de:"Web Growth verwandelt Ihre digitale Präsenz in pure Energie: Strategie, Kreation, Content und Werbung, aus dem Herzen Luxemburgs."};
 
 function scrollToId(id){
@@ -361,13 +366,20 @@ function Header({lang,setLang,t}){
   return(<>
     <header className={`nav ${solid?"solid":""} ${spot?"spot-on":""}`} onMouseMove={e=>{const r=e.currentTarget.getBoundingClientRect();sx.set(e.clientX-r.left);sy.set(e.clientY-r.top)}}
       onMouseEnter={()=>setSpot(true)} onMouseLeave={()=>setSpot(false)}>
-      <motion.div className="nav-spot" style={{x:sx,y:sy}}/>
+      <div className="nav-clip"><motion.div className="nav-spot" style={{x:sx,y:sy}}/></div>
       <div className="wrap nav-inner">
         <Brand/>
         <nav className="nav-links">
-          <a className="navlink" href="/services" onClick={e=>page(e,"services")}>{t.nav_services}</a>
+          <div className="nav-drop">
+            <a className="navlink nav-drop-trigger" href="/services" onClick={e=>page(e,"services")}>{t.nav_services}<i className="nav-chev" aria-hidden="true"/></a>
+            <div className="nav-drop-menu">
+              {SERVICE_ROUTES.map(r=>(
+                <a key={r} className="nav-drop-item" href={"/"+r} onClick={e=>page(e,r)}>{SERVICE_LABELS[lang][r]}</a>
+              ))}
+              <a className="nav-drop-item nav-drop-all" href="/services" onClick={e=>page(e,"services")}>{t.nav_all_services}</a>
+            </div>
+          </div>
           <a className="navlink" href="/objectifs" onClick={e=>page(e,"objectifs")}>{t.nav_objectifs}</a>
-          <a className="navlink" href="/seo-conversion" onClick={e=>page(e,"seo-conversion")}>{t.nav_seo}</a>
           <a className="navlink" onClick={()=>go("work")}>{t.nav_work}</a>
           <a className="navlink" onClick={()=>go("contact")}>{t.nav_contact}</a>
         </nav>
@@ -380,8 +392,10 @@ function Header({lang,setLang,t}){
     </header>
     <AnimatePresence>{open&&(
       <motion.div className="mobile-menu" initial={{y:"-100%"}} animate={{y:0}} exit={{y:"-100%"}} transition={{duration:.5,ease:[.7,0,.2,1]}}>
-        {[["p:services",t.nav_services],["p:objectifs",t.nav_objectifs],["p:seo-conversion",t.nav_seo],["work",t.nav_work],["contact",t.nav_contact]].map(([id,label],i)=>(
+        {[["p:services",t.nav_services],["p:objectifs",t.nav_objectifs],["work",t.nav_work],["contact",t.nav_contact]].map(([id,label],i)=>(
           <motion.a key={id} href={id.startsWith("p:")?"/"+id.slice(2):undefined} onClick={e=>id.startsWith("p:")?page(e,id.slice(2)):go(id)} initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{delay:.12+i*.06}}>{label}</motion.a>))}
+        {SERVICE_ROUTES.map((r,i)=>(
+          <motion.a key={r} className="mm-sub" href={"/"+r} onClick={e=>page(e,r)} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.4+i*.05}}>{SERVICE_LABELS[lang][r]}</motion.a>))}
         <div className="mm-foot">hello@webgrowth.lu · Luxembourg</div>
       </motion.div>)}</AnimatePresence>
   </>);
@@ -866,9 +880,67 @@ function PageHero({data}){
         <motion.span className="eyebrow" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6}}><span className="dot"/>{data.tag}</motion.span>
         <ScrambleText as="h1" className="pg-title" text={data.title}/>
         <motion.p className="pg-intro" initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35}}>{data.intro}</motion.p>
+        {data.heroCta&&(
+          <motion.div className="pg-hero-cta" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.5}}>
+            <Magnetic className="btn fill" onClick={()=>scrollToId("contact")}>{data.heroCta}</Magnetic>
+          </motion.div>)}
       </motion.div>
       <div className="scroll-hint"><span className="mouse"/></div>
     </section>
+  );
+}
+function ServiceBenefits({benefits}){
+  return(
+    <section className="pg-benefits"><div className="wrap">
+      <div className="pg-ben-grid">
+        {benefits.map((b,i)=>{
+          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
+          return(<motion.div className="pg-ben" key={i} ref={ref} initial={{opacity:0,y:30}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.1}}>
+            <span className="pg-ben-mark"/>
+            <h3>{b.h}</h3><p>{b.p}</p>
+          </motion.div>);
+        })}
+      </div>
+    </div></section>
+  );
+}
+function ServiceIncluded({title,items}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
+  return(
+    <section className="pg-incl" ref={ref}><div className="wrap">
+      <ScrambleText as="h2" className="pg-sec-h" text={title}/>
+      <ul className="pg-incl-list">
+        {items.map((it,i)=>(
+          <motion.li key={i} initial={{opacity:0,y:16}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.5,delay:i*.05}}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>
+            <span>{it}</span>
+          </motion.li>
+        ))}
+      </ul>
+    </div></section>
+  );
+}
+function ServicesHub({data}){
+  return(
+    <section className="pg-hub"><div className="wrap">
+      <div className="pg-hub-head">
+        <motion.span className="eyebrow" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6}}><span className="dot"/>{data.tag}</motion.span>
+        <ScrambleText as="h1" className="pg-title" text={data.title}/>
+        <motion.p className="pg-intro" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.3}}>{data.intro}</motion.p>
+      </div>
+      <div className="pg-hub-grid">
+        {data.items.map((it,i)=>{
+          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-40px"});
+          return(<motion.a key={it.route} className="pg-hub-card" href={"/"+it.route} ref={ref}
+            onClick={e=>{e.preventDefault();goPage(it.route);}}
+            initial={{opacity:0,y:34}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.55,delay:i*.06}}>
+            <span className="pg-hub-n">{String(i+1).padStart(2,"0")}</span>
+            <h3>{it.h}</h3><p>{it.p}</p>
+            <span className="pg-hub-go">→</span>
+          </motion.a>);
+        })}
+      </div>
+    </div></section>
   );
 }
 function PageBlock({b,i}){
@@ -935,12 +1007,21 @@ function PageFaq({faq}){
 function PageView({route,lang,t}){
   const data=(PAGES[lang]&&PAGES[lang][route])||PAGES.fr[route];
   if(!data)return null;
+  if(data.hub){
+    return(<div className="pg" key={route+lang}>
+      <ServicesHub data={data}/>
+      <PageCTA data={data.cta}/>
+      <Footer t={t}/>
+    </div>);
+  }
   return(
     <div className="pg" key={route+lang}>
       <PageHero data={data}/>
-      <section className="pg-body"><div className="wrap">
+      {data.benefits&&<ServiceBenefits benefits={data.benefits}/>}
+      {data.blocks&&<section className="pg-body"><div className="wrap">
         {data.blocks.map((b,i)=><PageBlock key={i} b={b} i={i}/>)}
-      </div></section>
+      </div></section>}
+      {data.included&&<ServiceIncluded title={data.includedTitle||"Inclus"} items={data.included}/>}
       {data.method&&<PageMethod method={data.method}/>}
       {data.faq&&<PageFaq faq={data.faq}/>}
       <PageCTA data={data.cta}/>
@@ -955,7 +1036,7 @@ function App(){
   useEffect(()=>{const on=()=>{setRoute(parseRoute());window.scrollTo(0,0);if(window.__lenis)window.__lenis.scrollTo(0,{immediate:true});};
     window.addEventListener("popstate",on);return()=>window.removeEventListener("popstate",on);},[]);
   useEffect(()=>{ // titre + meta description dynamiques par page (SEO)
-    document.title=(SEO_TITLE[route]&&SEO_TITLE[route][lang])||SEO_TITLE.home[lang];
+    document.title=seoTitle(route,lang);
     const desc = route==="home" ? HOME_DESC[lang] : ((PAGES[lang]&&PAGES[lang][route]&&PAGES[lang][route].intro)||HOME_DESC[lang]);
     let m=document.querySelector('meta[name="description"]');
     if(!m){m=document.createElement("meta");m.setAttribute("name","description");document.head.appendChild(m);}
