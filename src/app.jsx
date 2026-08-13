@@ -288,15 +288,26 @@ function Trail({mx,my,stiff,damp,size,c}){
   return <motion.div className="glow-trail" style={{x,y,width:size,height:size,background:c,boxShadow:`0 0 10px ${c}`}}/>;
 }
 
-/* ============================ ROUTING (hash) ============================ */
+/* ============================ ROUTING (chemins réels) ============================ */
 const ROUTES=["services","objectifs","seo-conversion"];
-function parseRoute(){const h=(window.location.hash||"").replace(/^#\/?/,"").trim();return ROUTES.includes(h)?h:"home";}
-function goPage(r){window.location.hash = r==="home" ? "/" : "/"+r;}
+function parseRoute(){const p=(window.location.pathname||"/").replace(/^\/+|\/+$/g,"").trim();return ROUTES.includes(p)?p:"home";}
+function goPage(r){
+  const path = r==="home" ? "/" : "/"+r;
+  if(window.location.pathname!==path){window.history.pushState({},"",path);}
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
+const SEO_TITLE={
+  home:{fr:"Web Growth — Agence de communication digitale à Luxembourg",en:"Web Growth — Digital communication agency in Luxembourg",de:"Web Growth — Agentur für digitale Kommunikation in Luxemburg"},
+  services:{fr:"Services de communication digitale · Web Growth Luxembourg",en:"Digital communication services · Web Growth Luxembourg",de:"Digitale Kommunikationsleistungen · Web Growth Luxemburg"},
+  objectifs:{fr:"Objectifs & résultats marketing · Web Growth Luxembourg",en:"Marketing goals & results · Web Growth Luxembourg",de:"Marketingziele & Ergebnisse · Web Growth Luxemburg"},
+  "seo-conversion":{fr:"SEO & optimisation des conversions · Web Growth Luxembourg",en:"SEO & conversion optimisation · Web Growth Luxembourg",de:"SEO & Conversion-Optimierung · Web Growth Luxemburg"},
+};
+const HOME_DESC={fr:"Web Growth transforme votre présence digitale en énergie pure : stratégie, création, contenu et publicité, depuis le cœur du Luxembourg.",en:"Web Growth turns your digital presence into pure energy: strategy, creative, content and advertising, from the heart of Luxembourg.",de:"Web Growth verwandelt Ihre digitale Präsenz in pure Energie: Strategie, Kreation, Content und Werbung, aus dem Herzen Luxemburgs."};
 
 function scrollToId(id){
   const el=document.getElementById(id);
   if(!el){ // probablement sur une sous-page → retour accueil puis scroll
-    if(parseRoute()!=="home"){goPage("home");setTimeout(()=>scrollToId(id),180);}
+    if(parseRoute()!=="home"){goPage("home");setTimeout(()=>scrollToId(id),200);}
     return;
   }
   if(window.__lenis)window.__lenis.scrollTo(el,{offset:-64,duration:1.1});
@@ -305,7 +316,7 @@ function scrollToId(id){
 /* ============================ BRAND (header logo) ============================ */
 function Brand(){
   return(
-    <a className="brand" onClick={()=>{if(parseRoute()!=="home"){goPage("home");window.scrollTo(0,0);}else if(window.__lenis)window.__lenis.scrollTo(0,{duration:1});else window.scrollTo({top:0,behavior:"smooth"})}}>
+    <a className="brand" href="/" onClick={e=>{e.preventDefault();if(parseRoute()!=="home"){goPage("home");}else if(window.__lenis)window.__lenis.scrollTo(0,{duration:1});else window.scrollTo({top:0,behavior:"smooth"})}}>
       <span className="brand-word" data-txt="WEB GROWTH">WEB GROWTH</span>
       <span className="brand-tag">.LU</span>
     </a>
@@ -346,7 +357,7 @@ function Header({lang,setLang,t}){
   useEffect(()=>{const s=()=>setSolid(window.scrollY>40);window.addEventListener("scroll",s);return()=>window.removeEventListener("scroll",s)},[]);
   useEffect(()=>{document.body.classList.toggle("menu-open",open)},[open]);
   const go=id=>{setOpen(false);scrollToId(id)};
-  const page=r=>{setOpen(false);goPage(r);};
+  const page=(e,r)=>{if(e)e.preventDefault();setOpen(false);goPage(r);};
   return(<>
     <header className={`nav ${solid?"solid":""} ${spot?"spot-on":""}`} onMouseMove={e=>{const r=e.currentTarget.getBoundingClientRect();sx.set(e.clientX-r.left);sy.set(e.clientY-r.top)}}
       onMouseEnter={()=>setSpot(true)} onMouseLeave={()=>setSpot(false)}>
@@ -354,9 +365,9 @@ function Header({lang,setLang,t}){
       <div className="wrap nav-inner">
         <Brand/>
         <nav className="nav-links">
-          <a className="navlink" onClick={()=>page("services")}>{t.nav_services}</a>
-          <a className="navlink" onClick={()=>page("objectifs")}>{t.nav_objectifs}</a>
-          <a className="navlink" onClick={()=>page("seo-conversion")}>{t.nav_seo}</a>
+          <a className="navlink" href="/services" onClick={e=>page(e,"services")}>{t.nav_services}</a>
+          <a className="navlink" href="/objectifs" onClick={e=>page(e,"objectifs")}>{t.nav_objectifs}</a>
+          <a className="navlink" href="/seo-conversion" onClick={e=>page(e,"seo-conversion")}>{t.nav_seo}</a>
           <a className="navlink" onClick={()=>go("work")}>{t.nav_work}</a>
           <a className="navlink" onClick={()=>go("contact")}>{t.nav_contact}</a>
         </nav>
@@ -370,7 +381,7 @@ function Header({lang,setLang,t}){
     <AnimatePresence>{open&&(
       <motion.div className="mobile-menu" initial={{y:"-100%"}} animate={{y:0}} exit={{y:"-100%"}} transition={{duration:.5,ease:[.7,0,.2,1]}}>
         {[["p:services",t.nav_services],["p:objectifs",t.nav_objectifs],["p:seo-conversion",t.nav_seo],["work",t.nav_work],["contact",t.nav_contact]].map(([id,label],i)=>(
-          <motion.a key={id} onClick={()=>id.startsWith("p:")?page(id.slice(2)):go(id)} initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{delay:.12+i*.06}}>{label}</motion.a>))}
+          <motion.a key={id} href={id.startsWith("p:")?"/"+id.slice(2):undefined} onClick={e=>id.startsWith("p:")?page(e,id.slice(2)):go(id)} initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{delay:.12+i*.06}}>{label}</motion.a>))}
         <div className="mm-foot">hello@webgrowth.lu · Luxembourg</div>
       </motion.div>)}</AnimatePresence>
   </>);
@@ -884,6 +895,43 @@ function PageCTA({data}){
     </section>
   );
 }
+function PageMethod({method}){
+  return(
+    <section className="pg-method"><div className="wrap">
+      <ScrambleText as="h2" className="pg-sec-h" text={method.title}/>
+      <div className="pg-steps">
+        {method.steps.map((s,i)=>{
+          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
+          return(<motion.div className="pg-step" key={i} ref={ref} initial={{opacity:0,y:30}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.08}}>
+            <span className="pg-step-n">{String(i+1).padStart(2,"0")}</span>
+            <h3>{s.h}</h3><p>{s.p}</p>
+          </motion.div>);
+        })}
+      </div>
+    </div></section>
+  );
+}
+function PageFaq({faq}){
+  const[open,setOpen]=useState(0);
+  return(
+    <section className="pg-faq"><div className="wrap">
+      <ScrambleText as="h2" className="pg-sec-h" text={faq.title}/>
+      <div className="pg-faq-list">
+        {faq.items.map((it,i)=>(
+          <div className={`pg-faq-item ${open===i?"on":""}`} key={i}>
+            <button className="pg-faq-q" onClick={()=>setOpen(open===i?-1:i)} aria-expanded={open===i}>
+              <span>{it.q}</span><i className="pg-faq-ic" aria-hidden="true"/>
+            </button>
+            <AnimatePresence initial={false}>{open===i&&(
+              <motion.div className="pg-faq-a" initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.3,ease:[.4,0,.2,1]}}>
+                <p>{it.a}</p>
+              </motion.div>)}</AnimatePresence>
+          </div>
+        ))}
+      </div>
+    </div></section>
+  );
+}
 function PageView({route,lang,t}){
   const data=(PAGES[lang]&&PAGES[lang][route])||PAGES.fr[route];
   if(!data)return null;
@@ -893,6 +941,8 @@ function PageView({route,lang,t}){
       <section className="pg-body"><div className="wrap">
         {data.blocks.map((b,i)=><PageBlock key={i} b={b} i={i}/>)}
       </div></section>
+      {data.method&&<PageMethod method={data.method}/>}
+      {data.faq&&<PageFaq faq={data.faq}/>}
       <PageCTA data={data.cta}/>
       <Footer t={t}/>
     </div>
@@ -903,7 +953,16 @@ function App(){
   const[lang,setLang]=useState("fr");const t=I18N[lang];
   const[route,setRoute]=useState(parseRoute);
   useEffect(()=>{const on=()=>{setRoute(parseRoute());window.scrollTo(0,0);if(window.__lenis)window.__lenis.scrollTo(0,{immediate:true});};
-    window.addEventListener("hashchange",on);return()=>window.removeEventListener("hashchange",on);},[]);
+    window.addEventListener("popstate",on);return()=>window.removeEventListener("popstate",on);},[]);
+  useEffect(()=>{ // titre + meta description dynamiques par page (SEO)
+    document.title=(SEO_TITLE[route]&&SEO_TITLE[route][lang])||SEO_TITLE.home[lang];
+    const desc = route==="home" ? HOME_DESC[lang] : ((PAGES[lang]&&PAGES[lang][route]&&PAGES[lang][route].intro)||HOME_DESC[lang]);
+    let m=document.querySelector('meta[name="description"]');
+    if(!m){m=document.createElement("meta");m.setAttribute("name","description");document.head.appendChild(m);}
+    m.setAttribute("content",desc);
+    const c=document.querySelector('link[rel="canonical"]');
+    if(c)c.setAttribute("href","https://web-growth-production.up.railway.app"+(route==="home"?"/":"/"+route));
+  },[route,lang]);
   const[loading,setLoading]=useState(true);
   const[rave,setRave]=useState(false);
   const[conciergeOpen,setConciergeOpen]=useState(false);
