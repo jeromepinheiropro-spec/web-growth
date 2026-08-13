@@ -893,19 +893,32 @@ function PageHero({data}){
     </section>
   );
 }
-function ServiceStatement({text}){
-  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-90px"});
-  const{scrollYProgress}=useScroll({target:ref,offset:["start end","end start"]});
-  const ty=useTransform(scrollYProgress,[0,1],[70,-70]);        // parallax texte
-  const scale=useTransform(scrollYProgress,[0,.5,1],[.93,1,.97]);
-  const qy=useTransform(scrollYProgress,[0,1],[-60,140]);       // parallax guillemet
-  const glow=useTransform(scrollYProgress,[0,.5,1],[.03,.22,.03]);
+function lerpHex(a,b,t){
+  if(!a||a[0]!=="#"||!b||b[0]!=="#") return a||b||"#ffffff";
+  const pa=[1,3,5].map(i=>parseInt(a.slice(i,i+2),16));
+  const pb=[1,3,5].map(i=>parseInt(b.slice(i,i+2),16));
+  const c=pa.map((v,i)=>Math.round(v+(pb[i]-v)*t));
+  return "#"+c.map(v=>v.toString(16).padStart(2,"0")).join("");
+}
+function StatementWord({word,i,total,progress,acc,acc2}){
+  const s=(i/total)*0.80, e=s+(1/total)*1.25;                  // révélation décalée, comme le manifeste
+  const target=lerpHex(acc,acc2, total>1?i/(total-1):0);       // couleur le long du dégradé signature
+  const color=useTransform(progress,[s,e],["#413e52",target]); // gris terne → couleur vive
+  const opacity=useTransform(progress,[s,e],[0.55,1]);
+  const shadow=useTransform(progress,[s,e],["0 0 0 rgba(0,0,0,0)","0 0 26px "+target+"55"]);
+  return <motion.span className="sw" style={{color,opacity,textShadow:shadow}}>{word} </motion.span>;
+}
+function ServiceStatement({text,acc,acc2}){
+  const ref=useRef(null);
+  const{scrollYProgress}=useScroll({target:ref,offset:["start start","end end"]});
+  const words=text.split(" ");
   return(
     <section className="pg-statement" ref={ref}>
-      <motion.span className="pg-statement-q" aria-hidden="true" style={{y:qy}}>“</motion.span>
-      <motion.span className="pg-statement-glow" aria-hidden="true" style={{opacity:glow}}/>
-      <div className="wrap">
-        <motion.p style={{y:ty,scale}} initial={{opacity:0}} animate={inView?{opacity:1}:{}} transition={{duration:.85,ease:[.16,1,.3,1]}}>{text}</motion.p>
+      <div className="pg-statement-pin">
+        <span className="pg-statement-q" aria-hidden="true">“</span>
+        <p className="pg-statement-p">
+          {words.map((w,i)=><StatementWord key={i} word={w} i={i} total={words.length} progress={scrollYProgress} acc={acc} acc2={acc2}/>)}
+        </p>
       </div>
     </section>
   );
@@ -1082,7 +1095,7 @@ function PageView({route,lang,t}){
   return(
     <div className="pg pg-svc" style={{"--acc":acc.a,"--acc2":acc.a2}} key={route+lang}>
       <PageHero data={data}/>
-      {data.lead&&<ServiceStatement text={data.lead}/>}
+      {data.lead&&<ServiceStatement text={data.lead} acc={acc.a} acc2={acc.a2}/>}
       {data.context&&<ServiceContext label={CTX} text={data.context}/>}
       {data.benefits&&<ServiceBenefits benefits={data.benefits} title={BEN}/>}
       {data.method&&<PageMethod method={data.method}/>}
