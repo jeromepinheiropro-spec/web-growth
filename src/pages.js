@@ -72,6 +72,8 @@ fr: {
 
   "strategie-de-marque": {
     tag:"Service · Stratégie", title:"STRATÉGIE DE MARQUE", heroCta:"Construire ma marque",
+    valueProp:"Une marque claire que vos clients comprennent, retiennent et choisissent — avant même de comparer les prix.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Une méthode, pas de l'impro","p":"Ateliers structurés et livrables concrets : votre stratégie tient sur le papier comme dans la réalité."}]},
     intro:"Une marque forte se construit avant de se dessiner. On clarifie qui vous êtes, ce que vous promettez et pourquoi on devrait vous choisir — pour une image cohérente et mémorable.",
     benefits:[
       { h:"Une marque claire", p:"Un positionnement net qui vous distingue et parle vraiment à vos clients." },
@@ -95,6 +97,8 @@ fr: {
 
   "identite-visuelle": {
     tag:"Service · Design", title:"IDENTITÉ VISUELLE & DESIGN", heroCta:"Créer mon identité",
+    valueProp:"Une identité qu'on reconnaît au premier coup d'œil, et qui inspire confiance instantanément.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Vous êtes propriétaire de tout","p":"Fichiers sources, charte et déclinaisons vous appartiennent — aucune dépendance."}]},
     intro:"Logo, couleurs, typographies, univers graphique : une identité qui vous ressemble et qu'on reconnaît au premier coup d'œil.",
     benefits:[
       { h:"Une image mémorable", p:"Un univers visuel distinctif qui reste en tête et inspire confiance." },
@@ -118,6 +122,8 @@ fr: {
 
   "creation-site-web": {
     tag:"Service · Web", title:"CRÉATION DE SITE WEB", heroCta:"Lancer mon site",
+    valueProp:"Un site rapide qui travaille pour vous 24h/24 et transforme vos visiteurs en clients.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Livré, formé, autonome","p":"Vous repartez avec un site que vous savez gérer. On vous forme, on ne vous rend pas dépendant."}]},
     intro:"Des sites rapides, beaux et pensés pour convertir. Vitrine, e-commerce ou landing page — votre meilleur commercial, ouvert 24h/24.",
     benefits:[
       { h:"Rapide & fluide", p:"Un site performant qui charge vite : meilleure expérience et meilleur référencement." },
@@ -141,6 +147,8 @@ fr: {
 
   "reseaux-sociaux": {
     tag:"Service · Social media", title:"RÉSEAUX SOCIAUX & CONTENU", heroCta:"Booster mes réseaux",
+    valueProp:"Une présence qui fait grandir votre communauté et vend pour vous — sans y passer vos soirées.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Vous gardez la main","p":"Vous validez la ligne et le planning. On vous fait gagner du temps, pas perdre le contrôle."}]},
     intro:"Une présence vivante qui crée du lien et fait grandir votre communauté. Stratégie, contenus et community management, du début à la fin.",
     benefits:[
       { h:"Une communauté engagée", p:"Des abonnés qui interagissent vraiment, pas juste des chiffres." },
@@ -164,6 +172,8 @@ fr: {
 
   "publicite-en-ligne": {
     tag:"Service · Publicité", title:"PUBLICITÉ EN LIGNE", heroCta:"Lancer mes campagnes",
+    valueProp:"Les bons clients, dès le lancement. Chaque euro investi, ciblé et mesuré.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Chaque euro est mesuré","p":"Suivi des conversions et reporting clair : on investit là où c'est rentable, on coupe le reste."}]},
     intro:"Les bonnes personnes, au bon moment, au bon endroit. Campagnes Google, Meta et TikTok pilotées à la performance, budget maîtrisé.",
     benefits:[
       { h:"Des résultats rapides", p:"Contrairement au SEO, la publicité génère du trafic et des leads dès le lancement." },
@@ -187,6 +197,8 @@ fr: {
 
   "video-motion": {
     tag:"Service · Vidéo", title:"VIDÉO & MOTION DESIGN", heroCta:"Créer ma vidéo",
+    valueProp:"Des vidéos qui arrêtent le pouce et font passer votre message en cinq secondes.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Un tournage, plusieurs contenus","p":"On tire le maximum de chaque production : beaucoup de formats, un minimum d'effort pour vous."}]},
     intro:"Reels, motion design, vidéos de marque : du contenu qui arrête le pouce et fait passer votre message en quelques secondes.",
     benefits:[
       { h:"Ça capte l'attention", p:"La vidéo est le format le plus engageant : on arrête le scroll et on retient le regard." },
@@ -210,6 +222,8 @@ fr: {
 
   "seo-conversion": {
     tag:"Service · SEO & Conversion", title:"SEO & OPTIMISATION DES CONVERSIONS", heroCta:"Demander mon audit",
+    valueProp:"Être trouvé sur Google par ceux qui cherchent déjà vos services — et transformer ce trafic en clients.",
+    proof:{"title":"Ce qui vous rassure","items":[{"h":"Basé à Luxembourg","p":"Un interlocuteur proche et réactif, qui connaît votre marché local."},{"h":"Sans engagement","p":"On commence par un échange offert. Vous avancez seulement si le courant passe."},{"h":"Transparent de A à Z","p":"Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."},{"h":"Audit offert et sans jargon","p":"On commence par un diagnostic clair et chiffré. Vous savez exactement par où commencer."}]},
     intro:"Le meilleur site du monde ne sert à rien si personne ne le trouve — et un flot de visiteurs ne vaut rien s'ils repartent. On travaille les deux : être visible sur Google, puis transformer chaque visite en client.",
     benefits:[
       { h:"Plus de visibilité", p:"On grimpe dans Google sur les recherches qui comptent pour votre activité." },
@@ -265,6 +279,8 @@ en: {
 
   "strategie-de-marque":{
     tag:"Service · Strategy", title:"BRAND STRATEGY", heroCta:"Build my brand",
+    valueProp:"A clear brand your customers understand, remember and choose — before they even compare prices.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"A method, not improvisation","p":"Structured workshops and concrete deliverables: your strategy holds up on paper and in reality."}]},
     intro:"A strong brand is built before it's designed. We clarify who you are, what you promise and why you should be chosen — for a consistent, memorable image.",
     benefits:[
       { h:"A clear brand", p:"Sharp positioning that sets you apart and truly speaks to your customers." },
@@ -288,6 +304,8 @@ en: {
 
   "identite-visuelle":{
     tag:"Service · Design", title:"VISUAL IDENTITY & DESIGN", heroCta:"Create my identity",
+    valueProp:"An identity recognised at a glance that inspires trust instantly.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"You own everything","p":"Source files, guidelines and variations are yours — no lock-in."}]},
     intro:"Logo, colours, typography, visual world: an identity that looks like you and is recognised at a glance.",
     benefits:[
       { h:"A memorable image", p:"A distinctive visual world that sticks and inspires trust." },
@@ -311,6 +329,8 @@ en: {
 
   "creation-site-web":{
     tag:"Service · Web", title:"WEBSITE CREATION", heroCta:"Launch my site",
+    valueProp:"A fast site that works for you 24/7 and turns visitors into customers.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"Delivered, trained, autonomous","p":"You leave with a site you know how to run. We train you, we don't make you dependent."}]},
     intro:"Fast, beautiful sites built to convert. Showcase, e-commerce or landing page — your best salesperson, open 24/7.",
     benefits:[
       { h:"Fast & smooth", p:"A high-performance site that loads fast: better experience, better SEO." },
@@ -334,6 +354,8 @@ en: {
 
   "reseaux-sociaux":{
     tag:"Service · Social media", title:"SOCIAL MEDIA & CONTENT", heroCta:"Boost my socials",
+    valueProp:"A presence that grows your community and sells for you — without eating your evenings.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"You stay in control","p":"You approve the line and the schedule. We save you time, not control."}]},
     intro:"A living presence that builds connection and grows your community. Strategy, content and community management, end to end.",
     benefits:[
       { h:"An engaged community", p:"Followers who actually interact, not just numbers." },
@@ -357,6 +379,8 @@ en: {
 
   "publicite-en-ligne":{
     tag:"Service · Advertising", title:"ONLINE ADVERTISING", heroCta:"Launch my campaigns",
+    valueProp:"The right customers, from day one. Every euro invested, targeted and measured.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"Every euro is measured","p":"Conversion tracking and clear reporting: we invest where it pays, we cut the rest."}]},
     intro:"The right people, at the right moment, in the right place. Google, Meta and TikTok campaigns run on performance, budget under control.",
     benefits:[
       { h:"Fast results", p:"Unlike SEO, advertising drives traffic and leads from launch." },
@@ -380,6 +404,8 @@ en: {
 
   "video-motion":{
     tag:"Service · Video", title:"VIDEO & MOTION DESIGN", heroCta:"Create my video",
+    valueProp:"Videos that stop the scroll and land your message in five seconds.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"One shoot, several assets","p":"We get the most from each production: many formats, minimal effort on your side."}]},
     intro:"Reels, motion design, brand videos: content that stops the scroll and gets your message across in seconds.",
     benefits:[
       { h:"It grabs attention", p:"Video is the most engaging format: we stop the scroll and hold the eye." },
@@ -403,6 +429,8 @@ en: {
 
   "seo-conversion":{
     tag:"Service · SEO & Conversion", title:"SEO & CONVERSION OPTIMISATION", heroCta:"Request my audit",
+    valueProp:"Get found on Google by people already looking for your services — and turn that traffic into customers.",
+    proof:{"title":"Why you can trust us","items":[{"h":"Based in Luxembourg","p":"A close, responsive partner who knows your local market."},{"h":"No commitment","p":"We start with a free chat. You only move forward if it clicks."},{"h":"Transparent throughout","p":"Clear quote, announced timelines, no surprises: you always know where the project stands."},{"h":"Free audit, no jargon","p":"We start with a clear, quantified diagnosis. You know exactly where to begin."}]},
     intro:"The best site in the world is useless if no one finds it — and a flood of visitors is worthless if they leave. We work on both: being visible on Google, then turning every visit into a customer.",
     benefits:[
       { h:"More visibility", p:"We climb on Google for the searches that matter to your business." },
@@ -458,6 +486,8 @@ de: {
 
   "strategie-de-marque":{
     tag:"Leistung · Strategie", title:"MARKENSTRATEGIE", heroCta:"Marke aufbauen",
+    valueProp:"Eine klare Marke, die Ihre Kunden verstehen, sich merken und wählen — noch bevor sie Preise vergleichen.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Methode statt Improvisation","p":"Strukturierte Workshops und konkrete Ergebnisse: Ihre Strategie hält auf dem Papier wie in der Realität."}]},
     intro:"Eine starke Marke wird aufgebaut, bevor sie gestaltet wird. Wir klären, wer Sie sind, was Sie versprechen und warum man Sie wählen sollte — für ein konsistentes, einprägsames Bild.",
     benefits:[
       { h:"Eine klare Marke", p:"Eine scharfe Positionierung, die Sie abhebt und Ihre Kunden wirklich anspricht." },
@@ -481,6 +511,8 @@ de: {
 
   "identite-visuelle":{
     tag:"Leistung · Design", title:"VISUELLE IDENTITÄT & DESIGN", heroCta:"Identität erstellen",
+    valueProp:"Eine Identität, die man auf den ersten Blick erkennt und die sofort Vertrauen schafft.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Ihnen gehört alles","p":"Quelldateien, Design und Varianten gehören Ihnen — keine Abhängigkeit."}]},
     intro:"Logo, Farben, Typografie, visuelle Welt: eine Identität, die zu Ihnen passt und auf den ersten Blick erkannt wird.",
     benefits:[
       { h:"Ein einprägsames Bild", p:"Eine unverwechselbare visuelle Welt, die bleibt und Vertrauen schafft." },
@@ -504,6 +536,8 @@ de: {
 
   "creation-site-web":{
     tag:"Leistung · Web", title:"WEBSITE-ERSTELLUNG", heroCta:"Website starten",
+    valueProp:"Eine schnelle Website, die rund um die Uhr für Sie arbeitet und Besucher in Kunden verwandelt.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Geliefert, geschult, autonom","p":"Sie gehen mit einer Website, die Sie bedienen können. Wir schulen Sie, statt Sie abhängig zu machen."}]},
     intro:"Schnelle, schöne Websites, die konvertieren. Schaufenster, E-Commerce oder Landingpage — Ihr bester Verkäufer, rund um die Uhr geöffnet.",
     benefits:[
       { h:"Schnell & flüssig", p:"Eine performante Website, die schnell lädt: bessere Erfahrung, besseres SEO." },
@@ -527,6 +561,8 @@ de: {
 
   "reseaux-sociaux":{
     tag:"Leistung · Social Media", title:"SOCIAL MEDIA & CONTENT", heroCta:"Social pushen",
+    valueProp:"Eine Präsenz, die Ihre Community wachsen lässt und für Sie verkauft — ohne Ihre Abende zu kosten.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Sie behalten die Kontrolle","p":"Sie geben Linie und Plan frei. Wir sparen Ihnen Zeit, nicht Kontrolle."}]},
     intro:"Eine lebendige Präsenz, die Verbindung schafft und Ihre Community wachsen lässt. Strategie, Content und Community Management, von A bis Z.",
     benefits:[
       { h:"Eine engagierte Community", p:"Follower, die wirklich interagieren, nicht nur Zahlen." },
@@ -550,6 +586,8 @@ de: {
 
   "publicite-en-ligne":{
     tag:"Leistung · Werbung", title:"ONLINE-WERBUNG", heroCta:"Kampagnen starten",
+    valueProp:"Die richtigen Kunden, ab dem Start. Jeder investierte Euro, gezielt und messbar.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Jeder Euro ist messbar","p":"Conversion-Tracking und klares Reporting: Wir investieren, wo es sich lohnt, und stoppen den Rest."}]},
     intro:"Die richtigen Menschen, zum richtigen Zeitpunkt, am richtigen Ort. Google-, Meta- und TikTok-Kampagnen performanceorientiert, Budget im Griff.",
     benefits:[
       { h:"Schnelle Ergebnisse", p:"Anders als SEO bringt Werbung ab dem Start Traffic und Leads." },
@@ -573,6 +611,8 @@ de: {
 
   "video-motion":{
     tag:"Leistung · Video", title:"VIDEO & MOTION DESIGN", heroCta:"Video erstellen",
+    valueProp:"Videos, die den Daumen stoppen und Ihre Botschaft in fünf Sekunden vermitteln.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Ein Dreh, mehrere Inhalte","p":"Wir holen das Maximum aus jeder Produktion: viele Formate, minimaler Aufwand für Sie."}]},
     intro:"Reels, Motion Design, Markenvideos: Content, der den Daumen stoppt und Ihre Botschaft in Sekunden vermittelt.",
     benefits:[
       { h:"Es fesselt", p:"Video ist das ansprechendste Format: Wir stoppen das Scrollen und halten den Blick." },
@@ -596,6 +636,8 @@ de: {
 
   "seo-conversion":{
     tag:"Leistung · SEO & Conversion", title:"SEO & CONVERSION-OPTIMIERUNG", heroCta:"Audit anfordern",
+    valueProp:"Bei Google von denen gefunden werden, die bereits suchen — und diesen Traffic in Kunden verwandeln.",
+    proof:{"title":"Was Sie beruhigt","items":[{"h":"In Luxemburg ansässig","p":"Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."},{"h":"Ohne Verpflichtung","p":"Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."},{"h":"Durchgehend transparent","p":"Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."},{"h":"Kostenloses Audit, ohne Fachchinesisch","p":"Wir starten mit einer klaren, bezifferten Diagnose. Sie wissen genau, wo Sie anfangen."}]},
     intro:"Die beste Website der Welt nützt nichts, wenn niemand sie findet — und eine Flut an Besuchern ist wertlos, wenn sie wieder geht. Wir arbeiten an beidem: bei Google sichtbar sein und jeden Besuch in einen Kunden verwandeln.",
     benefits:[
       { h:"Mehr Sichtbarkeit", p:"Wir steigen bei Google für die Suchen, die für Ihr Geschäft zählen." },

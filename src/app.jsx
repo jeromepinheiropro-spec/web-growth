@@ -449,7 +449,7 @@ function Hero({t}){
   const line={hidden:{},show:{transition:{staggerChildren:.12,delayChildren:.1}}};
   const reveal={hidden:{yPercent:120},show:{yPercent:0,transition:{duration:.9,ease:[.16,1,.3,1]}}};
   return(
-    <section className="hero" id="top" ref={heroRef} onMouseMove={onParallax}>
+    <section className="hero" id="top" ref={heroRef}>
       <AnimatedHeroBG/><div className="hero-bg"/><canvas className="water-canvas" ref={waterRef}/>
       {[{y:"15%",c:"var(--cyan)",ang:"-20deg",dur:"4.6s",d:"0s"},
         {y:"25%",c:"var(--magenta)",ang:"-16deg",dur:"5.8s",d:"1.4s"},
@@ -460,7 +460,7 @@ function Hero({t}){
         <span key={i} className="shoot" style={{"--y":s.y,"--c":s.c,"--ang":s.ang,"--dur":s.dur,"--d":s.d}}/>))}
       <div className="wrap">
         <motion.span className="eyebrow" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7}}><span className="dot"/>{t.hero_eyebrow}</motion.span>
-        <motion.h1 variants={line} initial="hidden" animate="show" style={{x:px,y:py}}>
+        <motion.h1 variants={line} initial="hidden" animate="show">
           <span className="line"><motion.span style={{display:"inline-block"}} variants={reveal}>{t.hero_l1}</motion.span></span>
           <span className="line"><motion.span style={{display:"inline-block"}} variants={reveal}>{t.hero_l2}</motion.span></span>
           <span className="line"><AnimatePresence mode="wait"><motion.span key={words[idx]} className="rw"
@@ -874,6 +874,7 @@ function PageHero({data}){
       <motion.div className="wrap" style={{x:px,y:py}}>
         <motion.span className="eyebrow" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6}}><span className="dot"/>{data.tag}</motion.span>
         <ScrambleText as="h1" className="pg-title" text={data.title}/>
+        {data.valueProp&&<motion.p className="pg-vp" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.28}}>{data.valueProp}</motion.p>}
         <motion.p className="pg-intro" initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35}}>{data.intro}</motion.p>
         {data.heroCta&&(
           <motion.div className="pg-hero-cta" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.5}}>
@@ -912,6 +913,22 @@ function ServiceIncluded({title,items}){
           </motion.li>
         ))}
       </ul>
+    </div></section>
+  );
+}
+function ServiceProof({proof}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
+  return(
+    <section className="pg-proof" ref={ref}><div className="wrap">
+      <ScrambleText as="h2" className="pg-sec-h" text={proof.title}/>
+      <div className="pg-proof-grid">
+        {proof.items.map((it,i)=>(
+          <motion.div className="pg-proof-card" key={i} initial={{opacity:0,y:24}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.55,delay:i*.08}}>
+            <span className="pg-proof-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <h3>{it.h}</h3><p>{it.p}</p>
+          </motion.div>
+        ))}
+      </div>
     </div></section>
   );
 }
@@ -1017,6 +1034,7 @@ function PageView({route,lang,t}){
         {data.blocks.map((b,i)=><PageBlock key={i} b={b} i={i}/>)}
       </div></section>}
       {data.included&&<ServiceIncluded title={data.includedTitle||"Inclus"} items={data.included}/>}
+      {data.proof&&<ServiceProof proof={data.proof}/>}
       {data.method&&<PageMethod method={data.method}/>}
       {data.faq&&<PageFaq faq={data.faq}/>}
       <PageCTA data={data.cta}/>
