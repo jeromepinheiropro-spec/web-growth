@@ -177,7 +177,7 @@ body.rave{animation:ravehue 1s linear infinite}
 .brand-mark::after{content:"";position:absolute;inset:2.5px;border-radius:10px;background:#0a0a12}
 @keyframes spin{to{transform:rotate(360deg)}}
 .brand-bolt{position:relative;z-index:1;width:23px;height:23px;color:var(--acid);filter:drop-shadow(0 0 7px var(--acid))}
-.brand-word{position:relative;font-family:'Montserrat',sans-serif;font-weight:300;font-size:27px;letter-spacing:5.5px;text-transform:uppercase;
+.brand-word{position:relative;display:inline-block;font-family:'Montserrat',sans-serif;font-weight:300;font-size:27px;letter-spacing:6px;text-transform:uppercase;transform:skewX(-16deg);
   background:linear-gradient(90deg,#fff 0%,var(--cyan) 22%,var(--magenta) 48%,var(--violet) 72%,#fff 100%);
   background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 6s linear infinite;
   filter:drop-shadow(0 0 12px rgba(122,59,255,.3))}
