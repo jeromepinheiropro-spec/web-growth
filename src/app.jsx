@@ -51,29 +51,10 @@ function AnimatedHeroBG(){
 
 /* ============================ SCRAMBLE TEXT ============================ */
 const _SCHARS="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&/\\<>*";
-function ScrambleText({text,className,as:Tag="span",start=true}){
-  const [out,setOut]=useState(text);
+function ScrambleText({text,className,as:Tag="span"}){
+  // Animation de « décryptage » retirée — titres affichés en clair, fondu doux via CSS.
   const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
-  useEffect(()=>{
-    if(!start||!inView)return;
-    const DUR=750;let startTs=null;let raf;
-    const tick=ts=>{
-      if(startTs==null)startTs=ts;
-      const prog=Math.min(1,(ts-startTs)/DUR);
-      let s="";
-      for(let i=0;i<text.length;i++){
-        const ch=text[i];
-        if(ch===" "){s+=" ";continue;}
-        if(i/text.length<prog) s+=ch;
-        else s+=_SCHARS[Math.floor((Math.sin(ts*0.05+i*7.7)*0.5+0.5)*_SCHARS.length)%_SCHARS.length];
-      }
-      setOut(s);
-      if(prog<1)raf=requestAnimationFrame(tick);else setOut(text);
-    };
-    raf=requestAnimationFrame(tick);
-    return()=>cancelAnimationFrame(raf);
-  },[inView,text,start]);
-  return <Tag ref={ref} className={className}>{out}</Tag>;
+  return <Tag ref={ref} className={`${className||""} rise ${inView?"in":""}`}>{text}</Tag>;
 }
 
 /* ============================ PRELOADER (intro cinématique) ============================ */
@@ -1126,4 +1107,5 @@ function App(){
     </div>
   </>);
 }
-createRoot(document.getElementById("root")).render(<App/>);
+const _rootEl=document.getElementById("root"); _rootEl.innerHTML=""; // retire le bloc SEO pré-rendu
+createRoot(_rootEl).render(<App/>);
