@@ -5,7 +5,17 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 const BASE = process.env.PUBLIC_URL || "https://web-growth-production.up.railway.app";
-const ROUTES = ["", "services", "objectifs", "seo-conversion"];
+const ROUTES = [
+  "",
+  "services",
+  "strategie-de-marque",
+  "identite-visuelle",
+  "creation-site-web",
+  "reseaux-sociaux",
+  "publicite-en-ligne",
+  "seo-conversion",
+  "objectifs",
+];
 
 const HTML = fs.readFileSync(path.join(__dirname, "index.html"));
 const OG = fs.existsSync(path.join(__dirname, "og.png")) ? fs.readFileSync(path.join(__dirname, "og.png")) : null;
