@@ -106,7 +106,10 @@ function bodyHtml(route){
       d.items.map(it=>`<li><a href="/${it.route}"><strong>${esc(it.h)}</strong></a> — ${esc(it.p)}</li>`).join("")+`</ul>`;
   } else if(route==="objectifs"){
     const d = PAGES.fr.objectifs;
-    main = `<h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p>`+
+    main = `<h1>${esc(d.title)}</h1>`+
+      (d.lead?`<p><strong>${esc(d.lead)}</strong></p>`:"")+
+      (d.context?`<p>${esc(d.context)}</p>`:"")+
+      `<p>${esc(d.intro)}</p>`+
       d.blocks.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>${listHtml(b.items||[])}`).join("");
   } else {
     const d = PAGES.fr[route];
