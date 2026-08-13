@@ -263,6 +263,8 @@ fr: {
 
   objectifs: {
     tag:"Vos objectifs", title:"DES OBJECTIFS BUSINESS, PAS DES LIVRABLES",
+    lead:"On ne vend pas des livrables. On vend des résultats.",
+    context:"La plupart des agences vous parlent de posts, de pages ou de campagnes. Nous, on commence par la seule question qui compte : qu'est-ce que ça doit vous rapporter ? Ensuite seulement, on choisit les leviers. Chaque euro investi vise un objectif clair — notoriété, prospects, ventes ou fidélité — et chaque résultat se mesure.",
     intro:"Chaque action a une raison d'être et un résultat mesurable. On part de vos objectifs business, pas de nos habitudes — puis on aligne stratégie, création et diffusion pour y arriver.",
     blocks:[
       { h:"Notoriété", p:"Être vu, reconnu et mémorisé sur votre marché. On construit une présence qui s'imprime dans les têtes.", items:["Portée & impressions","Reconnaissance de marque","Couverture presse & sociale","Part de voix"] },
@@ -484,6 +486,8 @@ en: {
 
   objectifs:{
     tag:"Your goals", title:"BUSINESS GOALS, NOT DELIVERABLES",
+    lead:"We don't sell deliverables. We sell results.",
+    context:"Most agencies talk to you about posts, pages or campaigns. We start with the only question that matters: what should it earn you? Only then do we pick the levers. Every euro invested targets a clear goal — awareness, leads, sales or loyalty — and every result is measured.",
     intro:"Every action has a reason and a measurable result. We start from your business goals, not our habits — then align strategy, creative and distribution to get there.",
     blocks:[
       { h:"Awareness", p:"Be seen, recognised and remembered in your market. We build a presence that prints itself in minds.", items:["Reach & impressions","Brand recognition","Press & social coverage","Share of voice"] },
@@ -705,6 +709,8 @@ de: {
 
   objectifs:{
     tag:"Ihre Ziele", title:"GESCHÄFTSZIELE STATT LIEFERUNGEN",
+    lead:"Wir verkaufen keine Lieferungen. Wir verkaufen Ergebnisse.",
+    context:"Die meisten Agenturen sprechen über Posts, Seiten oder Kampagnen. Wir beginnen mit der einzigen Frage, die zählt: Was soll es Ihnen bringen? Erst dann wählen wir die Hebel. Jeder investierte Euro verfolgt ein klares Ziel — Bekanntheit, Leads, Verkäufe oder Loyalität — und jedes Ergebnis wird gemessen.",
     intro:"Jede Maßnahme hat einen Grund und ein messbares Ergebnis. Wir gehen von Ihren Geschäftszielen aus, nicht von unseren Gewohnheiten — und richten Strategie, Kreation und Distribution danach aus.",
     blocks:[
       { h:"Bekanntheit", p:"Gesehen, erkannt und erinnert werden in Ihrem Markt. Wir bauen eine Präsenz, die sich einprägt.", items:["Reichweite & Impressionen","Markenbekanntheit","Presse- & Social-Reichweite","Share of Voice"] },

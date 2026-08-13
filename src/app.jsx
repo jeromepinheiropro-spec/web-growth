@@ -868,6 +868,7 @@ const SERVICE_ACCENT={
   "publicite-en-ligne":{a:"#FF9F1C",a2:"#FF2D9B"},
   "video-motion":{a:"#B14BFF",a2:"#00E0FF"},
   "seo-conversion":{a:"#C9FF3B",a2:"#00E0FF"},
+  "objectifs":{a:"#C9FF3B",a2:"#00E0FF"},
 };
 function PageHero({data}){
   return(
@@ -1079,6 +1080,38 @@ function PageFaq({faq}){
     </div></section>
   );
 }
+function ObjStage({b,i,total,lang}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-70px"});
+  const{scrollYProgress}=useScroll({target:ref,offset:["start end","end start"]});
+  const ny=useTransform(scrollYProgress,[0,1],[28,-28]);
+  const STEP={fr:"Étape",en:"Stage",de:"Schritt"}[lang]||"Étape";
+  const w=100-i*5;
+  return(
+    <motion.div className="obj-stage" ref={ref} style={{maxWidth:w+"%"}}
+      initial={{opacity:0,y:44}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:.04}}>
+      <motion.span className="obj-num" aria-hidden="true" style={{y:ny}}>{String(i+1).padStart(2,"0")}</motion.span>
+      <span className="obj-eyebrow">{STEP} {String(i+1).padStart(2,"0")}</span>
+      <h3>{b.h}</h3>
+      <p>{b.p}</p>
+      {b.items&&<div className="obj-kpis">{b.items.map((it,j)=><span className="obj-kpi" key={j}>{it}</span>)}</div>}
+    </motion.div>
+  );
+}
+function ObjectivesFunnel({blocks,lang}){
+  return(
+    <section className="pg-funnel-wrap"><div className="wrap">
+      <div className="pg-funnel">
+        {blocks.flatMap((b,i)=>{
+          const stage=<ObjStage key={"s"+i} b={b} i={i} total={blocks.length} lang={lang}/>;
+          if(i<blocks.length-1) return [stage,(
+            <span key={"a"+i} className="obj-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+          )];
+          return [stage];
+        })}
+      </div>
+    </div></section>
+  );
+}
 function PageView({route,lang,t}){
   const data=(PAGES[lang]&&PAGES[lang][route])||PAGES.fr[route];
   if(!data)return null;
@@ -1099,9 +1132,7 @@ function PageView({route,lang,t}){
       {data.context&&<ServiceContext label={CTX} text={data.context}/>}
       {data.benefits&&<ServiceBenefits benefits={data.benefits} title={BEN}/>}
       {data.method&&<PageMethod method={data.method}/>}
-      {data.blocks&&<section className="pg-body"><div className="wrap">
-        {data.blocks.map((b,i)=><PageBlock key={i} b={b} i={i}/>)}
-      </div></section>}
+      {data.blocks&&<ObjectivesFunnel blocks={data.blocks} lang={lang}/>}
       {data.included&&<ServiceIncluded title={data.includedTitle||"Inclus"} items={data.included}/>}
       {data.proof&&<ServiceProof proof={data.proof}/>}
       {data.faq&&<PageFaq faq={data.faq}/>}
