@@ -1,5 +1,6 @@
 import { build } from "esbuild";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { createHash } from "crypto";
 import { PAGES, SERVICE_ROUTES, SERVICE_LABELS } from "./src/pages.js";
 
 /* 1) Bundle JS (externe, mis en cache) */
@@ -23,6 +24,7 @@ const css = cssRaw
   .replace(/\s+/g," ")                          // espaces multiples
   .trim();
 writeFileSync("bundle.js", js); // servi en externe (/bundle.js)
+const jsHash = createHash("sha1").update(js).digest("hex").slice(0,8); // cache-busting
 
 const BASE = "https://web-growth-production.up.railway.app";
 const SITE = "Web Growth";
@@ -169,7 +171,7 @@ ${ldTags}
 </head>
 <body>
 <div id="root">${bodyHtml(route)}</div>
-<script src="/bundle.js" defer></script>
+<script src="/bundle.js?v=${jsHash}" defer></script>
 </body>
 </html>`;
 }
