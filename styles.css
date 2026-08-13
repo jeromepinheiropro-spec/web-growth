@@ -507,7 +507,10 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
 .pg-statement::before{content:"";position:absolute;inset:-40% 0;background:radial-gradient(50% 60% at 50% 50%,var(--acc),transparent 70%);opacity:.13;filter:blur(30px);pointer-events:none}
 .pg-statement .wrap{position:relative;z-index:1}
 .pg-statement p{margin:0 auto;max-width:17ch;font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,5.4vw,76px);line-height:1.02;letter-spacing:-1px;background:linear-gradient(100deg,#fff,var(--acc) 58%,var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.pg-statement-q{position:absolute;top:clamp(6px,2.4vw,34px);left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:clamp(140px,22vw,300px);line-height:1;color:var(--acc);opacity:.08;pointer-events:none;z-index:0}
+.pg-statement-q{position:absolute;top:clamp(6px,2.4vw,34px);left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:clamp(140px,22vw,300px);line-height:1;color:var(--acc);opacity:.08;pointer-events:none;z-index:0;will-change:transform}
+.pg-statement-glow{position:absolute;inset:-30% 0;background:radial-gradient(46% 56% at 50% 50%,var(--acc),transparent 70%);filter:blur(36px);pointer-events:none;z-index:0}
+.pg-statement p{will-change:transform}
+.pg-ben-idx{will-change:transform}
 /* contexte éditorial (asymétrique, plus de texte) */
 .pg-context{padding:clamp(52px,7vw,100px) 0}
 .pg-context-grid{display:grid;grid-template-columns:210px 1fr;gap:clamp(22px,5vw,80px);align-items:start}
@@ -528,7 +531,9 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
 .pg-ben-row:nth-child(even) .pg-ben-line{background:linear-gradient(270deg,var(--acc),transparent 55%)}
 /* méthode en timeline connectée */
 .pg-timeline{position:relative;margin:clamp(32px,4vw,56px) auto 0;max-width:760px;padding-left:66px}
-.pg-tl-line{position:absolute;left:27px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--acc),var(--acc2));opacity:.55}
+.pg-tl-line{position:absolute;left:27px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--acc),var(--acc2))}
+.pg-tl-line-bg{opacity:.16}
+.pg-tl-line-fg{opacity:.95;transform-origin:top center;box-shadow:0 0 10px var(--acc);will-change:transform}
 .pg-tl-step{position:relative;padding:0 0 clamp(26px,3vw,42px)}
 .pg-tl-step:last-child{padding-bottom:0}
 .pg-tl-node{position:absolute;left:-66px;top:-6px;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:#0c0b16;border:1px solid var(--line);box-shadow:0 0 22px -6px var(--acc)}
