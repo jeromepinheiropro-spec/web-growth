@@ -113,6 +113,8 @@ function bodyHtml(route){
     main = `<h1>${esc(d.title)}</h1>`;
     if(d.valueProp) main += `<p><strong>${esc(d.valueProp)}</strong></p>`;
     main += `<p>${esc(d.intro)}</p>`;
+    if(d.lead) main += `<p><strong>${esc(d.lead)}</strong></p>`;
+    if(d.context) main += `<p>${esc(d.context)}</p>`;
     if(d.benefits) main += d.benefits.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>`).join("");
     if(d.blocks) main += d.blocks.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>${listHtml(b.items||[])}`).join("");
     if(d.included) main += `<h2>${esc(d.includedTitle||"Inclus")}</h2>${listHtml(d.included)}`;
