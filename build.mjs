@@ -14,7 +14,14 @@ await build({
   define:{"process.env.NODE_ENV":'"production"'},
 });
 const js = readFileSync("dist/bundle.js","utf8");
-const css = readFileSync("styles.css","utf8");
+const cssRaw = readFileSync("styles.css","utf8");
+/* Minification CSS (retire commentaires + espaces superflus) — pages plus légères */
+const css = cssRaw
+  .replace(/\/\*[\s\S]*?\*\//g,"")            // commentaires
+  .replace(/\s*([{}:;,>~])\s*/g,"$1")          // espaces autour des séparateurs
+  .replace(/;}/g,"}")                            // point-virgule final inutile
+  .replace(/\s+/g," ")                          // espaces multiples
+  .trim();
 writeFileSync("bundle.js", js); // servi en externe (/bundle.js)
 
 const BASE = "https://web-growth-production.up.railway.app";
@@ -54,10 +61,17 @@ function seoTitle(route){
   if(route==="objectifs") return "Objectifs & résultats marketing · Web Growth Luxembourg";
   return `${SERVICE_LABELS.fr[route]} · ${SITE} Luxembourg`;
 }
+function clampDesc(s){
+  s = String(s).replace(/\s+/g," ").trim();
+  if(s.length<=158) return s;
+  let cut = s.slice(0,155);
+  cut = cut.slice(0, cut.lastIndexOf(" ")); // coupe au dernier mot entier
+  return cut.replace(/[,;:.\s]+$/,"")+"…";
+}
 function seoDesc(route){
-  if(route==="home") return HOME_DESC;
+  if(route==="home") return clampDesc(HOME_DESC);
   const d = PAGES.fr[route];
-  return (d && d.intro) ? d.intro : HOME_DESC;
+  return clampDesc((d && d.intro) ? d.intro : HOME_DESC);
 }
 function canonical(route){ return BASE + (route==="home" ? "/" : "/"+route); }
 
