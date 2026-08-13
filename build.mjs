@@ -108,10 +108,13 @@ function bodyHtml(route){
       d.blocks.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>${listHtml(b.items||[])}`).join("");
   } else {
     const d = PAGES.fr[route];
-    main = `<h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p>`;
+    main = `<h1>${esc(d.title)}</h1>`;
+    if(d.valueProp) main += `<p><strong>${esc(d.valueProp)}</strong></p>`;
+    main += `<p>${esc(d.intro)}</p>`;
     if(d.benefits) main += d.benefits.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>`).join("");
     if(d.blocks) main += d.blocks.map(b=>`<h2>${esc(b.h)}</h2><p>${esc(b.p)}</p>${listHtml(b.items||[])}`).join("");
     if(d.included) main += `<h2>${esc(d.includedTitle||"Inclus")}</h2>${listHtml(d.included)}`;
+    if(d.proof) main += `<h2>${esc(d.proof.title)}</h2>`+d.proof.items.map(it=>`<h3>${esc(it.h)}</h3><p>${esc(it.p)}</p>`).join("");
     if(d.method) main += `<h2>${esc(d.method.title)}</h2>`+d.method.steps.map(s=>`<h3>${esc(s.h)}</h3><p>${esc(s.p)}</p>`).join("");
     if(d.faq) main += `<h2>${esc(d.faq.title)}</h2>`+d.faq.items.map(f=>`<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join("");
     if(d.cta) main += `<p><a href="/#contact">${esc(d.cta.btn)}</a></p>`;
