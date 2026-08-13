@@ -1,12 +1,13 @@
-// Serveur statique minimal (zéro dépendance) pour Railway / tout hébergeur Node.
+// Serveur statique (zéro dépendance) — compression gzip, cache, pré-rendu par route.
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const zlib = require("zlib");
 
 const PORT = process.env.PORT || 3000;
 const BASE = process.env.PUBLIC_URL || "https://web-growth-production.up.railway.app";
-const ROUTES = [
-  "",
+
+const ROUTE_SLUGS = [
   "services",
   "strategie-de-marque",
   "identite-visuelle",
@@ -18,40 +19,70 @@ const ROUTES = [
   "objectifs",
 ];
 
-const HTML = fs.readFileSync(path.join(__dirname, "index.html"));
-const OG = fs.existsSync(path.join(__dirname, "og.png")) ? fs.readFileSync(path.join(__dirname, "og.png")) : null;
+function readSafe(p) { try { return fs.readFileSync(p); } catch { return null; } }
+
+// HTML par route (pré-rendu). Fallback : index.html.
+const HTML = {};
+HTML["/"] = readSafe(path.join(__dirname, "index.html"));
+for (const s of ROUTE_SLUGS) {
+  HTML["/" + s] = readSafe(path.join(__dirname, s + ".html")) || HTML["/"];
+}
+
+const BUNDLE = readSafe(path.join(__dirname, "bundle.js"));
+const OG = readSafe(path.join(__dirname, "og.png"));
 
 const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`;
 const SITEMAP =
-  `<?xml version="1.0" encoding="UTF-8"?>\n` +
-  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  ROUTES.map(r => `  <url><loc>${BASE}/${r}</loc><changefreq>monthly</changefreq><priority>${r === "" ? "1.0" : "0.8"}</priority></url>`).join("\n") +
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  [""].concat(ROUTE_SLUGS).map(s => `  <url><loc>${BASE}/${s}</loc><changefreq>monthly</changefreq><priority>${s === "" ? "1.0" : "0.8"}</priority></url>`).join("\n") +
   `\n</urlset>\n`;
 
-const server = http.createServer((req, res) => {
-  const url = (req.url || "/").split("?")[0];
+// Pré-compression gzip des ressources statiques
+const gz = buf => (buf ? zlib.gzipSync(buf, { level: 8 }) : null);
+const GZ = new WeakMap();
+function gzipped(buf) {
+  if (!buf) return null;
+  if (!GZ.has(buf)) GZ.set(buf, gz(buf));
+  return GZ.get(buf);
+}
+const BUNDLE_GZ = gzipped(BUNDLE);
+const HTML_GZ = {}; for (const k in HTML) HTML_GZ[k] = gzipped(HTML[k]);
+const ROBOTS_GZ = gz(Buffer.from(ROBOTS));
+const SITEMAP_GZ = gz(Buffer.from(SITEMAP));
 
-  if (url === "/robots.txt") {
-    res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=86400" });
-    return res.end(ROBOTS);
+function send(req, res, body, type, cache, gzBody) {
+  const wantsGzip = /\bgzip\b/.test(req.headers["accept-encoding"] || "") && gzBody;
+  const headers = { "Content-Type": type, "Cache-Control": cache, "Vary": "Accept-Encoding" };
+  if (wantsGzip) { headers["Content-Encoding"] = "gzip"; res.writeHead(200, headers); res.end(gzBody); }
+  else { res.writeHead(200, headers); res.end(body); }
+}
+
+const server = http.createServer((req, res) => {
+  // Redirection www → non-www (SEO)
+  const host = req.headers.host || "";
+  if (host.startsWith("www.")) {
+    res.writeHead(301, { Location: "https://" + host.slice(4) + req.url });
+    return res.end();
   }
-  if (url === "/sitemap.xml") {
-    res.writeHead(200, { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=86400" });
-    return res.end(SITEMAP);
-  }
+
+  let url = (req.url || "/").split("?")[0];
+  if (url.length > 1 && url.endsWith("/")) url = url.slice(0, -1); // sans slash final
+
+  if (url === "/robots.txt")
+    return send(req, res, ROBOTS, "text/plain; charset=utf-8", "public, max-age=86400", ROBOTS_GZ);
+  if (url === "/sitemap.xml")
+    return send(req, res, SITEMAP, "application/xml; charset=utf-8", "public, max-age=86400", SITEMAP_GZ);
+  if (url === "/bundle.js" && BUNDLE)
+    return send(req, res, BUNDLE, "application/javascript; charset=utf-8", "public, max-age=31536000, immutable", BUNDLE_GZ);
   if (url === "/og.png" && OG) {
     res.writeHead(200, { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800" });
     return res.end(OG);
   }
 
-  // Site mono-page (routing côté client) : toutes les autres routes renvoient index.html
-  res.writeHead(200, {
-    "Content-Type": "text/html; charset=utf-8",
-    "Cache-Control": "public, max-age=300",
-  });
-  res.end(HTML);
+  // Page pré-rendue correspondant à la route (sinon accueil)
+  const html = HTML[url] || HTML["/"];
+  const htmlGz = HTML_GZ[url] || HTML_GZ["/"];
+  send(req, res, html, "text/html; charset=utf-8", "public, max-age=300", htmlGz);
 });
 
-server.listen(PORT, "0.0.0.0", () => {
-  console.log("Web Growth en ligne sur le port " + PORT);
-});
+server.listen(PORT, "0.0.0.0", () => console.log("Web Growth en ligne sur le port " + PORT));

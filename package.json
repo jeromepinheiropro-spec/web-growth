@@ -1,12 +1,7 @@
 {
   "name": "web-growth",
   "version": "1.0.0",
-  "private": true,
-  "description": "Site vitrine Web Growth — agence de communication digitale (Luxembourg)",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": ">=18"
-  }
+  "description": "Web Growth — agence de communication digitale (Luxembourg)",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
 }
