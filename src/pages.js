@@ -14,6 +14,7 @@ export const SERVICE_ROUTES = [
   "creation-site-web",
   "reseaux-sociaux",
   "publicite-en-ligne",
+  "video-motion",
   "seo-conversion",
 ];
 
@@ -25,6 +26,7 @@ export const SERVICE_LABELS = {
     "creation-site-web": "Création de site web",
     "reseaux-sociaux": "Réseaux sociaux & contenu",
     "publicite-en-ligne": "Publicité en ligne",
+    "video-motion": "Vidéo & motion",
     "seo-conversion": "SEO & Conversion",
   },
   en: {
@@ -33,6 +35,7 @@ export const SERVICE_LABELS = {
     "creation-site-web": "Website creation",
     "reseaux-sociaux": "Social media & content",
     "publicite-en-ligne": "Online advertising",
+    "video-motion": "Video & motion",
     "seo-conversion": "SEO & Conversion",
   },
   de: {
@@ -41,6 +44,7 @@ export const SERVICE_LABELS = {
     "creation-site-web": "Website-Erstellung",
     "reseaux-sociaux": "Social Media & Content",
     "publicite-en-ligne": "Online-Werbung",
+    "video-motion": "Video & Motion",
     "seo-conversion": "SEO & Conversion",
   },
 };
@@ -60,6 +64,7 @@ fr: {
       { route:"creation-site-web", h:"Création de site web", p:"Des sites rapides, beaux et pensés pour convertir." },
       { route:"reseaux-sociaux", h:"Réseaux sociaux & contenu", p:"Stratégie, contenus et community management qui créent du lien." },
       { route:"publicite-en-ligne", h:"Publicité en ligne", p:"Google, Meta & TikTok pilotés à la performance." },
+      { route:"video-motion", h:"Vidéo & motion", p:"Reels, motion design et vidéos qui arrêtent le pouce." },
       { route:"seo-conversion", h:"SEO & Conversion", p:"Être trouvé sur Google et transformer les visites en clients." },
     ],
     cta: { h:"Un projet en tête ?", p:"Parlons-en autour d'un café — sur place à Luxembourg ou en visio.", btn:"Démarrer un projet" },
@@ -180,6 +185,29 @@ fr: {
     cta:{ h:"Envie de résultats rapides ?", p:"On lance des campagnes rentables.", btn:"Lancer mes campagnes" },
   },
 
+  "video-motion": {
+    tag:"Service · Vidéo", title:"VIDÉO & MOTION DESIGN", heroCta:"Créer ma vidéo",
+    intro:"Reels, motion design, vidéos de marque : du contenu qui arrête le pouce et fait passer votre message en quelques secondes.",
+    benefits:[
+      { h:"Ça capte l'attention", p:"La vidéo est le format le plus engageant : on arrête le scroll et on retient le regard." },
+      { h:"Ça explique vite", p:"Une idée complexe devient limpide en quelques secondes de motion." },
+      { h:"Ça se partage", p:"Des formats courts pensés pour être vus, aimés et repartagés." },
+    ],
+    includedTitle:"Ce qui est inclus",
+    included:["Reels & formats courts","Motion design & animation","Vidéo de marque","Habillage & sous-titres","Tournage & montage","Déclinaisons multi-plateformes"],
+    method:{ title:"Comment on travaille", steps:[
+      { h:"Concept", p:"On définit le message, le ton et le format selon vos objectifs." },
+      { h:"Production", p:"Tournage, montage et motion : on donne vie à l'idée." },
+      { h:"Diffusion", p:"Des formats adaptés à chaque plateforme, prêts à publier." },
+    ]},
+    faq:{ title:"Questions fréquentes", items:[
+      { q:"Vous filmez ou juste le montage ?", a:"Les deux : captation, montage, motion design et habillage. On s'adapte à vos moyens et à votre besoin." },
+      { q:"Ça marche pour les réseaux ?", a:"Oui, on décline chaque vidéo aux bons formats (9:16, 1:1, 16:9) pour Instagram, TikTok, LinkedIn et YouTube." },
+      { q:"Il me faut beaucoup de contenu ?", a:"On peut partir d'un seul tournage et en tirer plusieurs formats courts — un maximum de contenu, un minimum d'effort." },
+    ]},
+    cta:{ h:"Envie de contenu qui capte ?", p:"On crée des vidéos qui font la différence.", btn:"Créer ma vidéo" },
+  },
+
   "seo-conversion": {
     tag:"Service · SEO & Conversion", title:"SEO & OPTIMISATION DES CONVERSIONS", heroCta:"Demander mon audit",
     intro:"Le meilleur site du monde ne sert à rien si personne ne le trouve — et un flot de visiteurs ne vaut rien s'ils repartent. On travaille les deux : être visible sur Google, puis transformer chaque visite en client.",
@@ -229,6 +257,7 @@ en: {
       { route:"creation-site-web", h:"Website creation", p:"Fast, beautiful sites built to convert." },
       { route:"reseaux-sociaux", h:"Social media & content", p:"Strategy, content and community management that build connection." },
       { route:"publicite-en-ligne", h:"Online advertising", p:"Google, Meta & TikTok run on performance." },
+      { route:"video-motion", h:"Video & motion", p:"Reels, motion design and videos that stop the scroll." },
       { route:"seo-conversion", h:"SEO & Conversion", p:"Get found on Google and turn visits into customers." },
     ],
     cta:{ h:"Got a project in mind?", p:"Let's talk it over — in Luxembourg or by video call.", btn:"Start a project" },
@@ -349,6 +378,29 @@ en: {
     cta:{ h:"Want fast results?", p:"Let's launch profitable campaigns.", btn:"Launch my campaigns" },
   },
 
+  "video-motion":{
+    tag:"Service · Video", title:"VIDEO & MOTION DESIGN", heroCta:"Create my video",
+    intro:"Reels, motion design, brand videos: content that stops the scroll and gets your message across in seconds.",
+    benefits:[
+      { h:"It grabs attention", p:"Video is the most engaging format: we stop the scroll and hold the eye." },
+      { h:"It explains fast", p:"A complex idea becomes crystal clear in a few seconds of motion." },
+      { h:"It gets shared", p:"Short formats made to be seen, liked and reshared." },
+    ],
+    includedTitle:"What's included",
+    included:["Reels & short-form","Motion design & animation","Brand video","Branding & subtitles","Filming & editing","Multi-platform versions"],
+    method:{ title:"How we work", steps:[
+      { h:"Concept", p:"We define the message, tone and format around your goals." },
+      { h:"Production", p:"Filming, editing and motion: we bring the idea to life." },
+      { h:"Distribution", p:"Formats adapted to each platform, ready to publish." },
+    ]},
+    faq:{ title:"Frequently asked questions", items:[
+      { q:"Do you film or just edit?", a:"Both: capture, editing, motion design and branding. We adapt to your means and your need." },
+      { q:"Does it work for social?", a:"Yes, we deliver each video in the right formats (9:16, 1:1, 16:9) for Instagram, TikTok, LinkedIn and YouTube." },
+      { q:"Do I need lots of content?", a:"We can start from a single shoot and cut several short formats from it — maximum content, minimum effort." },
+    ]},
+    cta:{ h:"Want content that grabs?", p:"We craft videos that make the difference.", btn:"Create my video" },
+  },
+
   "seo-conversion":{
     tag:"Service · SEO & Conversion", title:"SEO & CONVERSION OPTIMISATION", heroCta:"Request my audit",
     intro:"The best site in the world is useless if no one finds it — and a flood of visitors is worthless if they leave. We work on both: being visible on Google, then turning every visit into a customer.",
@@ -398,6 +450,7 @@ de: {
       { route:"creation-site-web", h:"Website-Erstellung", p:"Schnelle, schöne Websites, die konvertieren." },
       { route:"reseaux-sociaux", h:"Social Media & Content", p:"Strategie, Content und Community Management, die Verbindung schaffen." },
       { route:"publicite-en-ligne", h:"Online-Werbung", p:"Google, Meta & TikTok performanceorientiert." },
+      { route:"video-motion", h:"Video & Motion", p:"Reels, Motion Design und Videos, die den Daumen stoppen." },
       { route:"seo-conversion", h:"SEO & Conversion", p:"Bei Google gefunden werden und Besuche in Kunden verwandeln." },
     ],
     cta:{ h:"Ein Projekt im Kopf?", p:"Reden wir bei einem Kaffee darüber — in Luxemburg oder per Video.", btn:"Projekt starten" },
@@ -516,6 +569,29 @@ de: {
       { q:"Ist das Werbebudget enthalten?", a:"Nein, das an die Plattformen gezahlte Mediabudget ist von unserem Management getrennt. Wir beraten Sie zur besten Investition." },
     ]},
     cta:{ h:"Lust auf schnelle Ergebnisse?", p:"Wir starten rentable Kampagnen.", btn:"Kampagnen starten" },
+  },
+
+  "video-motion":{
+    tag:"Leistung · Video", title:"VIDEO & MOTION DESIGN", heroCta:"Video erstellen",
+    intro:"Reels, Motion Design, Markenvideos: Content, der den Daumen stoppt und Ihre Botschaft in Sekunden vermittelt.",
+    benefits:[
+      { h:"Es fesselt", p:"Video ist das ansprechendste Format: Wir stoppen das Scrollen und halten den Blick." },
+      { h:"Es erklärt schnell", p:"Eine komplexe Idee wird in wenigen Sekunden Motion glasklar." },
+      { h:"Es wird geteilt", p:"Kurzformate, gemacht, um gesehen, geliked und geteilt zu werden." },
+    ],
+    includedTitle:"Was enthalten ist",
+    included:["Reels & Kurzformate","Motion Design & Animation","Markenvideo","Branding & Untertitel","Dreh & Schnitt","Multi-Plattform-Versionen"],
+    method:{ title:"So arbeiten wir", steps:[
+      { h:"Konzept", p:"Wir definieren Botschaft, Ton und Format nach Ihren Zielen." },
+      { h:"Produktion", p:"Dreh, Schnitt und Motion: Wir erwecken die Idee zum Leben." },
+      { h:"Distribution", p:"An jede Plattform angepasste Formate, bereit zur Veröffentlichung." },
+    ]},
+    faq:{ title:"Häufige Fragen", items:[
+      { q:"Filmen Sie oder nur Schnitt?", a:"Beides: Aufnahme, Schnitt, Motion Design und Branding. Wir passen uns Ihren Mitteln und Ihrem Bedarf an." },
+      { q:"Funktioniert das für Social?", a:"Ja, wir liefern jedes Video in den richtigen Formaten (9:16, 1:1, 16:9) für Instagram, TikTok, LinkedIn und YouTube." },
+      { q:"Brauche ich viel Content?", a:"Wir können aus einem einzigen Dreh mehrere Kurzformate schneiden — maximaler Content, minimaler Aufwand." },
+    ]},
+    cta:{ h:"Lust auf Content, der fesselt?", p:"Wir gestalten Videos, die den Unterschied machen.", btn:"Video erstellen" },
   },
 
   "seo-conversion":{

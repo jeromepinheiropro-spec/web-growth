@@ -145,7 +145,7 @@ const I18N = {
   man_tag:"Le manifeste",
   man_big:"On ne fait pas du contenu pour faire joli. On crée des marques qu'on n'oublie pas.",
   man_hi:["joli.","qu'on","n'oublie","pas."],
-  svc_tag:"Nos services",svc_title:"Tout pour rayonner en ligne",swipe:"Défilez →",
+  svc_tag:"Nos services",svc_title:"Tout pour rayonner en ligne",svc_discover:"Découvrir",swipe:"Défilez →",
   app_tag:"Notre approche",app_title:"Simple, rapide, redoutable",app_intro:"Une méthode en quatre temps, pensée pour aller vite sans jamais sacrifier la qualité.",
   work_tag:"Réalisations",work_title:"Des projets qui claquent",work_intro:"Un aperçu du type de projets qu'on adore mener. Remplacez ces exemples par vos propres études de cas.",
   cli_lab:"Ils pourraient briller à vos côtés",
@@ -165,7 +165,7 @@ const I18N = {
   man_tag:"The manifesto",
   man_big:"We don't make content just to look nice. We build brands you won't forget.",
   man_hi:["nice.","you","won't","forget."],
-  svc_tag:"Our services",svc_title:"Everything to shine online",swipe:"Scroll →",
+  svc_tag:"Our services",svc_title:"Everything to shine online",svc_discover:"Discover",swipe:"Scroll →",
   app_tag:"Our approach",app_title:"Simple, fast, relentless",app_intro:"A four-step method built to move fast without ever cutting corners on quality.",
   work_tag:"Work",work_title:"Projects that pop",work_intro:"A taste of the kind of work we love to run. Swap these examples for your own case studies.",
   cli_lab:"They could shine beside you",
@@ -185,7 +185,7 @@ const I18N = {
   man_tag:"Das Manifest",
   man_big:"Wir machen Content nicht, damit es hübsch aussieht. Wir bauen Marken, die man nicht vergisst.",
   man_hi:["hübsch","die","man","vergisst."],
-  svc_tag:"Unsere Leistungen",svc_title:"Alles, um online zu glänzen",swipe:"Scrollen →",
+  svc_tag:"Unsere Leistungen",svc_title:"Alles, um online zu glänzen",svc_discover:"Entdecken",swipe:"Scrollen →",
   app_tag:"Unser Ansatz",app_title:"Einfach, schnell, kompromisslos",app_intro:"Eine Methode in vier Schritten, gebaut für Tempo — ohne je bei der Qualität Abstriche zu machen.",
   work_tag:"Projekte",work_title:"Projekte, die knallen",work_intro:"Ein Vorgeschmack auf die Art von Projekten, die wir lieben. Ersetze diese Beispiele durch deine eigenen Case Studies.",
   cli_lab:"Sie könnten an deiner Seite glänzen",
@@ -205,26 +205,30 @@ const SVG={
  ads:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><path d="M3 11v2a1 1 0 001 1h3l4 4V6L7 10H4a1 1 0 00-1 1z"/><path d="M16 9a4 4 0 010 6M19 6a8 8 0 010 12"/></svg>),
  web:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg>),
  video:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9l4-2v10l-4-2"/></svg>),
+ seo:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/><path d="M8.5 12l2-2 1.5 1.5 2.5-3"/></svg>),
 };
 const SERVICES={
- fr:[{i:'strat',c:'c1',t:"Stratégie de marque",d:"Positionnement, plateforme de marque, ton de voix. On pose les fondations avant de créer.",tags:["Positionnement","Brand platform","Audit"]},
-     {i:'design',c:'c2',t:"Identité & design",d:"Logo, charte, direction artistique. Une image qui vous ressemble et qui marque.",tags:["Logo","Charte","Art direction"]},
-     {i:'social',c:'c3',t:"Réseaux sociaux",d:"Ligne éditoriale, community management, contenu qui engage vraiment.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',t:"Publicité en ligne",d:"Campagnes Meta, Google & TikTok orientées performance et ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',t:"Sites & développement",d:"Sites, landing pages, e-commerce. Rapides, beaux, pensés pour convertir.",tags:["Web","E-commerce","SEO"]},
-     {i:'video',c:'c6',t:"Vidéo & motion",d:"Reels, motion design, production. Du contenu qui arrête le pouce.",tags:["Reels","Motion","Production"]}],
- en:[{i:'strat',c:'c1',t:"Brand strategy",d:"Positioning, brand platform, tone of voice. Foundations before we create.",tags:["Positioning","Platform","Audit"]},
-     {i:'design',c:'c2',t:"Identity & design",d:"Logo, guidelines, art direction. A look that's truly you — impossible to ignore.",tags:["Logo","Guidelines","Art direction"]},
-     {i:'social',c:'c3',t:"Social media",d:"Editorial line, community management, content that actually engages.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',t:"Online advertising",d:"Meta, Google & TikTok campaigns built around performance and ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',t:"Web & development",d:"Sites, landing pages, e-commerce. Fast, beautiful, built to convert.",tags:["Web","E-commerce","SEO"]},
-     {i:'video',c:'c6',t:"Video & motion",d:"Reels, motion design, production. Content that stops the scroll.",tags:["Reels","Motion","Production"]}],
- de:[{i:'strat',c:'c1',t:"Markenstrategie",d:"Positionierung, Markenplattform, Tonalität. Fundament vor der Gestaltung.",tags:["Positionierung","Plattform","Audit"]},
-     {i:'design',c:'c2',t:"Identität & Design",d:"Logo, Design, Art Direction. Ein Look, der zu dir passt und bleibt.",tags:["Logo","Design","Art Direction"]},
-     {i:'social',c:'c3',t:"Social Media",d:"Redaktionslinie, Community Management, Content mit echtem Engagement.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',t:"Online-Werbung",d:"Meta-, Google- & TikTok-Kampagnen für Performance und ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',t:"Web & Entwicklung",d:"Sites, Landingpages, E-Commerce. Schnell, schön, auf Conversion gebaut.",tags:["Web","E-Commerce","SEO"]},
-     {i:'video',c:'c6',t:"Video & Motion",d:"Reels, Motion Design, Produktion. Content, der den Daumen stoppt.",tags:["Reels","Motion","Produktion"]}]
+ fr:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Stratégie de marque",d:"Positionnement, plateforme de marque, ton de voix. On pose les fondations avant de créer.",tags:["Positionnement","Brand platform","Audit"]},
+     {i:'design',c:'c2',route:'identite-visuelle',t:"Identité & design",d:"Logo, charte, direction artistique. Une image qui vous ressemble et qui marque.",tags:["Logo","Charte","Art direction"]},
+     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Réseaux sociaux",d:"Ligne éditoriale, community management, contenu qui engage vraiment.",tags:["Instagram","TikTok","LinkedIn"]},
+     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Publicité en ligne",d:"Campagnes Meta, Google & TikTok orientées performance et ROI.",tags:["Meta","Google","Performance"]},
+     {i:'web',c:'c5',route:'creation-site-web',t:"Sites & développement",d:"Sites, landing pages, e-commerce. Rapides, beaux, pensés pour convertir.",tags:["Web","E-commerce","SEO"]},
+     {i:'video',c:'c6',route:'video-motion',t:"Vidéo & motion",d:"Reels, motion design, production. Du contenu qui arrête le pouce.",tags:["Reels","Motion","Production"]},
+     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Être trouvé sur Google et transformer les visites en clients.",tags:["SEO","Local","CRO"]}],
+ en:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Brand strategy",d:"Positioning, brand platform, tone of voice. Foundations before we create.",tags:["Positioning","Platform","Audit"]},
+     {i:'design',c:'c2',route:'identite-visuelle',t:"Identity & design",d:"Logo, guidelines, art direction. A look that's truly you — impossible to ignore.",tags:["Logo","Guidelines","Art direction"]},
+     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Social media",d:"Editorial line, community management, content that actually engages.",tags:["Instagram","TikTok","LinkedIn"]},
+     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Online advertising",d:"Meta, Google & TikTok campaigns built around performance and ROI.",tags:["Meta","Google","Performance"]},
+     {i:'web',c:'c5',route:'creation-site-web',t:"Web & development",d:"Sites, landing pages, e-commerce. Fast, beautiful, built to convert.",tags:["Web","E-commerce","SEO"]},
+     {i:'video',c:'c6',route:'video-motion',t:"Video & motion",d:"Reels, motion design, production. Content that stops the scroll.",tags:["Reels","Motion","Production"]},
+     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Get found on Google and turn visits into customers.",tags:["SEO","Local","CRO"]}],
+ de:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Markenstrategie",d:"Positionierung, Markenplattform, Tonalität. Fundament vor der Gestaltung.",tags:["Positionierung","Plattform","Audit"]},
+     {i:'design',c:'c2',route:'identite-visuelle',t:"Identität & Design",d:"Logo, Design, Art Direction. Ein Look, der zu dir passt und bleibt.",tags:["Logo","Design","Art Direction"]},
+     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Social Media",d:"Redaktionslinie, Community Management, Content mit echtem Engagement.",tags:["Instagram","TikTok","LinkedIn"]},
+     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Online-Werbung",d:"Meta-, Google- & TikTok-Kampagnen für Performance und ROI.",tags:["Meta","Google","Performance"]},
+     {i:'web',c:'c5',route:'creation-site-web',t:"Web & Entwicklung",d:"Sites, Landingpages, E-Commerce. Schnell, schön, auf Conversion gebaut.",tags:["Web","E-Commerce","SEO"]},
+     {i:'video',c:'c6',route:'video-motion',t:"Video & Motion",d:"Reels, Motion Design, Produktion. Content, der den Daumen stoppt.",tags:["Reels","Motion","Produktion"]},
+     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Bei Google gefunden werden und Besuche in Kunden verwandeln.",tags:["SEO","Local","CRO"]}]
 };
 const STEPS={
  fr:[{n:"01",t:"Écoute",d:"On plonge dans votre univers, vos objectifs et votre audience."},
@@ -517,25 +521,32 @@ function Manifesto({t}){
 
 /* ============================ HORIZONTAL SERVICES ============================ */
 function HorizontalServices({t,lang}){
-  const ref=useRef(null);const items=SERVICES[lang];
+  const ref=useRef(null);const rowRef=useRef(null);const items=SERVICES[lang];
   const{scrollYProgress}=useScroll({target:ref,offset:["start start","end end"]});
-  const x=useTransform(scrollYProgress,[0,1],["4vw","-82%"]);
-  const rowRef=useRef(null);
+  const [maxShift,setMaxShift]=useState(1600);
+  useEffect(()=>{
+    const calc=()=>{if(rowRef.current){const rw=rowRef.current.scrollWidth;const vw=window.innerWidth;setMaxShift(Math.max(0,rw-vw+64));}};
+    calc();const t1=setTimeout(calc,250);const t2=setTimeout(calc,900);
+    window.addEventListener("resize",calc);
+    return()=>{clearTimeout(t1);clearTimeout(t2);window.removeEventListener("resize",calc);};
+  },[lang,items.length]);
+  const x=useTransform(scrollYProgress,[0,1],[16,-maxShift]);
   useEffect(()=>{
     if(window.matchMedia("(hover: none)").matches||!rowRef.current)return;
     const nodes=rowRef.current.querySelectorAll(".hcard");
     VanillaTilt.init(nodes,{max:7,speed:500,glare:true,"max-glare":.22,scale:1.02,perspective:1000,gyroscope:false});
     return()=>nodes.forEach(n=>n.vanillaTilt&&n.vanillaTilt.destroy());
   },[lang]);
-  return(<section className="hsvc" id="services" ref={ref} style={{height:"420vh"}}>
+  return(<section className="hsvc" id="services" ref={ref} style={{height:`${items.length*70}vh`}}>
     <div className="hsvc-pin">
       <div className="hsvc-head wrap" style={{maxWidth:"none"}}><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
       <motion.div className="hsvc-row" style={{x}} ref={rowRef}>
         {items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
-          return(<div key={i} className={`hcard ${s.c}`}>
-            <div className="hnum">0{i+1}</div><div className="hico">{SVG[s.i](col)}</div>
+          return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>
+            <div className="hnum">{String(i+1).padStart(2,"0")}</div><div className="hico">{SVG[s.i](col)}</div>
             <h3>{s.t}</h3><p>{s.d}</p><div className="htags">{s.tags.map((tg,j)=><span key={j}>{tg}</span>)}</div>
-          </div>);})}
+            <span className="hcard-go" aria-hidden="true">{t.svc_discover||"Découvrir"} →</span>
+          </a>);})}
       </motion.div>
       <div className="hint-swipe">{t.swipe}</div>
       <div className="hprog"><motion.i style={{scaleX:scrollYProgress}}/></div>
@@ -748,7 +759,8 @@ const CONCIERGE={
      "Ligne édito + contenu + community management qui fait vraiment grandir ta communauté. On en parle ?",
      "Campagnes Meta / Google / TikTok orientées ROI, chaque euro optimisé. On démarre par un audit ?",
      "Site vitrine, landing ou e-commerce — rapide, beau, pensé pour convertir. On chiffre ton projet ?",
-     "Reels, motion, production — du contenu qui arrête le pouce. Dis-moi le format, on te propose un plan."],
+     "Reels, motion, production — du contenu qui arrête le pouce. Dis-moi le format, on te propose un plan.",
+     "On te rend visible sur Google et on transforme tes visiteurs en clients. On regarde ta visibilité ensemble ?"],
    respDevis:"Avec plaisir ! Le plus rapide : lance ton projet et l'équipe revient sous 48h avec un chiffrage.",
    respFallback:"Bien reçu ! Décris-le à l'équipe et tu auras des idées concrètes sous 48h. Je t'emmène au formulaire ?"},
  en:{title:"Concierge · Web Growth",sub:"Online",greet:"Hey 👋 I'm the Web Growth assistant. What can we help you with?",
@@ -758,7 +770,8 @@ const CONCIERGE={
      "Editorial line + content + community management that really grows your audience. Want to talk?",
      "Meta / Google / TikTok campaigns built for ROI, every euro optimised. Start with an audit?",
      "Showcase site, landing or e-commerce — fast, beautiful, built to convert. Shall we scope it?",
-     "Reels, motion, production — content that stops the scroll. Tell me the format, we'll propose a plan."],
+     "Reels, motion, production — content that stops the scroll. Tell me the format, we'll propose a plan.",
+     "We make you visible on Google and turn visitors into customers. Shall we review your visibility together?"],
    respDevis:"With pleasure! Fastest way: start your project and the team replies within 48h with a quote.",
    respFallback:"Got it! Describe it to the team and you'll get concrete ideas within 48h. Take you to the form?"},
  de:{title:"Concierge · Web Growth",sub:"Online",greet:"Hey 👋 Ich bin der Web-Growth-Assistent. Womit können wir helfen?",
@@ -768,7 +781,8 @@ const CONCIERGE={
      "Redaktionslinie + Content + Community Management, das deine Community wirklich wachsen lässt. Reden wir?",
      "Meta-/Google-/TikTok-Kampagnen auf ROI ausgelegt, jeder Euro optimiert. Mit einem Audit starten?",
      "Website, Landing oder E-Commerce — schnell, schön, auf Conversion gebaut. Kalkulieren?",
-     "Reels, Motion, Produktion — Content, der den Daumen stoppt. Nenn das Format, wir schlagen einen Plan vor."],
+     "Reels, Motion, Produktion — Content, der den Daumen stoppt. Nenn das Format, wir schlagen einen Plan vor.",
+     "Wir machen dich bei Google sichtbar und verwandeln Besucher in Kunden. Schauen wir uns deine Sichtbarkeit an?"],
    respDevis:"Gerne! Am schnellsten: Projekt starten und das Team meldet sich in 48h mit einem Angebot.",
    respFallback:"Verstanden! Beschreib es dem Team und du bekommst in 48h konkrete Ideen. Zum Formular?"}
 };
