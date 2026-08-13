@@ -895,24 +895,44 @@ function PageHero({data}){
 }
 function ServiceStatement({text}){
   const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-90px"});
+  const{scrollYProgress}=useScroll({target:ref,offset:["start end","end start"]});
+  const ty=useTransform(scrollYProgress,[0,1],[70,-70]);        // parallax texte
+  const scale=useTransform(scrollYProgress,[0,.5,1],[.93,1,.97]);
+  const qy=useTransform(scrollYProgress,[0,1],[-60,140]);       // parallax guillemet
+  const glow=useTransform(scrollYProgress,[0,.5,1],[.03,.22,.03]);
   return(
     <section className="pg-statement" ref={ref}>
-      <span className="pg-statement-q" aria-hidden="true">“</span>
+      <motion.span className="pg-statement-q" aria-hidden="true" style={{y:qy}}>“</motion.span>
+      <motion.span className="pg-statement-glow" aria-hidden="true" style={{opacity:glow}}/>
       <div className="wrap">
-        <motion.p initial={{opacity:0,y:32}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.85,ease:[.16,1,.3,1]}}>{text}</motion.p>
+        <motion.p style={{y:ty,scale}} initial={{opacity:0}} animate={inView?{opacity:1}:{}} transition={{duration:.85,ease:[.16,1,.3,1]}}>{text}</motion.p>
       </div>
     </section>
   );
 }
 function ServiceContext({label,text}){
   const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-80px"});
+  const{scrollYProgress}=useScroll({target:ref,offset:["start end","end start"]});
+  const ty=useTransform(scrollYProgress,[0,1],[46,-34]);        // parallax paragraphe
   return(
     <section className="pg-context" ref={ref}><div className="wrap">
       <div className="pg-context-grid">
         <div className="pg-context-label"><span className="pg-ctx-bar"/>{label}</div>
-        <motion.p className="pg-context-body" initial={{opacity:0,y:26}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.75}}>{text}</motion.p>
+        <motion.p className="pg-context-body" style={{y:ty}} initial={{opacity:0}} animate={inView?{opacity:1}:{}} transition={{duration:.75}}>{text}</motion.p>
       </div>
     </div></section>
+  );
+}
+function BenefitRow({b,i}){
+  const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-70px"});
+  const{scrollYProgress}=useScroll({target:ref,offset:["start end","end start"]});
+  const ny=useTransform(scrollYProgress,[0,1],[46,-46]);        // parallax du grand numéro
+  return(
+    <motion.div className="pg-ben-row" ref={ref} initial={{opacity:0,y:40}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.06}}>
+      <motion.span className="pg-ben-idx" style={{y:ny}}>{String(i+1).padStart(2,"0")}</motion.span>
+      <div className="pg-ben-txt"><h3>{b.h}</h3><p>{b.p}</p></div>
+      <span className="pg-ben-line" aria-hidden="true"/>
+    </motion.div>
   );
 }
 function ServiceBenefits({benefits,title}){
@@ -920,14 +940,7 @@ function ServiceBenefits({benefits,title}){
     <section className="pg-benefits"><div className="wrap">
       {title&&<ScrambleText as="h2" className="pg-sec-h pg-sec-h--left" text={title}/>}
       <div className="pg-ben-rows">
-        {benefits.map((b,i)=>{
-          const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-70px"});
-          return(<motion.div className="pg-ben-row" key={i} ref={ref} initial={{opacity:0,y:38}} animate={inView?{opacity:1,y:0}:{}} transition={{duration:.6,delay:i*.08}}>
-            <span className="pg-ben-idx">{String(i+1).padStart(2,"0")}</span>
-            <div className="pg-ben-txt"><h3>{b.h}</h3><p>{b.p}</p></div>
-            <span className="pg-ben-line" aria-hidden="true"/>
-          </motion.div>);
-        })}
+        {benefits.map((b,i)=><BenefitRow key={i} b={b} i={i}/>)}
       </div>
     </div></section>
   );
@@ -1012,11 +1025,15 @@ function PageCTA({data}){
   );
 }
 function PageMethod({method}){
+  const ref=useRef(null);
+  const{scrollYProgress}=useScroll({target:ref,offset:["start center","end center"]});
+  const lineScale=useTransform(scrollYProgress,[0,1],[0,1]);
   return(
-    <section className="pg-method"><div className="wrap">
+    <section className="pg-method" ref={ref}><div className="wrap">
       <ScrambleText as="h2" className="pg-sec-h" text={method.title}/>
       <div className="pg-timeline">
-        <span className="pg-tl-line" aria-hidden="true"/>
+        <span className="pg-tl-line pg-tl-line-bg" aria-hidden="true"/>
+        <motion.span className="pg-tl-line pg-tl-line-fg" aria-hidden="true" style={{scaleY:lineScale}}/>
         {method.steps.map((s,i)=>{
           const ref=useRef(null);const inView=useInView(ref,{once:true,margin:"-60px"});
           return(<motion.div className="pg-tl-step" key={i} ref={ref} initial={{opacity:0,x:-24}} animate={inView?{opacity:1,x:0}:{}} transition={{duration:.55,delay:i*.1}}>
