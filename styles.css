@@ -325,6 +325,14 @@ body.lowfx .brand-word{animation:none!important;background:linear-gradient(90deg
 .hprog{position:absolute;left:6vw;right:6vw;bottom:38px;height:3px;background:var(--line);border-radius:3px;overflow:hidden;z-index:2}
 .hprog i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--amber));box-shadow:0 0 12px rgba(255,45,155,.6);transform-origin:left}
 .hint-swipe{position:absolute;bottom:52px;left:6vw;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--fog);z-index:2}
+/* Services (home) — variante mobile : empilement vertical natif, aucun scroll-jack (fluide) */
+.hsvc-mobile{background:var(--bg2);padding:72px 0 58px}
+.hsvc-mobile .hsvc-head{position:static;padding:0 6vw;margin-bottom:24px;display:block}
+.hsvc-mobile .hsvc-stack{display:flex;flex-direction:column;gap:16px;padding:0 5vw}
+.hsvc-mobile .hcard{flex:0 0 auto;width:100%;min-height:0;padding:28px 24px 26px}
+.hsvc-mobile .hcard .hico{margin:14px 0 6px}
+.hsvc-mobile .hcard h3{margin:14px 0 10px}
+.hsvc-mobile .hcard-go{position:static;margin-top:18px;opacity:.95;transform:none}
 
 /* APPROACH */
 .approach{background:var(--bg)}
