@@ -9,15 +9,23 @@ const BASE = process.env.PUBLIC_URL || "https://web-growth-production.up.railway
 
 const ROUTE_SLUGS = [
   "services",
-  "strategie-de-marque",
-  "identite-visuelle",
+  "developpement-logiciel",
+  "application-mobile",
   "creation-site-web",
-  "reseaux-sociaux",
-  "publicite-en-ligne",
-  "video-motion",
+  "design-ui-ux",
+  "identite-visuelle",
   "seo-conversion",
+  "conseil-it",
   "objectifs",
 ];
+
+// Anciennes URL de services retirées → redirection 301 vers le hub (SEO)
+const REDIRECTS = {
+  "/strategie-de-marque": "/services",
+  "/reseaux-sociaux": "/services",
+  "/publicite-en-ligne": "/services",
+  "/video-motion": "/services",
+};
 
 function readSafe(p) { try { return fs.readFileSync(p); } catch { return null; } }
 
@@ -67,6 +75,11 @@ const server = http.createServer((req, res) => {
 
   let url = (req.url || "/").split("?")[0];
   if (url.length > 1 && url.endsWith("/")) url = url.slice(0, -1); // sans slash final
+
+  if (REDIRECTS[url]) {
+    res.writeHead(301, { Location: BASE + REDIRECTS[url] });
+    return res.end();
+  }
 
   if (url === "/robots.txt")
     return send(req, res, ROBOTS, "text/plain; charset=utf-8", "public, max-age=86400", ROBOTS_GZ);

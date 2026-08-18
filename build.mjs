@@ -29,7 +29,7 @@ const jsHash = createHash("sha1").update(js).digest("hex").slice(0,8); // cache-
 const BASE = "https://web-growth-production.up.railway.app";
 const SITE = "Web Growth";
 const HOME_TITLE = "Web Growth — Agence de communication digitale à Luxembourg";
-const HOME_DESC = "Web Growth transforme votre présence digitale en énergie pure : stratégie de marque, création, contenu, publicité et SEO, depuis le cœur du Luxembourg.";
+const HOME_DESC = "Web Growth conçoit vos produits digitaux : développement logiciel et mobile, création web, design UI/UX, SEO et conseil IT, depuis le cœur du Luxembourg.";
 const SOCIALS = ["https://www.instagram.com/webgrowth.lu","https://www.linkedin.com/company/webgrowth-lu"];
 
 const FAVICON = "data:image/svg+xml," + encodeURIComponent(
@@ -46,20 +46,20 @@ const NAV = [
   ["/objectifs", "Objectifs"],
 ];
 const HOME_SERVICES = [
-  {r:"strategie-de-marque", t:"Stratégie de marque", d:"Positionnement, plateforme de marque, ton de voix."},
-  {r:"identite-visuelle",  t:"Identité visuelle & design", d:"Logo, charte, direction artistique."},
+  {r:"developpement-logiciel", t:"Développement logiciel sur mesure", d:"Plateformes, back-offices et API pensés pour la performance et l'échelle."},
+  {r:"application-mobile",  t:"Développement d'application mobile", d:"Apps iOS & Android, natives ou cross-platform, fluides et fiables."},
   {r:"creation-site-web",  t:"Création de site web", d:"Des sites rapides, beaux et pensés pour convertir."},
-  {r:"reseaux-sociaux",    t:"Réseaux sociaux & contenu", d:"Ligne éditoriale, community management, contenu."},
-  {r:"publicite-en-ligne", t:"Publicité en ligne", d:"Campagnes Meta, Google & TikTok à la performance."},
-  {r:"video-motion",       t:"Vidéo & motion", d:"Reels, motion design et vidéos qui arrêtent le pouce."},
+  {r:"design-ui-ux",       t:"Design UI/UX & Branding", d:"Interfaces claires, design systems durables, du logo au produit."},
+  {r:"identite-visuelle",  t:"Identité visuelle & design", d:"Logo, charte, direction artistique."},
   {r:"seo-conversion",     t:"SEO & Conversion", d:"Être trouvé sur Google et transformer les visites en clients."},
+  {r:"conseil-it",         t:"Conseil IT & Stratégie digitale", d:"Audit, architecture et feuille de route pour investir dans ce qui compte."},
 ];
 
 const ROUTES = ["home","services",...SERVICE_ROUTES,"objectifs"];
 
 function seoTitle(route){
   if(route==="home") return HOME_TITLE;
-  if(route==="services") return "Services de communication digitale · Web Growth Luxembourg";
+  if(route==="services") return "Services digitaux & développement · Web Growth Luxembourg";
   if(route==="objectifs") return "Objectifs & résultats marketing · Web Growth Luxembourg";
   return `${SERVICE_LABELS.fr[route]} · ${SITE} Luxembourg`;
 }
@@ -94,7 +94,7 @@ function bodyHtml(route){
   let main = "";
   if(route==="home"){
     main = `<p class="eyebrow">Agence de communication digitale · Luxembourg</p>`+
-      `<h1>De la com qui a du voltage</h1>`+
+      `<h1>De la com qui a du punch</h1>`+
       `<p>${esc(HOME_DESC)}</p>`+
       `<h2>Nos services</h2><ul>`+
       HOME_SERVICES.map(s=>`<li><a href="/${s.r}"><strong>${esc(s.t)}</strong></a> — ${esc(s.d)}</li>`).join("")+
@@ -130,7 +130,7 @@ function bodyHtml(route){
 }
 
 /* JSON-LD (global) */
-const ldOrg = {"@context":"https://schema.org","@type":"ProfessionalService","name":"Web Growth","description":HOME_DESC,"url":BASE+"/","image":BASE+"/og.png","email":"hello@webgrowth.lu","areaServed":{"@type":"Country","name":"Luxembourg"},"address":{"@type":"PostalAddress","addressCountry":"LU","addressLocality":"Luxembourg"},"knowsAbout":["Communication digitale","SEO","Optimisation des conversions","Publicité en ligne","Community management","Stratégie de marque","Création de sites web","Vidéo & motion"],"sameAs":SOCIALS};
+const ldOrg = {"@context":"https://schema.org","@type":"ProfessionalService","name":"Web Growth","description":HOME_DESC,"url":BASE+"/","image":BASE+"/og.png","email":"hello@webgrowth.lu","areaServed":{"@type":"Country","name":"Luxembourg"},"address":{"@type":"PostalAddress","addressCountry":"LU","addressLocality":"Luxembourg"},"knowsAbout":["Développement logiciel sur mesure","Développement d'application mobile","Création de sites web","Design UI/UX","Identité visuelle","SEO","Optimisation des conversions","Conseil IT & stratégie digitale"],"sameAs":SOCIALS};
 const ldSite = {"@context":"https://schema.org","@type":"WebSite","name":"Web Growth","url":BASE+"/","inLanguage":["fr","en","de"]};
 const faq = PAGES.fr["seo-conversion"].faq;
 const ldFaq = faq && faq.items ? {"@context":"https://schema.org","@type":"FAQPage","mainEntity":faq.items.map(it=>({"@type":"Question","name":it.q,"acceptedAnswer":{"@type":"Answer","text":it.a}}))} : null;
