@@ -95,7 +95,9 @@ const server = http.createServer((req, res) => {
   // Page pré-rendue correspondant à la route (sinon accueil)
   const html = HTML[url] || HTML["/"];
   const htmlGz = HTML_GZ[url] || HTML_GZ["/"];
-  send(req, res, html, "text/html; charset=utf-8", "public, max-age=300", htmlGz);
+  // no-cache : le HTML est revalidé à chaque visite (le bundle reste immutable via ?v=hash).
+  // Garantit que les visiteurs reçoivent toujours la dernière version après un déploiement.
+  send(req, res, html, "text/html; charset=utf-8", "no-cache", htmlGz);
 });
 
 server.listen(PORT, "0.0.0.0", () => console.log("Web Growth en ligne sur le port " + PORT));

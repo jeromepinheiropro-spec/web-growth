@@ -333,6 +333,15 @@ body.lowfx .brand-word{animation:none!important;background:linear-gradient(90deg
 .hsvc-mobile .hcard .hico{margin:14px 0 6px}
 .hsvc-mobile .hcard h3{margin:14px 0 10px}
 .hsvc-mobile .hcard-go{position:static;margin-top:18px;opacity:.95;transform:none}
+/* Filet de sécurité : si la variante desktop se rend sur petit écran, on l'aplatit en vertical */
+@media(max-width:820px){
+  .hsvc:not(.hsvc-mobile){height:auto!important}
+  .hsvc:not(.hsvc-mobile) .hsvc-pin{position:static;height:auto;display:block;padding:72px 0 58px}
+  .hsvc:not(.hsvc-mobile) .hsvc-head{position:static;padding:0 6vw;margin-bottom:24px}
+  .hsvc:not(.hsvc-mobile) .hsvc-row{flex-direction:column;gap:16px;padding:0 5vw;transform:none!important}
+  .hsvc:not(.hsvc-mobile) .hcard{width:100%;min-height:0}
+  .hsvc:not(.hsvc-mobile) .hint-swipe,.hsvc:not(.hsvc-mobile) .hprog{display:none}
+}
 
 /* APPROACH */
 .approach{background:var(--bg)}
