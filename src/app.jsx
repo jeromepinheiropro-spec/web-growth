@@ -332,6 +332,10 @@ function scrollToId(id){
 function Brand(){
   return(
     <a className="brand" href="/" onClick={e=>{e.preventDefault();if(parseRoute()!=="home"){goPage("home");}else if(window.__lenis)window.__lenis.scrollTo(0,{duration:1});else window.scrollTo({top:0,behavior:"smooth"})}}>
+      <span className="brand-mark" aria-hidden="true">
+        <span className="bm-stars"/><span className="bm-stars bm-stars2"/>
+        <span className="bm-rocket"><RocketIcon/><span className="bm-flame"/></span>
+      </span>
       <span className="brand-word" data-txt="WEB GROWTH">WEB GROWTH</span>
       <span className="brand-tag">.LU</span>
     </a>
