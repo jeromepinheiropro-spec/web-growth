@@ -11,26 +11,40 @@ import confetti from "canvas-confetti";
 import { PAGES, SERVICE_ROUTES, SERVICE_LABELS } from "./pages.js";
 
 /* ============================ ANIMATED HERO BG (WebGL plasma néon) ============================ */
+// Détection appareil faible : on coupe les effets GPU lourds (WebGL, particules, flous animés)
+let _lowFX=null;
+function lowFX(){
+  if(_lowFX!==null) return _lowFX;
+  try{
+    if(typeof window==="undefined"){ _lowFX=false; return _lowFX; }
+    const rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cores=navigator.hardwareConcurrency||8;
+    const mem=navigator.deviceMemory||8;
+    _lowFX = !!(rm || cores<=4 || mem<=4);
+  }catch(_){ _lowFX=false; }
+  return _lowFX;
+}
 function AnimatedHeroBG(){
   const ref=useRef(null);
   useEffect(()=>{
     const canvas=ref.current; if(!canvas) return;
+    if(lowFX()){ canvas.style.display="none"; return; }   // appareil faible → dégradé statique CSS
     const gl=canvas.getContext("webgl")||canvas.getContext("experimental-webgl");
     if(!gl){ canvas.style.display="none"; return; }
     const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}`;
-    const fs=`precision highp float;uniform vec2 u_res;uniform float u_time;
+    const fs=`precision mediump float;uniform vec2 u_res;uniform float u_time;
       float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
       float noise(vec2 p){vec2 i=floor(p),f=fract(p);float a=hash(i),b=hash(i+vec2(1.,0.)),c=hash(i+vec2(0.,1.)),d=hash(i+vec2(1.,1.));vec2 u=f*f*(3.-2.*f);return mix(a,b,u.x)+(c-a)*u.y*(1.-u.x)+(d-b)*u.x*u.y;}
-      float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p*=2.02;a*=.5;}return v;}
+      float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*noise(p);p*=2.02;a*=.5;}return v;}
       void main(){
         vec2 uv=gl_FragCoord.xy/u_res.xy;
         vec2 p=uv*vec2(u_res.x/u_res.y,1.0)*2.6;
         float t=u_time*0.06;
-        float n=fbm(p+vec2(t,-t*0.7)+fbm(p*1.4-t*0.8)*0.7);
+        float n=fbm(p+vec2(t,-t*0.7));
         vec3 base=vec3(0.03,0.02,0.08);
         vec3 vio=vec3(0.30,0.12,0.75), cya=vec3(0.0,0.75,1.0), mag=vec3(1.0,0.15,0.55);
         vec3 col=mix(base,vio,smoothstep(0.25,0.75,n));
-        col=mix(col,cya,smoothstep(0.55,0.95,fbm(p*1.1+t*1.4))*0.55);
+        col=mix(col,cya,smoothstep(0.5,0.95,fbm(p*1.1+t*1.2))*0.5);
         col=mix(col,mag,smoothstep(0.62,1.0,n)*0.45);
         col*=1.0-0.55*length(uv-0.5);
         gl_FragColor=vec4(col,1.0);
@@ -40,11 +54,21 @@ function AnimatedHeroBG(){
     const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
     const loc=gl.getAttribLocation(prog,"p");gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
     const uRes=gl.getUniformLocation(prog,"u_res"),uTime=gl.getUniformLocation(prog,"u_time");
-    function resize(){const dpr=Math.min(window.devicePixelRatio||1,1.5);const w=canvas.clientWidth*dpr,h=canvas.clientHeight*dpr;if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}gl.viewport(0,0,canvas.width,canvas.height);}
-    let raf,start=null,destroyed=false;
-    function frame(ts){if(destroyed)return;if(!start)start=ts;resize();gl.uniform2f(uRes,canvas.width,canvas.height);gl.uniform1f(uTime,(ts-start)/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);raf=requestAnimationFrame(frame);}
+    const SCALE=0.6;                                       // rendu basse résolution (plasma flou → invisible à l'œil)
+    function resize(){const dpr=Math.min(window.devicePixelRatio||1,1)*SCALE;const w=Math.max(2,Math.round(canvas.clientWidth*dpr)),h=Math.max(2,Math.round(canvas.clientHeight*dpr));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}}
+    resize();window.addEventListener("resize",resize);
+    let raf,start=null,destroyed=false,visible=true,last=0,drawn=0,probe=null,io=null;
+    function teardown(fallback){ if(destroyed)return; destroyed=true; cancelAnimationFrame(raf); if(io)io.disconnect(); window.removeEventListener("resize",resize); const lc=gl.getExtension("WEBGL_lose_context"); if(lc)lc.loseContext(); if(fallback){ canvas.style.display="none"; try{document.body.classList.add("lowfx");}catch(_){} } }
+    try{ io=new IntersectionObserver(es=>{visible=es[0].isIntersecting; if(!visible)probe=null;},{threshold:0}); io.observe(canvas); }catch(_){}
+    function frame(ts){ if(destroyed)return; raf=requestAnimationFrame(frame);
+      if(!visible) return;                                 // pause quand le hero est hors écran
+      if(ts-last<32) return;                               // plafonné ~30 fps
+      last=ts; if(!start){start=ts;probe=ts;}
+      gl.uniform2f(uRes,canvas.width,canvas.height);gl.uniform1f(uTime,(ts-start)/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);drawn++;
+      if(probe!==null && ts-probe>900){ const f=drawn/((ts-probe)/1000); probe=null; if(f<20){ teardown(true); } } // GPU trop lent → dégradé statique
+    }
     raf=requestAnimationFrame(frame);
-    return()=>{destroyed=true;cancelAnimationFrame(raf);const lc=gl.getExtension("WEBGL_lose_context");if(lc)lc.loseContext();};
+    return()=>teardown(false);
   },[]);
   return <canvas ref={ref} className="hero-plasma"/>;
 }
@@ -93,10 +117,11 @@ let _tsLoaded=false;
 async function ensureTs(){ if(!_tsLoaded){ await loadSlim(tsParticles); _tsLoaded=true; } }
 function Particles({id}){
   useEffect(()=>{
+    if(lowFX()) return;                                    // appareil faible → pas de particules
     let inst,cancelled=false;
     (async()=>{ await ensureTs(); if(cancelled)return;
       inst=await tsParticles.load({id,options:{
-        fullScreen:{enable:false},background:{color:"transparent"},fpsLimit:60,detectRetina:true,
+        fullScreen:{enable:false},background:{color:"transparent"},fpsLimit:30,detectRetina:true,
         particles:{
           number:{value:70,density:{enable:true,area:900}},
           color:{value:["#00E0FF","#FF2D9B","#7A3BFF","#C9FF3B"]},
@@ -434,6 +459,7 @@ function Hero({t}){
   const heroRef=useRef(null),waterRef=useRef(null);
   useEffect(()=>{setIdx(0);const id=setInterval(()=>setIdx(i=>(i+1)%words.length),2200);return()=>clearInterval(id)},[t]);
   useEffect(()=>{if(window.matchMedia("(hover: none)").matches)return;
+    if(lowFX()){ if(waterRef.current) waterRef.current.style.display="none"; return; } // appareil faible → pas de simulation d'eau WebGL
     let fx=null;
     try{ fx=initWaterReveal({canvas:waterRef.current,container:heroRef.current,imageUrl:revealImg,
       options:{WET_RADIUS:0.0036,SPLASH_RADIUS:0.0009,WET_DECAY:0.968,WAVE_SPEED:1.95,WAVE_DAMPING:0.99}}); }catch(e){ fx=null; }
@@ -1169,6 +1195,7 @@ function App(){
   };
   useEffect(()=>{document.documentElement.lang=lang},[lang]);
   useEffect(()=>{document.body.classList.toggle("loading",loading);},[loading]);
+  useEffect(()=>{ if(lowFX()) document.body.classList.add("lowfx"); },[]);
   useEffect(()=>{
     if(window.matchMedia("(hover: none)").matches) return; // garder le scroll natif tactile
     const lenis=new Lenis({lerp:.1,smoothWheel:true,wheelMultiplier:1});
