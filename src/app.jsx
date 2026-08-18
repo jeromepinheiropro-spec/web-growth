@@ -505,7 +505,6 @@ function Hero({t}){
           <Magnetic className="btn ghost" onClick={()=>scrollToId("work")}>{t.hero_cta2}</Magnetic>
         </motion.div>
       </div>
-      <div className="scroll-hint"><span className="mouse"/>{t.scroll}</div>
     </section>
   );
 }
