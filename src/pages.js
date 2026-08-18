@@ -1,8 +1,6 @@
 /* ============================================================
    PAGES — trilingue (FR / EN / DE)
-   Hub : services + une page par service (SEO + conversion)
-   Services : developpement-logiciel · application-mobile · creation-site-web · design-ui-ux · identite-visuelle · seo-conversion · conseil-it
-   + objectifs
+   Services : developpement-logiciel · application-mobile · creation-site-web · design-ui-ux · seo-conversion · conseil-it + objectifs
    (généré — éditer les sources de contenu puis régénérer)
    ============================================================ */
 
@@ -11,7 +9,6 @@ export const SERVICE_ROUTES = [
   "application-mobile",
   "creation-site-web",
   "design-ui-ux",
-  "identite-visuelle",
   "seo-conversion",
   "conseil-it"
 ];
@@ -22,7 +19,6 @@ export const SERVICE_LABELS = {
     "application-mobile": "Application mobile",
     "creation-site-web": "Création de site web",
     "design-ui-ux": "Design UI/UX & Branding",
-    "identite-visuelle": "Identité visuelle & design",
     "seo-conversion": "SEO & Conversion",
     "conseil-it": "Conseil IT & Stratégie"
   },
@@ -31,7 +27,6 @@ export const SERVICE_LABELS = {
     "application-mobile": "Mobile apps",
     "creation-site-web": "Website creation",
     "design-ui-ux": "UI/UX & Branding",
-    "identite-visuelle": "Visual identity & design",
     "seo-conversion": "SEO & Conversion",
     "conseil-it": "IT consulting & strategy"
   },
@@ -40,7 +35,6 @@ export const SERVICE_LABELS = {
     "application-mobile": "Mobile Apps",
     "creation-site-web": "Website-Erstellung",
     "design-ui-ux": "UI/UX & Branding",
-    "identite-visuelle": "Visuelle Identität & Design",
     "seo-conversion": "SEO & Conversion",
     "conseil-it": "IT-Beratung & Strategie"
   }
@@ -73,11 +67,6 @@ export const PAGES = {
           "route": "design-ui-ux",
           "h": "Design UI/UX & Branding",
           "p": "Interfaces claires, design systems durables, du logo au produit."
-        },
-        {
-          "route": "identite-visuelle",
-          "h": "Identité visuelle & design",
-          "p": "Logo, charte et univers graphique qui vous rendent reconnaissable."
         },
         {
           "route": "seo-conversion",
@@ -464,98 +453,6 @@ export const PAGES = {
         "btn": "Designer mon produit"
       }
     },
-    "identite-visuelle": {
-      "tag": "Service · Design",
-      "title": "IDENTITÉ VISUELLE & DESIGN",
-      "heroCta": "Créer mon identité",
-      "lead": "On vous reconnaît avant même de vous lire.",
-      "context": "Votre identité visuelle, c'est la première poignée de main — souvent la seule. En quelques millisecondes, un visiteur décide s'il vous fait confiance. On construit un univers graphique cohérent — logo, couleurs, typographies, motifs, photo — qui raconte votre positionnement sans un mot, se décline partout du site aux réseaux, et vous fait passer instantanément dans une autre catégorie de prix.",
-      "valueProp": "Une identité qu'on reconnaît au premier coup d'œil, et qui inspire confiance instantanément.",
-      "proof": {
-        "title": "Ce qui vous rassure",
-        "items": [
-          {
-            "h": "Basé à Luxembourg",
-            "p": "Un interlocuteur proche et réactif, qui connaît votre marché local."
-          },
-          {
-            "h": "Sans engagement",
-            "p": "On commence par un échange offert. Vous avancez seulement si le courant passe."
-          },
-          {
-            "h": "Transparent de A à Z",
-            "p": "Devis clair, délais annoncés, aucune surprise : vous savez toujours où en est le projet."
-          },
-          {
-            "h": "Vous êtes propriétaire de tout",
-            "p": "Fichiers sources, charte et déclinaisons vous appartiennent — aucune dépendance."
-          }
-        ]
-      },
-      "intro": "Logo, couleurs, typographies, univers graphique : une identité qui vous ressemble et qu'on reconnaît au premier coup d'œil.",
-      "benefits": [
-        {
-          "h": "Une image mémorable",
-          "p": "Un univers visuel distinctif qui reste en tête et inspire confiance."
-        },
-        {
-          "h": "De la cohérence",
-          "p": "Tous vos supports parlent d'une même voix visuelle, du web au print."
-        },
-        {
-          "h": "Du professionnalisme",
-          "p": "Une image soignée qui vous fait passer dans la cour des grands."
-        }
-      ],
-      "includedTitle": "Ce qui est inclus",
-      "included": [
-        "Logo & déclinaisons",
-        "Palette de couleurs",
-        "Typographies",
-        "Charte graphique complète",
-        "Templates réseaux sociaux",
-        "Déclinaisons print & web"
-      ],
-      "method": {
-        "title": "Comment on travaille",
-        "steps": [
-          {
-            "h": "Exploration",
-            "p": "Moodboards et pistes créatives à partir de votre stratégie."
-          },
-          {
-            "h": "Création",
-            "p": "On dessine votre identité et on l'affine avec vous."
-          },
-          {
-            "h": "Livraison",
-            "p": "Charte complète + fichiers sources, prêts à l'emploi partout."
-          }
-        ]
-      },
-      "faq": {
-        "title": "Questions fréquentes",
-        "items": [
-          {
-            "q": "Je repars avec les fichiers sources ?",
-            "a": "Oui, vous êtes propriétaire de votre identité : fichiers vectoriels, charte et déclinaisons vous appartiennent."
-          },
-          {
-            "q": "Vous refaites mon logo existant ?",
-            "a": "Refonte complète ou évolution en douceur : on s'adapte à votre besoin et à votre historique."
-          },
-          {
-            "q": "Le print est inclus ?",
-            "a": "Oui, on décline l'identité sur tous vos supports : cartes, enseignes, packaging, réseaux."
-          }
-        ]
-      },
-      "cta": {
-        "h": "Envie d'une image qui marque ?",
-        "p": "On crée une identité à votre image.",
-        "btn": "Créer mon identité"
-      }
-    },
     "seo-conversion": {
       "tag": "Service · SEO & Conversion",
       "title": "SEO & OPTIMISATION DES CONVERSIONS",
@@ -829,11 +726,6 @@ export const PAGES = {
           "route": "design-ui-ux",
           "h": "UI/UX design & branding",
           "p": "Clean interfaces, lasting design systems, from logo to product."
-        },
-        {
-          "route": "identite-visuelle",
-          "h": "Visual identity & design",
-          "p": "Logo, guidelines and a visual world that make you recognisable."
         },
         {
           "route": "seo-conversion",
@@ -1220,98 +1112,6 @@ export const PAGES = {
         "btn": "Design my product"
       }
     },
-    "identite-visuelle": {
-      "tag": "Service · Design",
-      "title": "VISUAL IDENTITY & DESIGN",
-      "heroCta": "Create my identity",
-      "lead": "People recognise you before they even read you.",
-      "context": "Your visual identity is the first handshake — often the only one. In milliseconds, a visitor decides whether to trust you. We build a coherent visual world — logo, colours, type, patterns, imagery — that tells your positioning without a word, works everywhere from site to socials, and instantly moves you into a higher price bracket.",
-      "valueProp": "An identity recognised at a glance that inspires trust instantly.",
-      "proof": {
-        "title": "Why you can trust us",
-        "items": [
-          {
-            "h": "Based in Luxembourg",
-            "p": "A close, responsive partner who knows your local market."
-          },
-          {
-            "h": "No commitment",
-            "p": "We start with a free chat. You only move forward if it clicks."
-          },
-          {
-            "h": "Transparent throughout",
-            "p": "Clear quote, announced timelines, no surprises: you always know where the project stands."
-          },
-          {
-            "h": "You own everything",
-            "p": "Source files, guidelines and variations are yours — no lock-in."
-          }
-        ]
-      },
-      "intro": "Logo, colours, typography, visual world: an identity that looks like you and is recognised at a glance.",
-      "benefits": [
-        {
-          "h": "A memorable image",
-          "p": "A distinctive visual world that sticks and inspires trust."
-        },
-        {
-          "h": "Consistency",
-          "p": "All your materials speak with one visual voice, from web to print."
-        },
-        {
-          "h": "Professionalism",
-          "p": "A polished image that moves you up a league."
-        }
-      ],
-      "includedTitle": "What's included",
-      "included": [
-        "Logo & variations",
-        "Colour palette",
-        "Typography",
-        "Full brand guidelines",
-        "Social media templates",
-        "Print & web assets"
-      ],
-      "method": {
-        "title": "How we work",
-        "steps": [
-          {
-            "h": "Exploration",
-            "p": "Moodboards and creative directions from your strategy."
-          },
-          {
-            "h": "Creation",
-            "p": "We design your identity and refine it with you."
-          },
-          {
-            "h": "Delivery",
-            "p": "Full guidelines + source files, ready to use everywhere."
-          }
-        ]
-      },
-      "faq": {
-        "title": "Frequently asked questions",
-        "items": [
-          {
-            "q": "Do I get the source files?",
-            "a": "Yes, you own your identity: vector files, guidelines and assets are yours."
-          },
-          {
-            "q": "Do you redo my existing logo?",
-            "a": "Full redesign or gentle evolution: we adapt to your needs and your history."
-          },
-          {
-            "q": "Is print included?",
-            "a": "Yes, we apply the identity across all your materials: cards, signage, packaging, social."
-          }
-        ]
-      },
-      "cta": {
-        "h": "Want an image that stands out?",
-        "p": "We craft an identity that's truly you.",
-        "btn": "Create my identity"
-      }
-    },
     "seo-conversion": {
       "tag": "Service · SEO & Conversion",
       "title": "SEO & CONVERSION OPTIMISATION",
@@ -1585,11 +1385,6 @@ export const PAGES = {
           "route": "design-ui-ux",
           "h": "UI/UX-Design & Branding",
           "p": "Klare Interfaces, langlebige Design-Systeme, vom Logo bis zum Produkt."
-        },
-        {
-          "route": "identite-visuelle",
-          "h": "Visuelle Identität & Design",
-          "p": "Logo, Richtlinien und eine visuelle Welt, die Sie unverwechselbar machen."
         },
         {
           "route": "seo-conversion",
@@ -1974,98 +1769,6 @@ export const PAGES = {
         "h": "Ein Produkt, das großes Design verdient?",
         "p": "Wir gestalten ein klares, konsistentes, einprägsames Erlebnis.",
         "btn": "Produkt gestalten"
-      }
-    },
-    "identite-visuelle": {
-      "tag": "Leistung · Design",
-      "title": "VISUELLE IDENTITÄT & DESIGN",
-      "heroCta": "Identität erstellen",
-      "lead": "Man erkennt Sie, bevor man Sie liest.",
-      "context": "Ihre visuelle Identität ist der erste Händedruck — oft der einzige. In Millisekunden entscheidet ein Besucher, ob er Ihnen vertraut. Wir bauen eine kohärente visuelle Welt — Logo, Farben, Typografie, Muster, Bildsprache — die Ihre Positionierung ohne ein Wort erzählt, überall funktioniert und Sie sofort in eine höhere Preisklasse hebt.",
-      "valueProp": "Eine Identität, die man auf den ersten Blick erkennt und die sofort Vertrauen schafft.",
-      "proof": {
-        "title": "Was Sie beruhigt",
-        "items": [
-          {
-            "h": "In Luxemburg ansässig",
-            "p": "Ein naher, reaktionsschneller Ansprechpartner, der Ihren lokalen Markt kennt."
-          },
-          {
-            "h": "Ohne Verpflichtung",
-            "p": "Wir beginnen mit einem kostenlosen Gespräch. Sie machen nur weiter, wenn es passt."
-          },
-          {
-            "h": "Durchgehend transparent",
-            "p": "Klares Angebot, angekündigte Fristen, keine Überraschungen: Sie wissen immer, wo das Projekt steht."
-          },
-          {
-            "h": "Ihnen gehört alles",
-            "p": "Quelldateien, Design und Varianten gehören Ihnen — keine Abhängigkeit."
-          }
-        ]
-      },
-      "intro": "Logo, Farben, Typografie, visuelle Welt: eine Identität, die zu Ihnen passt und auf den ersten Blick erkannt wird.",
-      "benefits": [
-        {
-          "h": "Ein einprägsames Bild",
-          "p": "Eine unverwechselbare visuelle Welt, die bleibt und Vertrauen schafft."
-        },
-        {
-          "h": "Konsistenz",
-          "p": "Alle Ihre Materialien sprechen mit einer visuellen Stimme, von Web bis Print."
-        },
-        {
-          "h": "Professionalität",
-          "p": "Ein gepflegtes Bild, das Sie eine Liga höher spielen lässt."
-        }
-      ],
-      "includedTitle": "Was enthalten ist",
-      "included": [
-        "Logo & Varianten",
-        "Farbpalette",
-        "Typografie",
-        "Vollständiges Corporate Design",
-        "Social-Media-Vorlagen",
-        "Print- & Web-Assets"
-      ],
-      "method": {
-        "title": "So arbeiten wir",
-        "steps": [
-          {
-            "h": "Exploration",
-            "p": "Moodboards und kreative Richtungen aus Ihrer Strategie."
-          },
-          {
-            "h": "Kreation",
-            "p": "Wir gestalten Ihre Identität und verfeinern sie mit Ihnen."
-          },
-          {
-            "h": "Lieferung",
-            "p": "Komplettes Design + Quelldateien, überall einsatzbereit."
-          }
-        ]
-      },
-      "faq": {
-        "title": "Häufige Fragen",
-        "items": [
-          {
-            "q": "Bekomme ich die Quelldateien?",
-            "a": "Ja, Ihre Identität gehört Ihnen: Vektordateien, Design und Varianten sind Ihr Eigentum."
-          },
-          {
-            "q": "Überarbeiten Sie mein bestehendes Logo?",
-            "a": "Komplettes Redesign oder sanfte Weiterentwicklung: Wir passen uns Ihrem Bedarf und Ihrer Geschichte an."
-          },
-          {
-            "q": "Ist Print enthalten?",
-            "a": "Ja, wir übertragen die Identität auf alle Materialien: Karten, Beschilderung, Verpackung, Social."
-          }
-        ]
-      },
-      "cta": {
-        "h": "Lust auf ein Bild, das auffällt?",
-        "p": "Wir gestalten eine Identität, die zu Ihnen passt.",
-        "btn": "Identität erstellen"
       }
     },
     "seo-conversion": {
