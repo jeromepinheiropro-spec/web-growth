@@ -312,7 +312,7 @@ function goPage(r){
 const LOC={fr:"Luxembourg",en:"Luxembourg",de:"Luxemburg"};
 const SEO_FIXED={
   home:{fr:"Web Growth — Agence de communication digitale à Luxembourg",en:"Web Growth — Digital communication agency in Luxembourg",de:"Web Growth — Agentur für digitale Kommunikation in Luxemburg"},
-  services:{fr:"Services de communication digitale · Web Growth Luxembourg",en:"Digital communication services · Web Growth Luxembourg",de:"Digitale Kommunikationsleistungen · Web Growth Luxemburg"},
+  services:{fr:"Services digitaux & développement · Web Growth Luxembourg",en:"Digital & development services · Web Growth Luxembourg",de:"Digital- & Entwicklungsleistungen · Web Growth Luxemburg"},
   objectifs:{fr:"Objectifs & résultats marketing · Web Growth Luxembourg",en:"Marketing goals & results · Web Growth Luxembourg",de:"Marketingziele & Ergebnisse · Web Growth Luxemburg"},
 };
 function seoTitle(route,lang){
@@ -320,7 +320,7 @@ function seoTitle(route,lang){
   const label=(SERVICE_LABELS[lang]&&SERVICE_LABELS[lang][route])||route;
   return `${label} · Web Growth ${LOC[lang]}`;
 }
-const HOME_DESC={fr:"Web Growth transforme votre présence digitale en énergie pure : stratégie, création, contenu et publicité, depuis le cœur du Luxembourg.",en:"Web Growth turns your digital presence into pure energy: strategy, creative, content and advertising, from the heart of Luxembourg.",de:"Web Growth verwandelt Ihre digitale Präsenz in pure Energie: Strategie, Kreation, Content und Werbung, aus dem Herzen Luxemburgs."};
+const HOME_DESC={fr:"Web Growth conçoit vos produits digitaux : développement logiciel et mobile, création web, design UI/UX, SEO et conseil IT, depuis le cœur du Luxembourg.",en:"Web Growth builds your digital products: custom software and mobile, web, UI/UX design, SEO and IT consulting, from the heart of Luxembourg.",de:"Web Growth entwickelt Ihre digitalen Produkte: Software und Mobile, Web, UI/UX-Design, SEO und IT-Beratung, aus dem Herzen Luxemburgs."};
 
 function scrollToId(id){
   const el=document.getElementById(id);
