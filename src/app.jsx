@@ -555,17 +555,28 @@ function HorizontalServices({t,lang}){
     VanillaTilt.init(nodes,{max:7,speed:500,glare:true,"max-glare":.22,scale:1.02,perspective:1000,gyroscope:false});
     return()=>nodes.forEach(n=>n.vanillaTilt&&n.vanillaTilt.destroy());
   },[lang,mobile]);
+  const cardInner=(s,i,col)=>(<>
+    <div className="hnum">{String(i+1).padStart(2,"0")}</div><div className="hico">{SVG[s.i](col)}</div>
+    <h3>{s.t}</h3><p>{s.d}</p><div className="htags">{s.tags.map((tg,j)=><span key={j}>{tg}</span>)}</div>
+    <span className="hcard-go" aria-hidden="true">{t.svc_discover||"Découvrir"} →</span>
+  </>);
   const cards=items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
-    return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>
-      <div className="hnum">{String(i+1).padStart(2,"0")}</div><div className="hico">{SVG[s.i](col)}</div>
-      <h3>{s.t}</h3><p>{s.d}</p><div className="htags">{s.tags.map((tg,j)=><span key={j}>{tg}</span>)}</div>
-      <span className="hcard-go" aria-hidden="true">{t.svc_discover||"Découvrir"} →</span>
-    </a>);});
-  // MOBILE : pas de scroll-jack ni de transform lié au scroll (empile en vertical = fluide)
+    return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>{cardInner(s,i,col)}</a>);});
+  // MOBILE : pas de scroll-jack. Animation React d'entrée « qui s'empile »
+  // (opacity + translate + scale, une seule fois à l'apparition = fluide, transforms GPU only).
   if(mobile){
     return(<section className="hsvc hsvc-mobile" id="services">
       <div className="hsvc-head wrap"><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
-      <div className="hsvc-stack">{cards}</div>
+      <div className="hsvc-stack">
+        {items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
+          return(<motion.a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}
+            initial={{opacity:0,y:64,scale:.93,rotate:i%2?-1.6:1.6}}
+            whileInView={{opacity:1,y:0,scale:1,rotate:0}}
+            viewport={{once:true,amount:.35}}
+            transition={{type:"spring",stiffness:130,damping:17,mass:.7}}>
+            {cardInner(s,i,col)}
+          </motion.a>);})}
+      </div>
     </section>);
   }
   return(<section className="hsvc" id="services" ref={ref} style={{height:`${items.length*70}vh`}}>
