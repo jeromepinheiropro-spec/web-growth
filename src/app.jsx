@@ -534,34 +534,44 @@ function Manifesto({t}){
 }
 
 /* ============================ HORIZONTAL SERVICES ============================ */
+function isTouchLike(){ try{ return window.matchMedia("(hover: none)").matches || window.innerWidth<=820; }catch(_){ return false; } }
 function HorizontalServices({t,lang}){
   const ref=useRef(null);const rowRef=useRef(null);const items=SERVICES[lang];
+  const [mobile,setMobile]=useState(()=>isTouchLike());
   const{scrollYProgress}=useScroll({target:ref,offset:["start start","end end"]});
   const [maxShift,setMaxShift]=useState(1600);
   useEffect(()=>{
-    const calc=()=>{if(rowRef.current){const rw=rowRef.current.scrollWidth;const vw=window.innerWidth;setMaxShift(Math.max(0,rw-vw+64));}};
-    calc();const t1=setTimeout(calc,250);const t2=setTimeout(calc,900);
-    window.addEventListener("resize",calc);
+    const onR=()=>setMobile(isTouchLike());
+    const calc=()=>{if(!isTouchLike()&&rowRef.current){const rw=rowRef.current.scrollWidth;const vw=window.innerWidth;setMaxShift(Math.max(0,rw-vw+64));}};
+    onR();calc();const t1=setTimeout(calc,250);const t2=setTimeout(calc,900);
+    window.addEventListener("resize",()=>{onR();calc();});
     return()=>{clearTimeout(t1);clearTimeout(t2);window.removeEventListener("resize",calc);};
   },[lang,items.length]);
   const x=useTransform(scrollYProgress,[0,1],[16,-maxShift]);
   useEffect(()=>{
-    if(window.matchMedia("(hover: none)").matches||!rowRef.current)return;
+    // Effet tilt : desktop uniquement (jamais sur mobile — coûteux)
+    if(isTouchLike()||!rowRef.current)return;
     const nodes=rowRef.current.querySelectorAll(".hcard");
     VanillaTilt.init(nodes,{max:7,speed:500,glare:true,"max-glare":.22,scale:1.02,perspective:1000,gyroscope:false});
     return()=>nodes.forEach(n=>n.vanillaTilt&&n.vanillaTilt.destroy());
-  },[lang]);
+  },[lang,mobile]);
+  const cards=items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
+    return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>
+      <div className="hnum">{String(i+1).padStart(2,"0")}</div><div className="hico">{SVG[s.i](col)}</div>
+      <h3>{s.t}</h3><p>{s.d}</p><div className="htags">{s.tags.map((tg,j)=><span key={j}>{tg}</span>)}</div>
+      <span className="hcard-go" aria-hidden="true">{t.svc_discover||"Découvrir"} →</span>
+    </a>);});
+  // MOBILE : pas de scroll-jack ni de transform lié au scroll (empile en vertical = fluide)
+  if(mobile){
+    return(<section className="hsvc hsvc-mobile" id="services">
+      <div className="hsvc-head wrap"><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
+      <div className="hsvc-stack">{cards}</div>
+    </section>);
+  }
   return(<section className="hsvc" id="services" ref={ref} style={{height:`${items.length*70}vh`}}>
     <div className="hsvc-pin">
       <div className="hsvc-head wrap" style={{maxWidth:"none"}}><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
-      <motion.div className="hsvc-row" style={{x}} ref={rowRef}>
-        {items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
-          return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>
-            <div className="hnum">{String(i+1).padStart(2,"0")}</div><div className="hico">{SVG[s.i](col)}</div>
-            <h3>{s.t}</h3><p>{s.d}</p><div className="htags">{s.tags.map((tg,j)=><span key={j}>{tg}</span>)}</div>
-            <span className="hcard-go" aria-hidden="true">{t.svc_discover||"Découvrir"} →</span>
-          </a>);})}
-      </motion.div>
+      <motion.div className="hsvc-row" style={{x}} ref={rowRef}>{cards}</motion.div>
       <div className="hint-swipe">{t.swipe}</div>
       <div className="hprog"><motion.i style={{scaleX:scrollYProgress}}/></div>
     </div>
