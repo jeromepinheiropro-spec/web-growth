@@ -232,14 +232,32 @@ body.rave{animation:ravehue 1s linear infinite}
 .hero h1{position:relative;z-index:1}
 .hero .eyebrow,.hero .sub,.hero-cta,.scroll-hint{position:relative;z-index:3}
 @media (hover:none){.water-canvas{display:none}}
+/* ---- ciel étoilé + fusée, EN FOND du hero, derrière le H1 ---- */
+.hero-space{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  mask-image:radial-gradient(140% 108% at 50% 32%,#000 52%,transparent 92%);-webkit-mask-image:radial-gradient(140% 108% at 50% 32%,#000 52%,transparent 92%)}
+.hs-stars{position:absolute;inset:-6% 0;background-repeat:repeat;
+  background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 78% 8%,#dbeafe,transparent),radial-gradient(1px 1px at 42% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 62% 52%,#fff,transparent),radial-gradient(1px 1px at 25% 66%,#cfe0ff,transparent),radial-gradient(1.5px 1.5px at 88% 74%,#fff,transparent),radial-gradient(1px 1px at 8% 88%,#fff,transparent),radial-gradient(1.5px 1.5px at 52% 84%,#e9d5ff,transparent);
+  background-size:520px 520px;animation:hsTwinkle 4.6s ease-in-out infinite}
+.hs-stars2{background-size:360px 360px;animation-duration:6.8s;animation-delay:-2.2s;opacity:.72;
+  background-image:radial-gradient(1px 1px at 30% 12%,#fff,transparent),radial-gradient(1px 1px at 66% 24%,#bfdbfe,transparent),radial-gradient(1px 1px at 18% 44%,#fff,transparent),radial-gradient(1px 1px at 82% 60%,#fff,transparent),radial-gradient(1px 1px at 46% 72%,#ddd6fe,transparent)}
+.hs-stars3{background-size:700px 700px;animation-duration:3.3s;opacity:.95;filter:drop-shadow(0 0 4px rgba(255,255,255,.6));
+  background-image:radial-gradient(2px 2px at 22% 26%,#fff,transparent),radial-gradient(2px 2px at 72% 66%,#a5f3fc,transparent),radial-gradient(2px 2px at 90% 20%,#fff,transparent)}
+@keyframes hsTwinkle{0%,100%{opacity:.5}50%{opacity:1}}
+.hs-rocket{position:absolute;left:0;top:0;width:46px;height:46px;animation:hsFly 18s linear infinite;will-change:transform,opacity}
+.hs-ship{position:relative;display:block;width:46px;height:46px;transform:rotate(46deg);filter:drop-shadow(0 0 9px rgba(0,224,255,.5))}
+.hs-ship svg{width:46px;height:46px;display:block}
+.hs-trail{position:absolute;left:50%;top:56%;width:5px;height:96px;margin-left:-2.5px;border-radius:5px;filter:blur(1px);opacity:.5;
+  background:linear-gradient(rgba(0,224,255,0) 0%,rgba(0,224,255,.55) 14%,rgba(255,45,155,.35) 60%,transparent 100%)}
+@keyframes hsFly{0%{transform:translate(-9vw,90vh) scale(.55);opacity:0}9%{opacity:1}88%{opacity:1}100%{transform:translate(97vw,-26vh) scale(1);opacity:0}}
 /* dégradé statique derrière le hero des pages service (visible si le plasma WebGL est coupé) */
 .pg-hero{background:radial-gradient(1000px 560px at 80% 4%,rgba(122,59,255,.18),transparent 60%),radial-gradient(760px 520px at 12% 90%,rgba(0,224,255,.12),transparent 62%),var(--bg)}
 /* ---- appareils faibles / mouvement réduit : coupe des effets GPU lourds ---- */
-body.lowfx .hero-plasma,body.lowfx .water-canvas,body.lowfx .pg-orb,body.lowfx .shoot,body.lowfx .particles-layer,body.lowfx .warp-canvas,body.lowfx .pg-statement-glow{display:none!important}
-body.lowfx .hero-bg,body.lowfx .mq-track,body.lowfx .bm-stars,body.lowfx .bm-rocket,body.lowfx .bm-flame{animation:none!important}
+body.lowfx .hero-plasma,body.lowfx .water-canvas,body.lowfx .pg-orb,body.lowfx .shoot,body.lowfx .particles-layer,body.lowfx .warp-canvas,body.lowfx .pg-statement-glow,body.lowfx .hs-rocket{display:none!important}
+body.lowfx .hero-bg,body.lowfx .mq-track,body.lowfx .hs-stars{animation:none!important}
 body.lowfx .brand-word{animation:none!important;background:linear-gradient(90deg,var(--cyan),var(--magenta));-webkit-background-clip:text;background-clip:text}
 @media (prefers-reduced-motion: reduce){
-  .mq-track,.brand-word,.bm-stars,.bm-rocket,.bm-flame,.hero-bg,.pg-orb,.shoot{animation:none!important}
+  .mq-track,.brand-word,.hs-stars,.hero-bg,.pg-orb,.shoot{animation:none!important}
+  .hs-rocket{display:none!important}
 }
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:13.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--paper);
   background:rgba(22,19,39,.6);border:1px solid var(--line);border-radius:100px;padding:9px 18px;margin-bottom:30px}
