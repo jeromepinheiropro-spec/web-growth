@@ -160,7 +160,7 @@ const I18N = {
   con_loc:"Luxembourg-Ville, Luxembourg",
   f_name:"Nom",f_email:"Email",f_need:"Votre besoin",f_msg:"Message",f_send:"Envoyer la fusée 🚀",f_note:"En cliquant, votre messagerie s'ouvre avec le message prérempli.",
   foot_rights:"Tous droits réservés.",foot_made:"⚡ Conçu avec énergie au Luxembourg",foot_legal:"Mentions légales",foot_privacy:"Confidentialité",
-  rotator:["voltage","punch","peps","style","mordant","panache"]
+  rotator:["punch","peps","style","mordant","panache","caractère"]
  },
  en:{
   nav_services:"Services",nav_objectifs:"Goals",nav_seo:"SEO & Conversion",nav_all_services:"All services",nav_work:"Work",nav_approach:"Approach",nav_contact:"Contact",nav_cta:"Start a project",
@@ -180,7 +180,7 @@ const I18N = {
   con_loc:"Luxembourg City, Luxembourg",
   f_name:"Name",f_email:"Email",f_need:"What you need",f_msg:"Message",f_send:"Launch the rocket 🚀",f_note:"On click, your mail app opens with the message pre-filled.",
   foot_rights:"All rights reserved.",foot_made:"⚡ Crafted with energy in Luxembourg",foot_legal:"Legal notice",foot_privacy:"Privacy",
-  rotator:["voltage","punch","energy","spark"]
+  rotator:["punch","energy","spark","edge","drive"]
  },
  de:{
   nav_services:"Leistungen",nav_objectifs:"Ziele",nav_seo:"SEO & Conversion",nav_all_services:"Alle Leistungen",nav_work:"Projekte",nav_approach:"Ansatz",nav_contact:"Kontakt",nav_cta:"Projekt starten",
@@ -212,29 +212,32 @@ const SVG={
  web:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10"/></svg>),
  video:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9l4-2v10l-4-2"/></svg>),
  seo:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/><path d="M8.5 12l2-2 1.5 1.5 2.5-3"/></svg>),
+ code:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></svg>),
+ mobile:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="7" y="3" width="10" height="18" rx="2.2"/><path d="M11 18h2"/></svg>),
+ ui:(c)=>(<svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>),
 };
 const SERVICES={
- fr:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Stratégie de marque",d:"Positionnement, plateforme de marque, ton de voix. On pose les fondations avant de créer.",tags:["Positionnement","Brand platform","Audit"]},
-     {i:'design',c:'c2',route:'identite-visuelle',t:"Identité & design",d:"Logo, charte, direction artistique. Une image qui vous ressemble et qui marque.",tags:["Logo","Charte","Art direction"]},
-     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Réseaux sociaux",d:"Ligne éditoriale, community management, contenu qui engage vraiment.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Publicité en ligne",d:"Campagnes Meta, Google & TikTok orientées performance et ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',route:'creation-site-web',t:"Sites & développement",d:"Sites, landing pages, e-commerce. Rapides, beaux, pensés pour convertir.",tags:["Web","E-commerce","SEO"]},
-     {i:'video',c:'c6',route:'video-motion',t:"Vidéo & motion",d:"Reels, motion design, production. Du contenu qui arrête le pouce.",tags:["Reels","Motion","Production"]},
-     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Être trouvé sur Google et transformer les visites en clients.",tags:["SEO","Local","CRO"]}],
- en:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Brand strategy",d:"Positioning, brand platform, tone of voice. Foundations before we create.",tags:["Positioning","Platform","Audit"]},
-     {i:'design',c:'c2',route:'identite-visuelle',t:"Identity & design",d:"Logo, guidelines, art direction. A look that's truly you — impossible to ignore.",tags:["Logo","Guidelines","Art direction"]},
-     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Social media",d:"Editorial line, community management, content that actually engages.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Online advertising",d:"Meta, Google & TikTok campaigns built around performance and ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',route:'creation-site-web',t:"Web & development",d:"Sites, landing pages, e-commerce. Fast, beautiful, built to convert.",tags:["Web","E-commerce","SEO"]},
-     {i:'video',c:'c6',route:'video-motion',t:"Video & motion",d:"Reels, motion design, production. Content that stops the scroll.",tags:["Reels","Motion","Production"]},
-     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Get found on Google and turn visits into customers.",tags:["SEO","Local","CRO"]}],
- de:[{i:'strat',c:'c1',route:'strategie-de-marque',t:"Markenstrategie",d:"Positionierung, Markenplattform, Tonalität. Fundament vor der Gestaltung.",tags:["Positionierung","Plattform","Audit"]},
-     {i:'design',c:'c2',route:'identite-visuelle',t:"Identität & Design",d:"Logo, Design, Art Direction. Ein Look, der zu dir passt und bleibt.",tags:["Logo","Design","Art Direction"]},
-     {i:'social',c:'c3',route:'reseaux-sociaux',t:"Social Media",d:"Redaktionslinie, Community Management, Content mit echtem Engagement.",tags:["Instagram","TikTok","LinkedIn"]},
-     {i:'ads',c:'c4',route:'publicite-en-ligne',t:"Online-Werbung",d:"Meta-, Google- & TikTok-Kampagnen für Performance und ROI.",tags:["Meta","Google","Performance"]},
-     {i:'web',c:'c5',route:'creation-site-web',t:"Web & Entwicklung",d:"Sites, Landingpages, E-Commerce. Schnell, schön, auf Conversion gebaut.",tags:["Web","E-Commerce","SEO"]},
-     {i:'video',c:'c6',route:'video-motion',t:"Video & Motion",d:"Reels, Motion Design, Produktion. Content, der den Daumen stoppt.",tags:["Reels","Motion","Produktion"]},
-     {i:'seo',c:'c1',route:'seo-conversion',t:"SEO & Conversion",d:"Bei Google gefunden werden und Besuche in Kunden verwandeln.",tags:["SEO","Local","CRO"]}]
+ fr:[{i:'code',c:'c1',route:'developpement-logiciel',t:"Développement logiciel",d:"Plateformes, back-offices et API sur mesure, pensés pour la performance et l'échelle.",tags:["Web app","API","Sur mesure"]},
+     {i:'mobile',c:'c2',route:'application-mobile',t:"Application mobile",d:"Apps iOS & Android, natives ou cross-platform, fluides et fiables.",tags:["iOS","Android","React Native"]},
+     {i:'web',c:'c3',route:'creation-site-web',t:"Création de site web",d:"Sites, landing pages, e-commerce. Rapides, beaux, pensés pour convertir.",tags:["Web","E-commerce","SEO"]},
+     {i:'ui',c:'c4',route:'design-ui-ux',t:"Design UI/UX & Branding",d:"Interfaces claires, design systems durables, du logo au produit.",tags:["UI/UX","Design system","Figma"]},
+     {i:'design',c:'c5',route:'identite-visuelle',t:"Identité & design",d:"Logo, charte, direction artistique. Une image qui vous ressemble et qui marque.",tags:["Logo","Charte","Art direction"]},
+     {i:'seo',c:'c6',route:'seo-conversion',t:"SEO & Conversion",d:"Être trouvé sur Google et transformer les visites en clients.",tags:["SEO","Local","CRO"]},
+     {i:'strat',c:'c1',route:'conseil-it',t:"Conseil IT & Stratégie",d:"Audit, architecture et feuille de route pour investir dans ce qui compte.",tags:["Audit","Architecture","Roadmap"]}],
+ en:[{i:'code',c:'c1',route:'developpement-logiciel',t:"Custom software",d:"Tailor-made platforms, back-offices and APIs engineered for performance and scale.",tags:["Web app","API","Bespoke"]},
+     {i:'mobile',c:'c2',route:'application-mobile',t:"Mobile apps",d:"iOS & Android apps, native or cross-platform, smooth and reliable.",tags:["iOS","Android","React Native"]},
+     {i:'web',c:'c3',route:'creation-site-web',t:"Website creation",d:"Sites, landing pages, e-commerce. Fast, beautiful, built to convert.",tags:["Web","E-commerce","SEO"]},
+     {i:'ui',c:'c4',route:'design-ui-ux',t:"UI/UX & Branding",d:"Clean interfaces, lasting design systems, from logo to product.",tags:["UI/UX","Design system","Figma"]},
+     {i:'design',c:'c5',route:'identite-visuelle',t:"Identity & design",d:"Logo, guidelines, art direction. A look that's truly you — impossible to ignore.",tags:["Logo","Guidelines","Art direction"]},
+     {i:'seo',c:'c6',route:'seo-conversion',t:"SEO & Conversion",d:"Get found on Google and turn visits into customers.",tags:["SEO","Local","CRO"]},
+     {i:'strat',c:'c1',route:'conseil-it',t:"IT consulting & strategy",d:"Audit, architecture and roadmap to invest in what truly matters.",tags:["Audit","Architecture","Roadmap"]}],
+ de:[{i:'code',c:'c1',route:'developpement-logiciel',t:"Softwareentwicklung",d:"Maßgeschneiderte Plattformen, Back-Offices und APIs für Performance und Skalierung.",tags:["Web-App","API","Maßarbeit"]},
+     {i:'mobile',c:'c2',route:'application-mobile',t:"Mobile Apps",d:"iOS- & Android-Apps, nativ oder cross-platform, flüssig und zuverlässig.",tags:["iOS","Android","React Native"]},
+     {i:'web',c:'c3',route:'creation-site-web',t:"Website-Erstellung",d:"Sites, Landingpages, E-Commerce. Schnell, schön, auf Conversion gebaut.",tags:["Web","E-Commerce","SEO"]},
+     {i:'ui',c:'c4',route:'design-ui-ux',t:"UI/UX & Branding",d:"Klare Interfaces, langlebige Design-Systeme, vom Logo bis zum Produkt.",tags:["UI/UX","Design-System","Figma"]},
+     {i:'design',c:'c5',route:'identite-visuelle',t:"Identität & Design",d:"Logo, Design, Art Direction. Ein Look, der zu dir passt und bleibt.",tags:["Logo","Design","Art Direction"]},
+     {i:'seo',c:'c6',route:'seo-conversion',t:"SEO & Conversion",d:"Bei Google gefunden werden und Besuche in Kunden verwandeln.",tags:["SEO","Local","CRO"]},
+     {i:'strat',c:'c1',route:'conseil-it',t:"IT-Beratung & Strategie",d:"Audit, Architektur und Roadmap, um ins Richtige zu investieren.",tags:["Audit","Architektur","Roadmap"]}]
 };
 const STEPS={
  fr:[{n:"01",t:"Écoute",d:"On plonge dans votre univers, vos objectifs et votre audience."},
@@ -894,13 +897,13 @@ function CommandPalette({t,lang,setLang,openConcierge,triggerRave}){
 /* ============================ APP ============================ */
 /* ============================ PAGES DÉDIÉES ============================ */
 const SERVICE_ACCENT={
-  "strategie-de-marque":{a:"#7A3BFF",a2:"#00E0FF"},
-  "identite-visuelle":{a:"#FF2D9B",a2:"#7A3BFF"},
+  "developpement-logiciel":{a:"#4D8CFF",a2:"#7A3BFF"},
+  "application-mobile":{a:"#7A3BFF",a2:"#FF2D9B"},
   "creation-site-web":{a:"#00E0FF",a2:"#7A3BFF"},
-  "reseaux-sociaux":{a:"#FF3D7F",a2:"#FF9F1C"},
-  "publicite-en-ligne":{a:"#FF9F1C",a2:"#FF2D9B"},
-  "video-motion":{a:"#B14BFF",a2:"#00E0FF"},
+  "design-ui-ux":{a:"#FF2D9B",a2:"#FFB23A"},
+  "identite-visuelle":{a:"#B14BFF",a2:"#00E0FF"},
   "seo-conversion":{a:"#C9FF3B",a2:"#00E0FF"},
+  "conseil-it":{a:"#00E0FF",a2:"#C9FF3B"},
   "objectifs":{a:"#C9FF3B",a2:"#00E0FF"},
 };
 function PageHero({data}){
