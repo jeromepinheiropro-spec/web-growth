@@ -13,7 +13,6 @@ const ROUTE_SLUGS = [
   "application-mobile",
   "creation-site-web",
   "design-ui-ux",
-  "identite-visuelle",
   "seo-conversion",
   "conseil-it",
   "objectifs",
@@ -25,6 +24,7 @@ const REDIRECTS = {
   "/reseaux-sociaux": "/services",
   "/publicite-en-ligne": "/services",
   "/video-motion": "/services",
+  "/identite-visuelle": "/design-ui-ux",
 };
 
 function readSafe(p) { try { return fs.readFileSync(p); } catch { return null; } }
