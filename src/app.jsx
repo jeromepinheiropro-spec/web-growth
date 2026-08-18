@@ -562,20 +562,20 @@ function HorizontalServices({t,lang}){
   </>);
   const cards=items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
     return(<a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}>{cardInner(s,i,col)}</a>);});
-  // MOBILE : pas de scroll-jack. Animation React d'entrée « qui s'empile »
-  // (opacity + translate + scale, une seule fois à l'apparition = fluide, transforms GPU only).
+  // MOBILE : cartes qui s'empilent (sticky stacking, façon cafein.lu) — pur CSS sticky,
+  // donc fluide, + un léger fondu/montée React (framer) à l'apparition de chaque carte.
   if(mobile){
     return(<section className="hsvc hsvc-mobile" id="services">
       <div className="hsvc-head wrap"><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
       <div className="hsvc-stack">
         {items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
-          return(<motion.a key={i} className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}
-            initial={{opacity:0,y:64,scale:.93,rotate:i%2?-1.6:1.6}}
-            whileInView={{opacity:1,y:0,scale:1,rotate:0}}
-            viewport={{once:true,amount:.35}}
-            transition={{type:"spring",stiffness:130,damping:17,mass:.7}}>
-            {cardInner(s,i,col)}
-          </motion.a>);})}
+          return(<div className="hstick" key={i} style={{top:`calc(74px + ${i*13}px)`,zIndex:i+1}}>
+            <motion.a className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}
+              initial={{opacity:0,y:34}} whileInView={{opacity:1,y:0}}
+              viewport={{once:true,amount:.4}} transition={{duration:.55,ease:[.16,1,.3,1]}}>
+              {cardInner(s,i,col)}
+            </motion.a>
+          </div>);})}
       </div>
     </section>);
   }
