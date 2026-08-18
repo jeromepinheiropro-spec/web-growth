@@ -535,6 +535,8 @@ function Manifesto({t}){
 
 /* ============================ HORIZONTAL SERVICES ============================ */
 function isTouchLike(){ try{ return window.matchMedia("(hover: none), (pointer: coarse)").matches || window.innerWidth<=900; }catch(_){ return false; } }
+// angles « jeu de cartes » — chaque carte empilée légèrement de travers
+const DECK_ANGLES=[-3.4,2.6,-1.8,3.2,-2.7,1.7,-2.2,2.9];
 function HorizontalServices({t,lang}){
   const ref=useRef(null);const rowRef=useRef(null);const items=SERVICES[lang];
   const [mobile,setMobile]=useState(()=>isTouchLike());
@@ -569,10 +571,11 @@ function HorizontalServices({t,lang}){
       <div className="hsvc-head wrap"><div><span className="tag">{t.svc_tag}</span><ScrambleText as="h2" text={t.svc_title}/></div></div>
       <div className="hsvc-stack">
         {items.map((s,i)=>{const dark=["c3","c4","c5"].includes(s.c);const col=dark?"#131018":"#fff";
+          const ang=DECK_ANGLES[i%DECK_ANGLES.length];
           return(<div className="hstick" key={i} style={{top:`calc(74px + ${i*13}px)`,zIndex:i+1}}>
             <motion.a className={`hcard ${s.c}`} href={"/"+s.route} onClick={e=>{e.preventDefault();goPage(s.route);}}
-              initial={{opacity:0,y:34}} whileInView={{opacity:1,y:0}}
-              viewport={{once:true,amount:.4}} transition={{duration:.55,ease:[.16,1,.3,1]}}>
+              initial={{opacity:0,y:36,rotate:ang-3.5}} whileInView={{opacity:1,y:0,rotate:ang}}
+              viewport={{once:true,amount:.4}} transition={{duration:.6,ease:[.16,1,.3,1]}}>
               {cardInner(s,i,col)}
             </motion.a>
           </div>);})}
