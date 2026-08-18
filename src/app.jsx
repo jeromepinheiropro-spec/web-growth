@@ -160,7 +160,7 @@ const I18N = {
   con_loc:"Luxembourg-Ville, Luxembourg",
   f_name:"Nom",f_email:"Email",f_need:"Votre besoin",f_msg:"Message",f_send:"Envoyer la fusée 🚀",f_note:"En cliquant, votre messagerie s'ouvre avec le message prérempli.",
   foot_rights:"Tous droits réservés.",foot_made:"⚡ Conçu avec énergie au Luxembourg",foot_legal:"Mentions légales",foot_privacy:"Confidentialité",
-  rotator:["voltage","punch","du peps","de l'éclat"]
+  rotator:["voltage","punch","peps","style","mordant","panache"]
  },
  en:{
   nav_services:"Services",nav_objectifs:"Goals",nav_seo:"SEO & Conversion",nav_all_services:"All services",nav_work:"Work",nav_approach:"Approach",nav_contact:"Contact",nav_cta:"Start a project",
@@ -200,7 +200,7 @@ const I18N = {
   con_loc:"Luxemburg-Stadt, Luxemburg",
   f_name:"Name",f_email:"E-Mail",f_need:"Dein Bedarf",f_msg:"Nachricht",f_send:"Rakete starten 🚀",f_note:"Beim Klick öffnet sich dein Mailprogramm mit der vorausgefüllten Nachricht.",
   foot_rights:"Alle Rechte vorbehalten.",foot_made:"⚡ Mit Energie in Luxemburg gestaltet",foot_legal:"Impressum",foot_privacy:"Datenschutz",
-  rotator:["voltage","punch","energie","funken"]
+  rotator:["punch","biss","drive","schwung","feuer","funken"]
  }
 };
 
