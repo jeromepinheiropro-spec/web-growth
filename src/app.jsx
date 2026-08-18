@@ -534,7 +534,7 @@ function Manifesto({t}){
 }
 
 /* ============================ HORIZONTAL SERVICES ============================ */
-function isTouchLike(){ try{ return window.matchMedia("(hover: none)").matches || window.innerWidth<=820; }catch(_){ return false; } }
+function isTouchLike(){ try{ return window.matchMedia("(hover: none), (pointer: coarse)").matches || window.innerWidth<=900; }catch(_){ return false; } }
 function HorizontalServices({t,lang}){
   const ref=useRef(null);const rowRef=useRef(null);const items=SERVICES[lang];
   const [mobile,setMobile]=useState(()=>isTouchLike());
