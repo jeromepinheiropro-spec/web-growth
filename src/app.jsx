@@ -332,10 +332,6 @@ function scrollToId(id){
 function Brand(){
   return(
     <a className="brand" href="/" onClick={e=>{e.preventDefault();if(parseRoute()!=="home"){goPage("home");}else if(window.__lenis)window.__lenis.scrollTo(0,{duration:1});else window.scrollTo({top:0,behavior:"smooth"})}}>
-      <span className="brand-mark" aria-hidden="true">
-        <span className="bm-stars"/><span className="bm-stars bm-stars2"/>
-        <span className="bm-rocket"><RocketIcon/><span className="bm-flame"/></span>
-      </span>
       <span className="brand-word" data-txt="WEB GROWTH">WEB GROWTH</span>
       <span className="brand-tag">.LU</span>
     </a>
@@ -458,6 +454,13 @@ function startFallbackReveal(host, imgUrl){
 }
 
 /* ============================ HERO ============================ */
+function HeroSpace(){
+  return(
+    <div className="hero-space" aria-hidden="true">
+      <div className="hs-stars"/><div className="hs-stars hs-stars2"/><div className="hs-stars hs-stars3"/>
+      <div className="hs-rocket"><span className="hs-ship"><span className="hs-trail"/><RocketIcon/></span></div>
+    </div>);
+}
 function Hero({t}){
   const [idx,setIdx]=useState(0);const words=t.rotator;
   const heroRef=useRef(null),waterRef=useRef(null);
@@ -480,7 +483,7 @@ function Hero({t}){
   const reveal={hidden:{yPercent:120},show:{yPercent:0,transition:{duration:.9,ease:[.16,1,.3,1]}}};
   return(
     <section className="hero" id="top" ref={heroRef}>
-      <AnimatedHeroBG/><div className="hero-bg"/><canvas className="water-canvas" ref={waterRef}/>
+      <AnimatedHeroBG/><div className="hero-bg"/><canvas className="water-canvas" ref={waterRef}/><HeroSpace/>
       {[{y:"15%",c:"var(--cyan)",ang:"-20deg",dur:"4.6s",d:"0s"},
         {y:"25%",c:"var(--magenta)",ang:"-16deg",dur:"5.8s",d:"1.4s"},
         {y:"39%",c:"var(--violet)",ang:"-24deg",dur:"5.2s",d:"2.6s"},
