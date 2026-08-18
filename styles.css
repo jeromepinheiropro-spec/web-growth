@@ -170,13 +170,23 @@ body.rave{animation:ravehue 1s linear infinite}
 .logo b{background:linear-gradient(90deg,var(--cyan),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
 /* ---- spectacular header logo ---- */
 .brand{display:flex;align-items:center;gap:13px;line-height:1;position:relative}
-.brand-mark{position:relative;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#0a0a12;overflow:hidden;flex:0 0 auto;
-  box-shadow:0 0 20px rgba(0,229,255,.28),inset 0 0 12px rgba(122,59,255,.25);transition:transform .35s}
+.brand-mark{position:relative;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;overflow:hidden;flex:0 0 auto;
+  background:radial-gradient(120% 120% at 50% 0%,#1a1636 0%,#0b0a1c 55%,#050510 100%);
+  box-shadow:0 0 20px rgba(0,229,255,.28),inset 0 0 12px rgba(122,59,255,.35),inset 0 0 0 1px rgba(122,59,255,.35);transition:transform .35s}
 .brand:hover .brand-mark{transform:rotate(-6deg) scale(1.06)}
-.brand-mark::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,var(--cyan),var(--magenta),var(--violet),var(--acid),var(--cyan));animation:spin 4.5s linear infinite}
-.brand-mark::after{content:"";position:absolute;inset:2.5px;border-radius:10px;background:#0a0a12}
-@keyframes spin{to{transform:rotate(360deg)}}
-.brand-bolt{position:relative;z-index:1;width:23px;height:23px;color:var(--acid);filter:drop-shadow(0 0 7px var(--acid))}
+/* starfield: tiny dots that scroll downward to fake the rocket climbing */
+.bm-stars{position:absolute;inset:-40% 0;pointer-events:none;
+  background-image:radial-gradient(1.3px 1.3px at 8px 10px,#fff,transparent),radial-gradient(1.3px 1.3px at 30px 24px,#cfe8ff,transparent),radial-gradient(1px 1px at 18px 40px,#fff,transparent),radial-gradient(1.4px 1.4px at 38px 52px,#fff,transparent),radial-gradient(1px 1px at 6px 60px,#bcd4ff,transparent);
+  background-size:44px 66px;background-repeat:repeat;animation:bmStars 3.4s linear infinite;opacity:.9}
+.bm-stars2{background-image:radial-gradient(1px 1px at 22px 6px,#fff,transparent),radial-gradient(1px 1px at 4px 30px,#9fb8ff,transparent),radial-gradient(1.2px 1.2px at 34px 44px,#fff,transparent);
+  background-size:44px 54px;animation-duration:2.1s;opacity:.6}
+@keyframes bmStars{from{background-position:0 0}to{background-position:0 66px}}
+.bm-rocket{position:relative;z-index:2;width:22px;height:22px;display:grid;place-items:center;animation:bmBob 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(0,229,255,.5))}
+.bm-rocket svg{width:22px;height:22px;display:block}
+@keyframes bmBob{0%,100%{transform:translateY(1px) rotate(-2deg)}50%{transform:translateY(-1.5px) rotate(2deg)}}
+.bm-flame{position:absolute;left:50%;top:100%;width:5px;height:8px;margin-left:-2.5px;margin-top:-3px;border-radius:0 0 50% 50%;
+  background:linear-gradient(#FFE08A,#FF9F1C 55%,#FF2D9B);filter:blur(.4px);transform-origin:50% 0;animation:bmFlame .28s ease-in-out infinite alternate;z-index:1}
+@keyframes bmFlame{from{transform:scaleY(.7) scaleX(.9);opacity:.75}to{transform:scaleY(1.15) scaleX(1.05);opacity:1}}
 .brand-word{position:relative;font-family:var(--font-display);font-weight:400;font-size:32px;letter-spacing:1.5px;text-transform:uppercase;
   background:linear-gradient(90deg,#fff 0%,var(--cyan) 22%,var(--magenta) 48%,var(--violet) 72%,#fff 100%);
   background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 6s linear infinite;
@@ -226,10 +236,10 @@ body.rave{animation:ravehue 1s linear infinite}
 .pg-hero{background:radial-gradient(1000px 560px at 80% 4%,rgba(122,59,255,.18),transparent 60%),radial-gradient(760px 520px at 12% 90%,rgba(0,224,255,.12),transparent 62%),var(--bg)}
 /* ---- appareils faibles / mouvement réduit : coupe des effets GPU lourds ---- */
 body.lowfx .hero-plasma,body.lowfx .water-canvas,body.lowfx .pg-orb,body.lowfx .shoot,body.lowfx .particles-layer,body.lowfx .warp-canvas,body.lowfx .pg-statement-glow{display:none!important}
-body.lowfx .hero-bg,body.lowfx .mq-track,body.lowfx .brand-mark::before{animation:none!important}
+body.lowfx .hero-bg,body.lowfx .mq-track,body.lowfx .bm-stars,body.lowfx .bm-rocket,body.lowfx .bm-flame{animation:none!important}
 body.lowfx .brand-word{animation:none!important;background:linear-gradient(90deg,var(--cyan),var(--magenta));-webkit-background-clip:text;background-clip:text}
 @media (prefers-reduced-motion: reduce){
-  .mq-track,.brand-word,.brand-mark::before,.hero-bg,.pg-orb,.shoot{animation:none!important}
+  .mq-track,.brand-word,.bm-stars,.bm-rocket,.bm-flame,.hero-bg,.pg-orb,.shoot{animation:none!important}
 }
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:13.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--paper);
   background:rgba(22,19,39,.6);border:1px solid var(--line);border-radius:100px;padding:9px 18px;margin-bottom:30px}
