@@ -418,6 +418,9 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
 .socials{display:flex;gap:12px}
 .socials a{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;transition:.3s;color:var(--fog)}
 .socials a:hover{background:var(--cyan);color:#052730;border-color:var(--cyan)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:14px 28px;padding:22px 0;border-top:1px solid var(--line)}
+.foot-nav a{font-family:var(--font-sans);font-weight:600;font-size:15px;color:#B9B4C6;transition:color .25s}
+.foot-nav a:hover{color:var(--cyan)}
 .foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line);font-size:13px;color:var(--fog)}
 .foot-bot a:hover{color:var(--cyan)}
 
