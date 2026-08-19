@@ -16,6 +16,7 @@ const ROUTE_SLUGS = [
   "seo-conversion",
   "conseil-it",
   "objectifs",
+  "lexique",
 ];
 
 // Anciennes URL de services retirées → redirection 301 vers le hub (SEO)

@@ -2,6 +2,7 @@ import { build } from "esbuild";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { createHash } from "crypto";
 import { PAGES, SERVICE_ROUTES, SERVICE_LABELS } from "./src/pages.js";
+import { LEXIQUE } from "./src/lexique.js";
 
 /* 1) Bundle JS (externe, mis en cache) */
 await build({
@@ -50,17 +51,17 @@ const HOME_SERVICES = [
   {r:"application-mobile",  t:"Développement d'application mobile", d:"Apps iOS & Android, natives ou cross-platform, fluides et fiables."},
   {r:"creation-site-web",  t:"Création de site web", d:"Des sites rapides, beaux et pensés pour convertir."},
   {r:"design-ui-ux",       t:"Design UI/UX & Branding", d:"Interfaces claires, design systems durables, du logo au produit."},
-  {r:"identite-visuelle",  t:"Identité visuelle & design", d:"Logo, charte, direction artistique."},
   {r:"seo-conversion",     t:"SEO & Conversion", d:"Être trouvé sur Google et transformer les visites en clients."},
   {r:"conseil-it",         t:"Conseil IT & Stratégie digitale", d:"Audit, architecture et feuille de route pour investir dans ce qui compte."},
 ];
 
-const ROUTES = ["home","services",...SERVICE_ROUTES,"objectifs"];
+const ROUTES = ["home","services",...SERVICE_ROUTES,"objectifs","lexique"];
 
 function seoTitle(route){
   if(route==="home") return HOME_TITLE;
   if(route==="services") return "Services digitaux & développement · Web Growth Luxembourg";
   if(route==="objectifs") return "Objectifs & résultats marketing · Web Growth Luxembourg";
+  if(route==="lexique") return "Lexique du web, du développement & des apps · Web Growth Luxembourg";
   return `${SERVICE_LABELS.fr[route]} · ${SITE} Luxembourg`;
 }
 function clampDesc(s){
@@ -72,6 +73,7 @@ function clampDesc(s){
 }
 function seoDesc(route){
   if(route==="home") return clampDesc(HOME_DESC);
+  if(route==="lexique") return clampDesc(LEXIQUE.intro);
   const d = PAGES.fr[route];
   return clampDesc((d && d.intro) ? d.intro : HOME_DESC);
 }
@@ -85,7 +87,7 @@ function navHtml(){
 }
 function footerHtml(){
   return `<footer><p><strong>Web Growth</strong> — Agence de communication digitale à Luxembourg</p>`+
-    `<p>hello@webgrowth.lu · Luxembourg</p>${navHtml()}</footer>`;
+    `<p>hello@webgrowth.lu · Luxembourg</p>${navHtml()}<p><a href="/lexique">Lexique du web &amp; du développement</a></p></footer>`;
 }
 function listHtml(items){ return `<ul>`+items.map(i=>`<li>${esc(i)}</li>`).join("")+`</ul>`; }
 
@@ -104,6 +106,10 @@ function bodyHtml(route){
     const d = PAGES.fr.services;
     main = `<h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p><ul>`+
       d.items.map(it=>`<li><a href="/${it.route}"><strong>${esc(it.h)}</strong></a> — ${esc(it.p)}</li>`).join("")+`</ul>`;
+  } else if(route==="lexique"){
+    main = `<h1>${esc(LEXIQUE.title)}</h1><p>${esc(LEXIQUE.intro)}</p>`+
+      LEXIQUE.groups.map(g=>`<h2>${esc(g.cat)}</h2><dl>`+
+        g.items.map(it=>`<dt>${esc(it.t)}</dt><dd>${esc(it.d)}</dd>`).join("")+`</dl>`).join("");
   } else if(route==="objectifs"){
     const d = PAGES.fr.objectifs;
     main = `<h1>${esc(d.title)}</h1>`+
@@ -130,7 +136,7 @@ function bodyHtml(route){
 }
 
 /* JSON-LD (global) */
-const ldOrg = {"@context":"https://schema.org","@type":"ProfessionalService","name":"Web Growth","description":HOME_DESC,"url":BASE+"/","image":BASE+"/og.png","email":"hello@webgrowth.lu","areaServed":{"@type":"Country","name":"Luxembourg"},"address":{"@type":"PostalAddress","addressCountry":"LU","addressLocality":"Luxembourg"},"knowsAbout":["Développement logiciel sur mesure","Développement d'application mobile","Création de sites web","Design UI/UX","Identité visuelle","SEO","Optimisation des conversions","Conseil IT & stratégie digitale"],"sameAs":SOCIALS};
+const ldOrg = {"@context":"https://schema.org","@type":"ProfessionalService","name":"Web Growth","description":HOME_DESC,"url":BASE+"/","image":BASE+"/og.png","email":"hello@webgrowth.lu","areaServed":{"@type":"Country","name":"Luxembourg"},"address":{"@type":"PostalAddress","addressCountry":"LU","addressLocality":"Luxembourg"},"knowsAbout":["Développement logiciel sur mesure","Développement d'application mobile","Création de sites web","Design UI/UX & branding","SEO","Optimisation des conversions","Conseil IT & stratégie digitale"],"sameAs":SOCIALS};
 const ldSite = {"@context":"https://schema.org","@type":"WebSite","name":"Web Growth","url":BASE+"/","inLanguage":["fr","en","de"]};
 const faq = PAGES.fr["seo-conversion"].faq;
 const ldFaq = faq && faq.items ? {"@context":"https://schema.org","@type":"FAQPage","mainEntity":faq.items.map(it=>({"@type":"Question","name":it.q,"acceptedAnswer":{"@type":"Answer","text":it.a}}))} : null;
@@ -138,6 +144,7 @@ const ldFaq = faq && faq.items ? {"@context":"https://schema.org","@type":"FAQPa
 function pageHtml(route){
   const title=seoTitle(route), desc=seoDesc(route), canon=canonical(route);
   const ld=[ldOrg,ldSite]; if(route==="seo-conversion" && ldFaq) ld.push(ldFaq);
+  if(route==="lexique") ld.push({"@context":"https://schema.org","@type":"DefinedTermSet","name":LEXIQUE.title,"url":BASE+"/lexique","hasDefinedTerm":LEXIQUE.groups.flatMap(g=>g.items.map(it=>({"@type":"DefinedTerm","name":it.t,"description":it.d,"inDefinedTermSet":BASE+"/lexique"})))});
   const ldTags = ld.map(o=>`<script type="application/ld+json">${JSON.stringify(o)}</script>`).join("");
   return `<!DOCTYPE html>
 <html lang="fr">
