@@ -321,14 +321,23 @@ function seoTitle(route,lang){
 }
 const HOME_DESC={fr:"Web Growth conçoit vos produits digitaux : développement logiciel et mobile, création web, design UI/UX, SEO et conseil IT, depuis le cœur du Luxembourg.",en:"Web Growth builds your digital products: custom software and mobile, web, UI/UX design, SEO and IT consulting, from the heart of Luxembourg.",de:"Web Growth entwickelt Ihre digitalen Produkte: Software und Mobile, Web, UI/UX-Design, SEO und IT-Beratung, aus dem Herzen Luxemburgs."};
 
-function scrollToId(id){
+function scrollToId(id,tries=0){
   const el=document.getElementById(id);
-  if(!el){ // probablement sur une sous-page → retour accueil puis scroll
-    if(parseRoute()!=="home"){goPage("home");setTimeout(()=>scrollToId(id),200);}
+  if(el){
+    const go=(dur)=>{ const e=document.getElementById(id); if(!e)return;
+      if(window.__lenis)window.__lenis.scrollTo(e,{offset:-64,duration:dur});
+      else e.scrollIntoView({behavior:"smooth"}); };
+    go(1.1);
+    // corrections : la page d'accueil (sections épinglées, images) grandit après coup,
+    // ce qui décale l'ancre — on recale une fois la mise en page stabilisée.
+    setTimeout(()=>go(0.6),650);
+    setTimeout(()=>go(0.4),1400);
     return;
   }
-  if(window.__lenis)window.__lenis.scrollTo(el,{offset:-64,duration:1.1});
-  else el.scrollIntoView({behavior:"smooth"});}
+  // pas encore présent (souvent : CTA depuis une sous-page → l'ancre est sur l'accueil)
+  if(tries===0 && parseRoute()!=="home") goPage("home");
+  if(tries<40) setTimeout(()=>scrollToId(id,tries+1),90); // ré-essaie jusqu'à ce que l'ancre existe (~3,6s)
+}
 
 /* ============================ BRAND (header logo) ============================ */
 function Brand(){
