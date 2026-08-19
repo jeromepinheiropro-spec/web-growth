@@ -688,10 +688,16 @@ function Footer({t}){
   return(<footer><div className="wrap">
     <div className="foot-top"><div className="foot-logo">WEB GROWTH</div>
       <div className="socials">{["IG","IN","TT","YT"].map(s=><a key={s} href="#" aria-label={s}>{s}</a>)}</div></div>
+    <nav className="foot-nav" aria-label="Liens de bas de page">
+      <a href="/services" onClick={e=>{e.preventDefault();goPage("services");}}>{t.nav_services}</a>
+      <a href="/objectifs" onClick={e=>{e.preventDefault();goPage("objectifs");}}>{t.nav_objectifs}</a>
+      <a href="/lexique" onClick={e=>{e.preventDefault();goPage("lexique");}}>{t.foot_lexique}</a>
+      <a href="/#contact" onClick={e=>{e.preventDefault();scrollToId("contact");}}>{t.nav_contact}</a>
+    </nav>
     <div className="foot-bot">
       <span>© {new Date().getFullYear()} {BRAND} — {t.foot_rights}</span>
       <span>{t.foot_made}</span>
-      <span><a href="/lexique" onClick={e=>{e.preventDefault();goPage("lexique");}}>{t.foot_lexique}</a> · <a href="#">{t.foot_legal}</a> · <a href="#">{t.foot_privacy}</a></span>
+      <span><a href="#">{t.foot_legal}</a> · <a href="#">{t.foot_privacy}</a></span>
     </div></div></footer>);
 }
 
