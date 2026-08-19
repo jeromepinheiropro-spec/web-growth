@@ -9,6 +9,7 @@ import { tsParticles } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import confetti from "canvas-confetti";
 import { PAGES, SERVICE_ROUTES, SERVICE_LABELS } from "./pages.js";
+import { LEXIQUE } from "./lexique.js";
 
 /* ============================ ANIMATED HERO BG (WebGL plasma néon) ============================ */
 // Détection appareil faible : on coupe les effets GPU lourds (WebGL, particules, flous animés)
@@ -159,7 +160,7 @@ const I18N = {
   con_lead:"Dites-nous où vous en êtes et où vous voulez aller. On revient vers vous sous 48h avec des idées concrètes.",
   con_loc:"Luxembourg-Ville, Luxembourg",
   f_name:"Nom",f_email:"Email",f_need:"Votre besoin",f_msg:"Message",f_send:"Envoyer la fusée 🚀",f_note:"En cliquant, votre messagerie s'ouvre avec le message prérempli.",
-  foot_rights:"Tous droits réservés.",foot_made:"⚡ Conçu avec énergie au Luxembourg",foot_legal:"Mentions légales",foot_privacy:"Confidentialité",
+  foot_rights:"Tous droits réservés.",foot_made:"⚡ Conçu avec énergie au Luxembourg",foot_legal:"Mentions légales",foot_lexique:"Lexique",foot_privacy:"Confidentialité",
   rotator:["punch","peps","style","mordant","panache","caractère"]
  },
  en:{
@@ -179,7 +180,7 @@ const I18N = {
   con_lead:"Tell us where you are and where you want to go. We'll get back to you within 48h with concrete ideas.",
   con_loc:"Luxembourg City, Luxembourg",
   f_name:"Name",f_email:"Email",f_need:"What you need",f_msg:"Message",f_send:"Launch the rocket 🚀",f_note:"On click, your mail app opens with the message pre-filled.",
-  foot_rights:"All rights reserved.",foot_made:"⚡ Crafted with energy in Luxembourg",foot_legal:"Legal notice",foot_privacy:"Privacy",
+  foot_rights:"All rights reserved.",foot_made:"⚡ Crafted with energy in Luxembourg",foot_legal:"Legal notice",foot_lexique:"Glossary",foot_privacy:"Privacy",
   rotator:["punch","energy","spark","edge","drive"]
  },
  de:{
@@ -199,7 +200,7 @@ const I18N = {
   con_lead:"Sag uns, wo du stehst und wohin du willst. Wir melden uns innerhalb von 48h mit konkreten Ideen.",
   con_loc:"Luxemburg-Stadt, Luxemburg",
   f_name:"Name",f_email:"E-Mail",f_need:"Dein Bedarf",f_msg:"Nachricht",f_send:"Rakete starten 🚀",f_note:"Beim Klick öffnet sich dein Mailprogramm mit der vorausgefüllten Nachricht.",
-  foot_rights:"Alle Rechte vorbehalten.",foot_made:"⚡ Mit Energie in Luxemburg gestaltet",foot_legal:"Impressum",foot_privacy:"Datenschutz",
+  foot_rights:"Alle Rechte vorbehalten.",foot_made:"⚡ Mit Energie in Luxemburg gestaltet",foot_legal:"Impressum",foot_lexique:"Glossar",foot_privacy:"Datenschutz",
   rotator:["punch","biss","drive","schwung","feuer","funken"]
  }
 };
@@ -299,7 +300,7 @@ function Trail({mx,my,stiff,damp,size,c}){
 }
 
 /* ============================ ROUTING (chemins réels) ============================ */
-const ROUTES=[...SERVICE_ROUTES,"services","objectifs"];
+const ROUTES=[...SERVICE_ROUTES,"services","objectifs","lexique"];
 function parseRoute(){const p=(window.location.pathname||"/").replace(/^\/+|\/+$/g,"").trim();return ROUTES.includes(p)?p:"home";}
 function goPage(r){
   const path = r==="home" ? "/" : "/"+r;
@@ -311,6 +312,7 @@ const SEO_FIXED={
   home:{fr:"Web Growth — Agence de communication digitale à Luxembourg",en:"Web Growth — Digital communication agency in Luxembourg",de:"Web Growth — Agentur für digitale Kommunikation in Luxemburg"},
   services:{fr:"Services digitaux & développement · Web Growth Luxembourg",en:"Digital & development services · Web Growth Luxembourg",de:"Digital- & Entwicklungsleistungen · Web Growth Luxemburg"},
   objectifs:{fr:"Objectifs & résultats marketing · Web Growth Luxembourg",en:"Marketing goals & results · Web Growth Luxembourg",de:"Marketingziele & Ergebnisse · Web Growth Luxemburg"},
+  lexique:{fr:"Lexique du web, du développement & des apps · Web Growth Luxembourg",en:"Web, development & app glossary · Web Growth Luxembourg",de:"Web-, Entwicklungs- & App-Glossar · Web Growth Luxemburg"},
 };
 function seoTitle(route,lang){
   if(SEO_FIXED[route]) return SEO_FIXED[route][lang];
@@ -689,7 +691,7 @@ function Footer({t}){
     <div className="foot-bot">
       <span>© {new Date().getFullYear()} {BRAND} — {t.foot_rights}</span>
       <span>{t.foot_made}</span>
-      <span><a href="#">{t.foot_legal}</a> · <a href="#">{t.foot_privacy}</a></span>
+      <span><a href="/lexique" onClick={e=>{e.preventDefault();goPage("lexique");}}>{t.foot_lexique}</a> · <a href="#">{t.foot_legal}</a> · <a href="#">{t.foot_privacy}</a></span>
     </div></div></footer>);
 }
 
@@ -1167,7 +1169,45 @@ function ObjectivesFunnel({blocks,lang}){
     </div></section>
   );
 }
+function LexiconPage({t,lang}){
+  const [q,setQ]=useState("");
+  const nq=q.trim().toLowerCase();
+  const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const groups=LEXIQUE.groups.map(g=>({...g,items:g.items.filter(it=>!nq||norm(it.t+" "+it.d).includes(norm(nq)))})).filter(g=>g.items.length);
+  const total=LEXIQUE.groups.reduce((n,g)=>n+g.items.length,0);
+  return(<div className="pg pg-lex" key={"lexique"+lang}>
+    <section className="lex-hero"><div className="wrap">
+      <span className="eyebrow"><span className="dot"/>{LEXIQUE.tag}</span>
+      <h1>{LEXIQUE.title}</h1>
+      <p className="lex-intro">{LEXIQUE.intro}</p>
+      <div className="lex-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="search" value={q} onChange={e=>setQ(e.target.value)} placeholder={LEXIQUE.searchPlaceholder} aria-label={LEXIQUE.searchPlaceholder}/>
+      </div>
+      <div className="lex-count">{groups.reduce((n,g)=>n+g.items.length,0)} / {total} termes</div>
+    </div></section>
+    <section className="lex-body"><div className="wrap">
+      {groups.length===0 && <p className="lex-empty">Aucun terme trouvé.</p>}
+      {groups.map((g,gi)=>(
+        <div className="lex-group" key={gi}>
+          <h2 className="lex-cat">{g.cat}</h2>
+          <dl className="lex-grid">
+            {g.items.map((it,i)=>(
+              <motion.div className="lex-item" key={it.t}
+                initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}}
+                viewport={{once:true,amount:.4}} transition={{duration:.4,delay:Math.min(i,6)*0.03,ease:[.16,1,.3,1]}}>
+                <dt>{it.t}</dt><dd>{it.d}</dd>
+              </motion.div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div></section>
+    <PageCTA data={{h:t.lex_cta_h||"Un projet digital en tête ?",p:t.lex_cta_p||"Parlons-en simplement, sans jargon inutile.",btn:t.nav_cta}}/>
+    <Footer t={t}/>
+  </div>);
+}
 function PageView({route,lang,t}){
+  if(route==="lexique") return <LexiconPage t={t} lang={lang}/>;
   const data=(PAGES[lang]&&PAGES[lang][route])||PAGES.fr[route];
   if(!data)return null;
   if(data.hub){
