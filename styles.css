@@ -693,21 +693,3 @@ footer{background:var(--bg);padding:44px 0 30px;border-top:1px solid var(--line)
 .lex-item dd{margin:0;font-size:14.5px;line-height:1.55;color:#B9B4C6}
 .lex-empty{color:var(--fog);font-size:16px;padding:20px 0}
 @media(max-width:720px){.lex-grid{grid-template-columns:1fr}.lex-hero{padding:120px 0 24px}}
-/* ============================ TEST 3D (cosmonaute) ============================ */
-.pg-test{background:var(--bg)}
-.test-hero{position:relative;min-height:100vh;padding:140px 0 80px;overflow:hidden;
-  background:radial-gradient(1200px 700px at 78% 8%,rgba(255,45,155,.18),transparent 60%),
-             radial-gradient(1000px 760px at 10% 92%,rgba(0,224,255,.14),transparent 60%),
-             radial-gradient(900px 600px at 50% 44%,rgba(122,59,255,.16),transparent 62%),var(--bg)}
-.test-hero .wrap{position:relative;z-index:1;max-width:1000px}
-.test-hero h1{font-family:var(--font-display);font-weight:400;text-transform:uppercase;line-height:1;
-  font-size:clamp(38px,7vw,96px);letter-spacing:-1px;color:var(--paper);margin:8px 0 16px}
-.test-intro{max-width:60ch;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:#C7C2D4}
-.test-stage{position:relative;margin-top:30px;border:1px solid var(--line);border-radius:22px;overflow:hidden;
-  background:radial-gradient(120% 120% at 50% 20%,rgba(122,59,255,.14),transparent 60%),rgba(10,9,20,.5);
-  box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(122,59,255,.15)}
-.test-stage model-viewer{display:block;width:100%;height:min(70vh,620px)}
-.test-loading{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;
-  font-family:var(--font-sans);font-size:14px;letter-spacing:1px;color:var(--fog)}
-.test-fallback{display:grid;place-items:center;min-height:340px;padding:40px;text-align:center;color:var(--fog)}
-.test-hint{margin-top:16px;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--fog)}
