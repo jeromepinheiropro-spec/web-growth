@@ -67,8 +67,13 @@ function send(req, res, body, type, cache, gzBody) {
 }
 
 const server = http.createServer((req, res) => {
-  // Domaine canonique : www.webgrowth.lu (l'apex webgrowth.lu redirige vers www via OVH).
-  // Pas de redirection www→non-www ici, sinon boucle avec la redirection OVH.
+  // Domaine canonique : www.webgrowth.lu — l'apex (A record → Railway) est
+  // redirigé ici en 301 vers www. Pas de redirection www→non-www (boucle sinon).
+  const host = (req.headers.host || "").split(":")[0];
+  if (host === "webgrowth.lu") {
+    res.writeHead(301, { Location: "https://www.webgrowth.lu" + (req.url || "/") });
+    return res.end();
+  }
 
   let url = (req.url || "/").split("?")[0];
   if (url.length > 1 && url.endsWith("/")) url = url.slice(0, -1); // sans slash final
