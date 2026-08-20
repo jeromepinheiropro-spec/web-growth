@@ -5,7 +5,7 @@ const path = require("path");
 const zlib = require("zlib");
 
 const PORT = process.env.PORT || 3000;
-const BASE = process.env.PUBLIC_URL || "https://web-growth-production.up.railway.app";
+const BASE = process.env.PUBLIC_URL || "https://www.webgrowth.lu";
 
 const ROUTE_SLUGS = [
   "services",
@@ -67,12 +67,8 @@ function send(req, res, body, type, cache, gzBody) {
 }
 
 const server = http.createServer((req, res) => {
-  // Redirection www → non-www (SEO)
-  const host = req.headers.host || "";
-  if (host.startsWith("www.")) {
-    res.writeHead(301, { Location: "https://" + host.slice(4) + req.url });
-    return res.end();
-  }
+  // Domaine canonique : www.webgrowth.lu (l'apex webgrowth.lu redirige vers www via OVH).
+  // Pas de redirection www→non-www ici, sinon boucle avec la redirection OVH.
 
   let url = (req.url || "/").split("?")[0];
   if (url.length > 1 && url.endsWith("/")) url = url.slice(0, -1); // sans slash final

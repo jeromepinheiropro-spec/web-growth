@@ -27,7 +27,7 @@ const css = cssRaw
 writeFileSync("bundle.js", js); // servi en externe (/bundle.js)
 const jsHash = createHash("sha1").update(js).digest("hex").slice(0,8); // cache-busting
 
-const BASE = "https://web-growth-production.up.railway.app";
+const BASE = "https://www.webgrowth.lu";
 const SITE = "Web Growth";
 const HOME_TITLE = "Web Growth — Agence de communication digitale à Luxembourg";
 const HOME_DESC = "Web Growth conçoit vos produits digitaux : développement logiciel et mobile, création web, design UI/UX, SEO et conseil IT, depuis le cœur du Luxembourg.";
