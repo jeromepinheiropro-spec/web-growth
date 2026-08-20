@@ -55,13 +55,14 @@ const HOME_SERVICES = [
   {r:"conseil-it",         t:"Conseil IT & Stratégie digitale", d:"Audit, architecture et feuille de route pour investir dans ce qui compte."},
 ];
 
-const ROUTES = ["home","services",...SERVICE_ROUTES,"objectifs","lexique"];
+const ROUTES = ["home","services",...SERVICE_ROUTES,"objectifs","lexique","test"];
 
 function seoTitle(route){
   if(route==="home") return HOME_TITLE;
   if(route==="services") return "Services digitaux & développement · Web Growth Luxembourg";
   if(route==="objectifs") return "Objectifs & résultats marketing · Web Growth Luxembourg";
   if(route==="lexique") return "Lexique du web, du développement & des apps · Web Growth Luxembourg";
+  if(route==="test") return "Test 3D · Web Growth Luxembourg";
   return `${SERVICE_LABELS.fr[route]} · ${SITE} Luxembourg`;
 }
 function clampDesc(s){
@@ -74,6 +75,7 @@ function clampDesc(s){
 function seoDesc(route){
   if(route==="home") return clampDesc(HOME_DESC);
   if(route==="lexique") return clampDesc(LEXIQUE.intro);
+  if(route==="test") return "Section test : un cosmonaute en 3D interactif, dans l'univers spatial de Web Growth.";
   const d = PAGES.fr[route];
   return clampDesc((d && d.intro) ? d.intro : HOME_DESC);
 }
@@ -106,6 +108,8 @@ function bodyHtml(route){
     const d = PAGES.fr.services;
     main = `<h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p><ul>`+
       d.items.map(it=>`<li><a href="/${it.route}"><strong>${esc(it.h)}</strong></a> — ${esc(it.p)}</li>`).join("")+`</ul>`;
+  } else if(route==="test"){
+    main = `<h1>Cosmonaute 3D</h1><p>Section test : un modèle 3D interactif dans l'univers spatial de Web Growth.</p>`;
   } else if(route==="lexique"){
     main = `<h1>${esc(LEXIQUE.title)}</h1><p>${esc(LEXIQUE.intro)}</p>`+
       LEXIQUE.groups.map(g=>`<h2>${esc(g.cat)}</h2><dl>`+
@@ -155,7 +159,7 @@ function pageHtml(route){
 <meta name="description" content="${esc(desc)}"/>
 <meta name="keywords" content="agence communication digitale Luxembourg, agence web Luxembourg, SEO Luxembourg, community management, publicité en ligne, création site internet, stratégie de marque, vidéo motion"/>
 <meta name="author" content="Web Growth"/>
-<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta name="robots" content="${route==="test"?"noindex, nofollow":"index, follow, max-image-preview:large"}"/>
 <meta name="theme-color" content="#0B0A12"/>
 <link rel="canonical" href="${canon}"/>
 <link rel="icon" href="${FAVICON}"/>

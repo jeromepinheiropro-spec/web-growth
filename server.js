@@ -37,8 +37,12 @@ for (const s of ROUTE_SLUGS) {
   HTML["/" + s] = readSafe(path.join(__dirname, s + ".html")) || HTML["/"];
 }
 
+// Page test (hors sitemap, noindex) + modèle 3D auto-hébergé
+HTML["/test"] = readSafe(path.join(__dirname, "test.html")) || HTML["/"];
+
 const BUNDLE = readSafe(path.join(__dirname, "bundle.js"));
 const OG = readSafe(path.join(__dirname, "og.png"));
+const ASTRONAUT = readSafe(path.join(__dirname, "Astronaut.glb"));
 
 const ROBOTS = `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`;
 const SITEMAP =
@@ -91,6 +95,10 @@ const server = http.createServer((req, res) => {
   if (url === "/og.png" && OG) {
     res.writeHead(200, { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800" });
     return res.end(OG);
+  }
+  if (url === "/Astronaut.glb" && ASTRONAUT) {
+    res.writeHead(200, { "Content-Type": "model/gltf-binary", "Cache-Control": "public, max-age=2592000" });
+    return res.end(ASTRONAUT);
   }
 
   // Page pré-rendue correspondant à la route (sinon accueil)
