@@ -300,7 +300,7 @@ function Trail({mx,my,stiff,damp,size,c}){
 }
 
 /* ============================ ROUTING (chemins réels) ============================ */
-const ROUTES=[...SERVICE_ROUTES,"services","objectifs","lexique"];
+const ROUTES=[...SERVICE_ROUTES,"services","objectifs","lexique","test"];
 function parseRoute(){const p=(window.location.pathname||"/").replace(/^\/+|\/+$/g,"").trim();return ROUTES.includes(p)?p:"home";}
 function goPage(r){
   const path = r==="home" ? "/" : "/"+r;
@@ -313,6 +313,7 @@ const SEO_FIXED={
   services:{fr:"Services digitaux & développement · Web Growth Luxembourg",en:"Digital & development services · Web Growth Luxembourg",de:"Digital- & Entwicklungsleistungen · Web Growth Luxemburg"},
   objectifs:{fr:"Objectifs & résultats marketing · Web Growth Luxembourg",en:"Marketing goals & results · Web Growth Luxembourg",de:"Marketingziele & Ergebnisse · Web Growth Luxemburg"},
   lexique:{fr:"Lexique du web, du développement & des apps · Web Growth Luxembourg",en:"Web, development & app glossary · Web Growth Luxembourg",de:"Web-, Entwicklungs- & App-Glossar · Web Growth Luxemburg"},
+  test:{fr:"Test 3D · Web Growth Luxembourg",en:"3D Test · Web Growth Luxembourg",de:"3D-Test · Web Growth Luxemburg"},
 };
 function seoTitle(route,lang){
   if(SEO_FIXED[route]) return SEO_FIXED[route][lang];
@@ -1221,7 +1222,46 @@ function LexiconPage({t,lang}){
     <Footer t={t}/>
   </div>);
 }
+function TestPage({t}){
+  const [status,setStatus]=useState("load"); // load | ready | error
+  useEffect(()=>{
+    // charge le web-component <model-viewer> à la demande (uniquement sur /test)
+    const done=()=>setStatus("ready");
+    if(customElements.get("model-viewer")){ done(); return; }
+    let s=document.getElementById("mv-script");
+    if(!s){
+      s=document.createElement("script");
+      s.id="mv-script"; s.type="module";
+      s.src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js";
+      s.onerror=()=>setStatus("error");
+      document.head.appendChild(s);
+    }
+    customElements.whenDefined("model-viewer").then(done);
+  },[]);
+  return(<div className="pg pg-test" key="test">
+    <section className="test-hero">
+      <div className="hero-space" aria-hidden="true"><div className="hs-stars"/><div className="hs-stars hs-stars2"/><div className="hs-stars hs-stars3"/></div>
+      <div className="wrap">
+        <span className="eyebrow"><span className="dot"/>Section test · 3D</span>
+        <h1>COSMONAUTE 3D</h1>
+        <p className="test-intro">Un modèle 3D interactif, dans l'esprit spatial du site. Glissez pour le faire tourner, molette pour zoomer.</p>
+        <motion.div className="test-stage" initial={{opacity:0,y:34}} animate={{opacity:1,y:0}} transition={{duration:.8,ease:[.16,1,.3,1]}}>
+          {status==="error"
+            ? <div className="test-fallback">Le modèle 3D n'a pas pu se charger (connexion ?). Réessayez plus tard.</div>
+            : <model-viewer
+                src="/Astronaut.glb" alt="Cosmonaute 3D" poster=""
+                {...{"camera-controls":true,"auto-rotate":true,"auto-rotate-delay":"200","rotation-per-second":"22deg","shadow-intensity":"0.9","exposure":"1.05","environment-image":"neutral","camera-orbit":"0deg 82deg 3.4m","min-camera-orbit":"auto auto 2m","max-camera-orbit":"auto auto 7m","field-of-view":"32deg","interaction-prompt":"none","touch-action":"pan-y"}}
+                style={{width:"100%",height:"min(70vh,620px)",background:"transparent","--poster-color":"transparent"}}/>}
+          {status==="load" && <div className="test-loading">Chargement du cosmonaute…</div>}
+        </motion.div>
+        <p className="test-hint">Astuce : cliquez-glissez pour orbiter autour du cosmonaute.</p>
+      </div>
+    </section>
+    <Footer t={t}/>
+  </div>);
+}
 function PageView({route,lang,t}){
+  if(route==="test") return <TestPage t={t}/>;
   if(route==="lexique") return <LexiconPage t={t} lang={lang}/>;
   const data=(PAGES[lang]&&PAGES[lang][route])||PAGES.fr[route];
   if(!data)return null;
